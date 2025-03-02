@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>长汀一中动漫社-幻想次元部</title>
+   <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
+    <style>
+        /* 基础样式 */
+        :root {
+            --main-color: #ff6b6b;
+            --bg-image: url('images/new_bg.jpg');
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: var(--bg-image) no-repeat center/cover fixed;
+            min-height: 100vh;
+        }
+
+        /* 导航栏容器 */
+        .header {
+            background: rgba(255,255,255,0.9);
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            border-radius: 15px;
+            margin: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        /* 顶栏Logo */
+        .header-logo {
+            height: 60px;
+            margin-left: 30px;
+            margin-right: 20px;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        .header-logo:hover {
+            transform: scale(1.05);
+        }
+
+        /* 导航菜单 */
+        .nav-menu {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        /* 导航项 */
+        .nav-item {
+            cursor: pointer;
+            padding: 12px 25px;
+            border-radius: 10px;
+            background: rgba(255,107,107,0.8);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            background: var(--main-color);
+        }
+
+        /* 内容区块 */
+        .section {
+            padding: 2rem;
+            background: rgba(255,255,255,0.9);
+            margin: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* 手机端适配 */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                padding: 1rem;
+                border-radius: 8px;
+            }
+            
+            .header-logo {
+                height: 40px;
+                margin: 15px 0;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.8rem;
+            }
+            
+            .nav-item {
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
+        }
+
+        /* 浓度测试样式 */
+        .quiz-section {
+            max-width: 800px;
+            margin: auto;
+        }
+        .question {
+            margin-bottom: 30px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 20px;
+        }
+        .options {
+            margin-top: 10px;
+        }
+        button { 
+            padding: 10px 20px; 
+            background-color: #ff6b6b; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 30px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部 -->
+    <header class="header">
+        <img src="assets/nav_logo.png" class="header-logo" alt="社团Logo">
+        <nav class="nav-menu">
+            <div class="nav-item" onclick="showSection('intro')">社团介绍</div>
+            <div class="nav-item" onclick="showSection('activity')">最新活动</div>
+            <div class="nav-item" onclick="showSection('test')">二次元浓度测试</div>
+        </nav>
+    </header>
+
+    <!-- 社团介绍 -->
+    <section id="intro" class="section">
+        <h2>🏫 社团简介</h2>
+        <p>这里是长汀一中幻想次元部，创立于2012年...</p>
+        <h3>🎯 我们的活动</h3>
+        <ul>
+            <li>新春祭</li>
+            <li>ACG作品鉴赏</li>
+        </ul>
+    </section>
+
+    <!-- 浓度测试 -->
+<!-- 浓度测试 -->
+    <section id="test" class="section quiz-section" style="display:none;">
+        <!DOCTYPE html>
+<html>
+<head>
+    <title>二次元浓度测试</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .question { margin-bottom: 30px; border-bottom: 2px solid #eee; padding-bottom: 20px; }
+        .options { margin-top: 10px; }
+        button { 
+            padding: 10px 20px; 
+            background-color: #ff6b6b; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer;
+        }
+        #result { margin-top: 30px; font-size: 1.2em; }
+    </style>
+</head>
+<body>
+    <h1>二次元浓度检测器</h1>
+    <div id="quiz"></div>
+    <button onclick="calculateScore()">查看浓度</button>
+    <div id="result"></div>
+
+ <script>
+    // 完整题库 ↓↓↓
+    const allQuestions = [
+        // 这里放置所有题目（保持你之前提供的完整题库）
+        // 示例格式：
+
+    {
+        question: "《东方Project》中操控境界能力的是哪位角色？",
+        options: ["八云紫", "博丽灵梦", "蕾米莉亚", "西行寺幽幽子"],
+        correct: 0
+    },
+    {
+        question: "《Fate》系列中「王之财宝」的拥有者是？",
+        options: ["吉尔伽美什", "伊斯坎达尔", "阿尔托莉雅", "库丘林"],
+        correct: 0
+    },
+    {
+        question: "《蔚蓝档案》中「夏莱」的顾问老师名字是？",
+        options: ["星野", "阿罗娜", "优香", "未花"],
+        correct: 1
+    },
+    {
+        question: "「永无止境的八月」循环次数实际是？",
+        options: ["15532次", "100次", "8次", "595次"],
+        correct: 0 // 根据注释选项D应为正确，但需确认选项索引
+    },
+    {
+        question: "《魔法禁书目录》中一方通行的能力本质是？",
+        options: ["矢量操作", "原子崩坏", "心理掌握", "未元物质"],
+        correct: 0
+    },
+    {
+        question: "《白色相簿2》中冬马和纱擅长的乐器是？",
+        options: ["钢琴", "小提琴", "吉他", "长笛"],
+        correct: 0
+    },
+    {
+        question: "「钉宫四萌」中唯一非傲娇的角色是？",
+        options: ["夏娜", "露易丝", "三千院凪", "逢坂大河"],
+        correct: 2
+    },
+    {
+        question: "《约会大作战》中时崎狂三的灵装编号是？",
+        options: ["神威灵装·三番", "神威灵装·十番", "神威灵装·一番", "神威灵装·五番"],
+        correct: 0
+    },
+    {
+        question: "《无职转生》中鲁迪前世的死因是？",
+        options: ["车祸救人", "宅家猝死", "自杀", "被霸凌致死"],
+        correct: 0
+    },
+    {
+        question: "《Clannad》中「团子大家族」的歌词主要象征？",
+        options: ["家族羁绊", "校园生活", "爱情悲剧", "时空轮回"],
+        correct: 0
+    },
+    {
+        question: "「德国骨科」梗源自？",
+        options: ["兄妹禁忌恋", "动画作画崩坏", "声优八卦", "游戏外挂"],
+        correct: 0
+    },
+    {
+        question: "「战五渣」最早出自《龙珠》中谁的评价？",
+        options: ["贝吉塔", "弗利萨", "悟空", "短笛"],
+        correct: 0
+    },
+    {
+        question: "《凉宫春日》中「SOS团」的全称是？",
+        options: ["让世界变得更热闹的凉宫春日团", "拯救宇宙战略部", "超自然现象研究社", "时空管理局"],
+        correct: 0
+    },
+    {
+        question: "《东方妖妖梦》中「反魂蝶」是哪位角色的符卡？",
+        options: ["西行寺幽幽子", "魂魄妖梦", "八云蓝", "蓬莱山辉夜"],
+        correct: 0
+    },
+    {
+        question: "《蔚蓝档案》中「美食研究会」的会长是？",
+        options: ["花子", "日富美", "优香", "白子"],
+        correct: 1
+    },
+    {
+        question: "《月姬》中「直死之魔眼」的弱点是什么？",
+        options: ["无法看到活物死线", "过度使用会失明", "对不死族无效", "需要魔力维持"],
+        correct: 1
+    },
+    {
+        question: "《魔法禁书目录》中「魔神」的定义是？",
+        options: ["达到神之领域的魔法师", "异界生物", "科学侧改造人", "天使的代行者"],
+        correct: 0
+    },
+    {
+        question: "《Fate/EXTRA》中主角的初始从者是？",
+        options: ["尼禄·克劳狄乌斯", "玉藻前", "高文", "阿尔托莉雅"],
+        correct: 0
+    },
+    {
+        question: "《东方红魔乡》EX面BOSS是？",
+        options: ["芙兰朵露·斯卡雷特", "蕾米莉亚·斯卡雷特", "十六夜咲夜", "红美铃"],
+        correct: 0
+    },
+    {
+        question: "《素晴日》中「卓司」的妄想主要受哪种哲学影响？",
+        options: ["尼采超人理论", "黑格尔辩证法", "康德伦理学", "萨特存在主义"],
+        correct: 0
+    },
+{
+    question: "《进击的巨人》中「兵长」的名字是？",
+    options: ["艾伦·耶格尔", "利威尔·阿克曼", "三笠·阿克曼", "埃尔文·史密斯"],
+    correct: 1
+},
+{
+    question: "“jojo立”指的是？",
+    options: ["《JOJO》角色经典姿势", "JOJO品牌酸奶", "日本某地名", "声优昵称"],
+    correct: 0
+},
+{
+    question: "“钉宫四萌”不包括以下哪位？",
+    options: ["夏娜", "露易丝", "三千院凪", "亚丝娜"],
+    correct: 3
+},
+{
+    question: "《鬼灭之刃》中炭治郎的耳饰图案是？",
+    options: ["太阳", "月亮", "火焰", "水波纹"],
+    correct: 2
+},
+{
+    question: "“十二神器”中以精神污染闻名的《女装山脉》属于？",
+    options: ["伪娘题材", "悬疑推理", "机甲战斗", "音乐节奏"],
+    correct: 0
+},
+{
+    question: "“德国骨科”梗源自？",
+    options: ["兄妹禁忌恋事件", "动画作画崩坏", "声优出轨新闻", "游戏外挂风波"],
+    correct: 0
+},
+{
+    question: "《魔法少女小圆》中学姐断头的情节被戏称为？",
+    options: ["AA制", "三集定律", "无头骑士", "掉凳文学"],
+    correct: 1
+},
+{
+    question: "《东方Project》的创作者是？",
+    options: ["奈须蘑菇", "ZUN", "虚渊玄", "新海诚"],
+    correct: 1
+},
+{
+    question: "“不要停下来啊！”名场面出自？",
+    options: ["《EVA》", "《铁血的奥尔芬斯》", "《进击的巨人》", "《CLANNAD》"],
+    correct: 1
+},
+{
+    question: "《白色相簿2》的党争被概括为？",
+    options: ["冬马小三，雪菜碧池", "雪乃败犬，团子必胜", "助手唯一，真由理炮灰", "亚丝娜正宫，诗乃外遇"],
+    correct: 0
+},
+{
+    question: "“FFF团”出自哪部作品？",
+    options: ["《笨蛋测验召唤兽》", "《为美好的世界献上祝福》", "《Re:从零开始》", "《凉宫春日的忧郁》"],
+    correct: 0
+},
+{
+    question: "《EVA》初号机暴走的直接原因是？",
+    options: ["驾驶员失控", "碇唯灵魂觉醒", "使徒入侵核心", "基地自毁程序"],
+    correct: 1
+},
+{
+    question: "“届不到”的日文原意是？",
+    options: ["无法传达的爱", "快递迟到", "考试不及格", "游戏通关失败"],
+    correct: 0
+},
+{
+    question: "《刀剑神域》中“SAO”的全称是？",
+    options: ["Sword Art Online", "Super Attack Operation", "Special Action Officer", "Space Adventure Odyssey"],
+    correct: 0
+},
+{
+    question: "《Fate/stay night》中Saber的真名是？",
+    options: ["阿尔托莉雅·潘德拉贡", "尼禄·克劳狄乌斯", "贞德", "冲田总司"],
+    correct: 0
+},
+{
+    question: "“阿姆斯特朗回旋加速喷气式阿姆斯特朗炮”出自？",
+    options: ["《银魂》", "《海贼王》", "《钢之炼金术师》", "《男子高中生的日常》"],
+    correct: 0
+},
+{
+    question: "《火影忍者》中“千年杀”的招式原型是？",
+    options: ["体术偷袭", "结印忍术", "通灵术", "幻术"],
+    correct: 0
+},
+{
+    question: "“颜艺”指的是？",
+    options: ["化妆技术", "面部夸张表情", "角色颜值评分", "美术绘画风格"],
+    correct: 1
+},
+{
+    question: "《Clannad》中冈崎朋也的毕业学校是？",
+    options: ["光坂高等学校", "榊野学园", "雏见泽分校", "总武高中"],
+    correct: 0
+},
+{
+    question: "“罚抄”是哪部Galgame的戏称？",
+    options: ["《Rewrite》", "《Chaos;Child》", "《装甲恶鬼村正》", "《Muv-Luv》"],
+    correct: 0
+},
+{
+    question: "《死亡笔记》中夜神月的目标是？",
+    options: ["成为新世界的神", "消灭所有超能力者", "破解L的真实身份", "收集七颗龙珠"],
+    correct: 0
+},
+{
+    question: "“前方高能”弹幕常用于？",
+    options: ["提醒精彩/雷人剧情", "标注视频分辨率", "天气预报术语", "游戏连招提示"],
+    correct: 0
+},
+{
+    question: "《鬼灭之刃》中“水之呼吸”有多少型？",
+    options: ["10型", "11型", "12型", "13型"],
+    correct: 0
+},
+{
+    question: "《兰斯》系列的开发商是？",
+    options: ["Key社", "AliceSoft", "Nitro+", "TYPE-MOON"],
+    correct: 1
+},
+{
+    question: "“团长”在《凉宫春日》系列中指？",
+    options: ["凉宫春日", "阿虚", "长门有希", "朝比奈实玖瑠"],
+    correct: 0
+},
+{
+    question: "《海贼王》中“D的意志”的“D”代表？",
+    options: ["Dream（梦想）", "Danger（危险）", "未知含义", "Destiny（命运）"],
+    correct: 2
+},
+{
+    question: "《Ever17》解锁真结局需要至少几周目？",
+    options: ["2周目", "3周目", "4周目", "5周目"],
+    correct: 3
+},
+{
+    question: "“战五渣”最早出自《龙珠》中谁的评价？",
+    options: ["贝吉塔", "弗利萨", "孙悟空", "比克"],
+    correct: 0
+},
+{
+    question: "Galgame术语“攻略”指？",
+    options: ["破解游戏程序", "达成角色专属结局", "跳过剧情快捷键", "修改游戏存档"],
+    correct: 1
+},
+{
+    question: "“二次元”一词在中国网络文化中主要指？",
+    options: ["日本动画漫画文化", "所有平面艺术形式", "特指儿童卡通", "3D游戏领域"],
+    correct: 0
+}
+        // 其他所有题目...
+    ];
+
+    // 随机抽取25题
+    let selectedQuestions = [];
+    function getRandomQuestions() {
+        // 克隆数组避免修改原题库
+        const tempArray = [...allQuestions];
+        // Fisher-Yates洗牌算法
+        for (let i = tempArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [tempArray[i], tempArray[j]] = [tempArray[j], tempArray[i]];
+        }
+        return tempArray.slice(0, 25);
+    }
+
+    // 初始化题目
+    function initQuiz() {
+        selectedQuestions = getRandomQuestions();
+        let html = '';
+        selectedQuestions.forEach((q, index) => {
+            html += `<div class="question">
+                <h3>${index + 1}. ${q.question}</h3>
+                <div class="options">
+                    ${q.options.map((opt, i) => `
+                        <div>
+                            <input type="radio" name="q${index}" value="${i}" id="q${index}opt${i}">
+                            <label for="q${index}opt${i}">${opt}</label>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>`;
+        });
+        document.getElementById('quiz').innerHTML = html;
+    }
+
+    // 计算得分
+    function calculateScore() {
+        let score = 0;
+        selectedQuestions.forEach((q, index) => {
+            const selected = document.querySelector(`input[name="q${index}"]:checked`);
+            if (selected && parseInt(selected.value) === q.correct) {
+                score++;
+            }
+        });
+        
+        const percentage = (score / 25 * 100).toFixed(1); // 固定25题计算
+        let resultText = `你的二次元浓度是：${percentage}%！`;
+        if (percentage >= 85) resultText += "<br>🎉二次元之神降临！";
+        else if (percentage >= 70) resultText += "<br>👓资深老宅认证！";
+        else if (percentage >= 50) resultText += "<br>📺日常追番群众";
+        else resultText += "<br>🤔萌新需要补课啦";
+        
+        document.getElementById('result').innerHTML = resultText;
+    }
+
+    // 初始化
+        initQuiz();
+    </script>
+</body>
+</html>
+    </section>
+
+    <script>
+        // 栏目切换功能
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(sec => {
+                sec.style.display = 'none';
+            });
+            document.getElementById(sectionId).style.display = 'block';
+        }
+ // 异步加载题库
+        async function loadQuestions() {
+            try {
+                const response = await fetch('questions.txt');
+                const text = await response.text();
+                return parseQuestions(text);
+            } catch (error) {
+                console.error('题库加载失败:', error);
+                return [];
+            }
+        }
+
+        // 解析题库文本
+        function parseQuestions(text) {
+            return text.split('\n\n').map(block => {
+                const lines = block.split('\n').filter(line => line.trim() !== '');
+                const question = lines[0].replace('Q: ', '');
+                const options = lines[1].replace('A: ', '').split(', ');
+                const correct = parseInt(lines[2].replace('C: ', ''));
+                return { question, options, correct };
+            });
+        }
+
+        // 修改初始化函数
+        async function initQuiz() {
+            allQuestions = await loadQuestions();
+            selectedQuestions = getRandomQuestions();
+            // 保持原有渲染逻辑
+        }
+        // 初始化测试
+        initQuiz();
+    </script>
+</body>
+</html>
