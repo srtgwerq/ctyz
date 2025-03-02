@@ -135,7 +135,114 @@
             <div class="nav-item" onclick="showSection('test')">二次元浓度测试</div>
         </nav>
     </header>
+<!-- 在HTML的<section>部分添加 -->
+<section id="activity" class="section" style="display:none;">
+    <h2>🎉 最新活动</h2>
+    
+    <!-- 活动发布器（开发者用） -->
+    <div class="activity-editor">
+        <h3>📌 发布新活动（需修改代码）</h3>
+        <pre>
+// 1. 将图片放入 /assets/activities/ 目录
+// 2. 复制以下代码块并修改内容：
+&lt;div class="activity-card"&gt;
+    &lt;img src="assets/activities/活动图片.jpg" class="activity-image"&gt;
+    &lt;div class="activity-content"&gt;
+        &lt;h3&gt;活动标题&lt;/h3&gt;
+        &lt;div class="activity-meta"&gt;
+            &lt;span class="activity-date"&gt;📅 2023-10-01&lt;/span&gt;
+            &lt;span class="activity-location"&gt;📍 活动中心302室&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;p&gt;这里是活动详细描述...&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        </pre>
+    </div>
 
+    <!-- 活动示例1 -->
+    <div class="activity-card">
+        <img src="assets/activities/cosplay_contest.jpg" class="activity-image">
+        <div class="activity-content">
+            <h3>长汀一中动漫社新春祭宅舞活动</h3>
+            <div class="activity-meta">
+                <span class="activity-date">📅 2025-2-28</span>
+                <span class="activity-location">📍 长汀一中老校区门口</span>
+            </div>
+            <p>动漫《凉宫春日的忧郁》ed《晴天好心情》宅舞活动</p>
+        </div>
+    </div>
+
+    
+</section>
+
+<style>
+/* 新增活动卡片样式 */
+.activity-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    margin: 20px 0;
+    overflow: hidden;
+    display: flex;
+    transition: transform 0.3s;
+}
+
+.activity-card:hover {
+    transform: translateY(-5px);
+}
+
+.activity-image {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-right: 3px solid #ff6b6b;
+}
+
+.activity-content {
+    padding: 20px;
+    flex: 1;
+}
+
+.activity-meta {
+    margin: 10px 0;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.activity-date {
+    margin-right: 15px;
+}
+
+/* 开发者指引样式 */
+.activity-editor {
+    background: #f8f9fa;
+    border: 2px dashed #ff6b6b;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.activity-editor pre {
+    background: white;
+    padding: 15px;
+    border-radius: 6px;
+    overflow-x: auto;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .activity-card {
+        flex-direction: column;
+    }
+    
+    .activity-image {
+        width: 100%;
+        height: 180px;
+        border-right: none;
+        border-bottom: 3px solid #ff6b6b;
+    }
+}
+</style>
     <!-- 社团介绍 -->
     <section id="intro" class="section">
         <h2>🏫 社团简介</h2>
