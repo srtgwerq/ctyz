@@ -1,22 +1,14 @@
 <!DOCTYPE html>
- <html>
- <head>
-     <title>长汀一中动漫社-幻想次元部</title>
-    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-     <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
-     <style>
-         /* 基础样式 */
-         :root {
-             --main-color: #ff6b6b;
-             --bg-image: url('images/new_bg.jpg');
-         }
-        body {
-            margin: 0;
-            font-family: 'Microsoft YaHei', sans-serif;
-            background: var(--bg-image) no-repeat center/cover fixed;
-            min-height: 100vh;
+<html>
+<head>
+    <title>长汀一中动漫社-幻想次元部</title>
+    <ink rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
+    <style>
+        :root {
+            --main-color: #ff6b6b;
+            --bg-image: url('images/new_bg.jpg');
         }
-
         body {
             margin: 0;
             font-family: 'Microsoft YaHei', sans-serif;
@@ -95,6 +87,41 @@
             }
         }
 
+        /* 活动卡片新增样式 */
+        .activity-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .activity-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin: 20px 0;
+            overflow: hidden;
+            display: flex;
+            transition: transform 0.3s;
+        }
+        .activity-card:hover { 
+            transform: translateY(-5px);
+            cursor: pointer;
+        }
+        .activity-image {
+            width: 300px;
+            height: 200px;
+            object-fit: cover;
+            border-right: 3px solid #ff6b6b;
+        }
+        @media (max-width: 768px) {
+            .activity-card { flex-direction: column; }
+            .activity-image {
+                width: 100%;
+                height: 180px;
+                border-right: none;
+                border-bottom: 3px solid #ff6b6b;
+            }
+        }
+
         /* 浓度测试样式 */
         .quiz-section { max-width: 800px; margin: auto; }
         .question { margin-bottom: 30px; border-bottom: 2px solid #eee; padding-bottom: 20px; }
@@ -109,35 +136,6 @@
         }
         #result { margin-top: 30px; font-size: 1.2em; }
 
-        /* 活动卡片样式 */
-        .activity-card {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            margin: 20px 0;
-            overflow: hidden;
-            display: flex;
-            transition: transform 0.3s;
-        }
-        .activity-card:hover { transform: translateY(-5px); }
-        .activity-image {
-            width: 300px;
-            height: 200px;
-            object-fit: cover;
-            border-right: 3px solid #ff6b6b;
-        }
-        .activity-content { padding: 20px; flex: 1; }
-        .activity-meta { margin: 10px 0; color: #666; font-size: 0.9em; }
-        .activity-date { margin-right: 15px; }
-        @media (max-width: 768px) {
-            .activity-card { flex-direction: column; }
-            .activity-image {
-                width: 100%;
-                height: 180px;
-                border-right: none;
-                border-bottom: 3px solid #ff6b6b;
-            }
-        }
     </style>
 </head>
 <body>
@@ -150,7 +148,7 @@
         </nav>
     </header>
 
-    < <section id="intro" class="section">
+    <section id="intro" class="section">
         <div class="section-content">
             <h2>🏫 社团简介</h2>
             <p>这里是长汀一中动漫社，创立于2012年...</p>
@@ -165,17 +163,44 @@
     <section id="activity" class="section" style="display:none;">
         <div class="section-content">
             <h2>🎉 最新活动</h2>
-        <div class="activity-card">
-            <img src="assets/activities/picture1.jpg" class="activity-image">
-            <div class="activity-content">
-                <h3>长汀一中动漫社新春祭宅舞活动</h3>
-                <div class="activity-meta">
-                    <span class="activity-date">📅 2025-2-28</span>
-                    <span class="activity-location">📍 长汀一中老校区门口</span>
+            <!-- 第一个活动卡片 -->
+            <a href="https://www.bilibili.com/video/BV1RdFYeCEHM/?spm_id_from=333.1387.homepage.video_card.click&vd_source=6f2617d8bcd5a1ec6f8bc373c8183f1a" class="activity-link" target="_blank">
+                <div class="activity-card">
+                    <img src="assets/activities/picture1.jpg" class="activity-image">
+                    <div class="activity-content">
+                        <h3>新春祭宅舞活动</h3>
+                        <div class="activity-meta">
+                            <span class="activity-date">📅 2025-1-28</span>
+                            <span class="activity-location">📍 长汀一中老校区门口</span>
+                        </div>
+                        <p>动漫《凉宫春日的忧郁》ed《晴天好心情》宅舞活动</p>
+                    </div>
                 </div>
-                <p>动漫《凉宫春日的忧郁》ed《晴天好心情》宅舞活动</p>
-            </div>
+            </a>
+
+            <!-- 第二个活动卡片 -->
+            <a href="https://www.bilibili.com/video/BV1QePCeVErQ/?spm_id_from=333.1387.homepage.video_card.click&vd_source=6f2617d8bcd5a1ec6f8bc373c8183f1a" class="activity-link" target="_blank">
+                <div class="activity-card">
+                    <img src="assets/activities/picture2.jpg" class="activity-image">
+                    <div class="activity-content">
+                        <h3>绘画组作品展</h3>
+                        <div class="activity-meta">
+                            <span class="activity-date">📅 2025-2-5</span>
+                            <span class="activity-location">📍 线上活动</span>
+                        </div>
+                        <p>长汀一中动漫社-绘画组作品欣赏～～</p>
+                    </div>
+                </div>
+            </a>
         </div>
+    </section>
+    <section id="test" class="section quiz-section" style="display:none;">
+        <div class="section-content">
+            <h1>二次元浓度检测器</h1>
+            <div id="quiz"></div>
+            <button onclick="calculateScore()">查看浓度</button>
+            <div id="result"></div>
+
     </section>
     <section id="test" class="section quiz-section" style="display:none;">
         <div class="section-content">
