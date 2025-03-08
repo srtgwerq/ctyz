@@ -1,38 +1,76 @@
+html
+复制
 <!DOCTYPE html>
 <html>
 <head>
     <title>长汀一中动漫社</title>
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
     <style>
-        /* 新增：统一栏目宽度系统 */
+        /* 统一栏目布局系统 */
         :root {
             --main-color: #ff6b6b;
             --bg-image: url('images/new_bg.jpg');
-            --section-max-width: 1200px;  /* 新增最大宽度变量 */
+            --content-max-width: 800px;  /* 新增内容最大宽度 */
+            --section-padding: 2rem;     /* 统一内边距 */
         }
 
+        /* 核心栏目样式 */
         .section {
-            padding: 2rem;
+            width: calc(100% - 4rem);
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: var(--section-padding);
             background: rgba(255,255,255,0.9);
-            margin: 2rem auto;  /* 修改为auto实现水平居中 */
             border-radius: 10px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            width: calc(100% - 4rem);  /* 动态宽度计算 */
-            max-width: var(--section-max-width);  /* 限制最大宽度 */
-            box-sizing: border-box;  /* 包含padding在宽度内 */
+            box-sizing: border-box;
+            
+            /* 新增统一内容容器 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        /* 新增：响应式宽度调整 */
+        /* 统一内容区域样式 */
+        .section-content {
+            width: 100%;
+            max-width: var(--content-max-width);
+        }
+
+        /* 浓度测试特殊样式 */
+        .quiz-section {
+            /* 继承.section基础样式 */
+            /* 特殊样式通过内部元素调整 */
+        }
+
+        /* 响应式调整 */
         @media (max-width: 768px) {
             .section {
-                width: calc(100% - 2rem);  /* 移动端减少边距 */
+                width: calc(100% - 2rem);
                 margin: 1rem auto;
+                padding: 1.5rem;
+            }
+            .section-content {
+                max-width: 100%;
             }
         }
 
-        /* 新增：内容容器统一对齐 */
-        .section > * {
-            max-width: 800px;
+        /* 强制所有栏目内容对齐 */
+        .section > h1,
+        .section > h2,
+        .section > h3,
+        .section > p,
+        .section > ul,
+        .section > div:not(.activity-card) {
+            width: 100%;
+            max-width: var(--content-max-width);
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* 活动卡片适配新布局 */
+        .activity-card {
+            max-width: var(--content-max-width);
             margin-left: auto;
             margin-right: auto;
         }
@@ -170,18 +208,21 @@
         </nav>
     </header>
 
-    <section id="intro" class="section">
-        <h2>🏫 社团简介</h2>
-        <p>这里是长汀一中动漫社，创立于2012年...</p>
-        <h3>🎯 我们的活动</h3>
-        <ul>
-            <li>新春祭</li>
-            <li>ACG作品鉴赏</li>
-        </ul>
+    < <section id="intro" class="section">
+        <div class="section-content">
+            <h2>🏫 社团简介</h2>
+            <p>这里是长汀一中动漫社，创立于2012年...</p>
+            <h3>🎯 我们的活动</h3>
+            <ul>
+                <li>新春祭</li>
+                <li>ACG作品鉴赏</li>
+            </ul>
+        </div>
     </section>
 
     <section id="activity" class="section" style="display:none;">
-        <h2>🎉 最新活动</h2>
+        <div class="section-content">
+            <h2>🎉 最新活动</h2>
         <div class="activity-card">
             <img src="assets/activities/picture1.jpg" class="activity-image">
             <div class="activity-content">
@@ -194,12 +235,13 @@
             </div>
         </div>
     </section>
-
     <section id="test" class="section quiz-section" style="display:none;">
-        <h1>二次元浓度检测器</h1>
-        <div id="quiz"></div>
-        <button onclick="calculateScore()">查看浓度</button>
-        <div id="result"></div>
+        <div class="section-content">
+            <h1>二次元浓度检测器</h1>
+            <div id="quiz"></div>
+            <button onclick="calculateScore()">查看浓度</button>
+            <div id="result"></div>
+
     </section>
 
     <script>
