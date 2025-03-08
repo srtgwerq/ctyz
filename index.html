@@ -4,9 +4,37 @@
     <title>长汀一中动漫社</title>
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
     <style>
+        /* 新增：统一栏目宽度系统 */
         :root {
             --main-color: #ff6b6b;
             --bg-image: url('images/new_bg.jpg');
+            --section-max-width: 1200px;  /* 新增最大宽度变量 */
+        }
+
+        .section {
+            padding: 2rem;
+            background: rgba(255,255,255,0.9);
+            margin: 2rem auto;  /* 修改为auto实现水平居中 */
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            width: calc(100% - 4rem);  /* 动态宽度计算 */
+            max-width: var(--section-max-width);  /* 限制最大宽度 */
+            box-sizing: border-box;  /* 包含padding在宽度内 */
+        }
+
+        /* 新增：响应式宽度调整 */
+        @media (max-width: 768px) {
+            .section {
+                width: calc(100% - 2rem);  /* 移动端减少边距 */
+                margin: 1rem auto;
+            }
+        }
+
+        /* 新增：内容容器统一对齐 */
+        .section > * {
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         body {
