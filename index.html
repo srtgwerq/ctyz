@@ -190,7 +190,7 @@
         // 加载题库
         async function loadQuestions() {
             try {
-                const response = await fetch('q.txt');
+                const response = await fetch('questions.txt');
                 const text = await response.text();
                 return text.split('\n\n').map(block => {
                     const lines = block.split('\n').filter(line => line.trim() !== '');
