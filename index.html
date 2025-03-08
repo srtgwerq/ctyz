@@ -176,7 +176,7 @@
 
     <script>
         // 全局变量
-        let allQuestions = [];
+       let allQuestions = [];
         let selectedQuestions = [];
 
         // 栏目切换
@@ -187,57 +187,87 @@
             document.getElementById(sectionId).style.display = 'block';
         }
 
-        // 加载题库
+        // 增强版题库加载
         async function loadQuestions() {
             try {
-                const response = await fetch('questions.txt');
+                const response = await fetch('q.txt');
+                if (!response.ok) throw new Error(`HTTP错误! 状态码: ${response.status}`);
                 const text = await response.text();
-                return text.split('\n\n').map(block => {
-                    const lines = block.split('\n').filter(line => line.trim() !== '');
-                    return {
-                        question: lines[0].replace('Q: ', ''),
-                        options: lines[1].replace('A: ', '').split(', '),
-                        correct: parseInt(lines[2].replace('C: ', ''))
-                    };
-                });
+                
+                // 更健壮的题目解析
+                return text.split(/\n\s*\n/)  // 支持不同系统的换行符
+                    .map(block => {
+                        const lines = block.split('\n')
+                            .map(line => line.trim())
+                            .filter(line => line);
+                        
+                        if (lines.length < 3) return null;
+                        
+                        try {
+                            return {
+                                question: lines[0].replace(/^Q:\s*/, ''),
+                                options: lines[1].replace(/^A:\s*/, '').split(/\s*,\s*/),
+                                correct: parseInt(lines[2].replace(/^C:\s*/, ''), 10)
+                            };
+                        } catch {
+                            return null;
+                        }
+                    })
+                    .filter(Boolean);  // 过滤无效题目
             } catch (error) {
                 console.error('题库加载失败:', error);
                 return [];
             }
         }
 
-        // 随机选题
+        // 优化的随机选题
         function getRandomQuestions() {
-            const temp = [...allQuestions];
-            for (let i = temp.length - 1; i > 0; i--) {
+            const clone = [...allQuestions];
+            for (let i = clone.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
-                [temp[i], temp[j]] = [temp[j], temp[i]];
+                [clone[i], clone[j]] = [clone[j], clone[i]];
             }
-            return temp.slice(0, 25);
+            return clone.slice(0, Math.min(25, clone.length));
         }
 
-        // 初始化测试
+        // 初始化测试（完全重写）
         async function initQuiz() {
-            allQuestions = await loadQuestions();
-            selectedQuestions = getRandomQuestions();
-            
-            let html = '';
-            selectedQuestions.forEach((q, index) => {
-                html += `<div class="question">
-                    <h3>${index + 1}. ${q.question}</h3>
-                    <div class="options">
-                        ${q.options.map((opt, i) => `
-                            <div>
-                                <input type="radio" name="q${index}" value="${i}" id="q${index}opt${i}">
-                                <label for="q${index}opt${i}">${opt}</label>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>`;
-            });
-            document.getElementById('quiz').innerHTML = html;
-        }
+            try {
+                allQuestions = await loadQuestions();
+                
+                if (allQuestions.length < 1) {
+                    document.getElementById('quiz').innerHTML = 
+                        '<p style="color: red">⚠️ 题库为空，请联系管理员</p>';
+                    return;
+                }
 
+                selectedQuestions = getRandomQuestions();
+                
+                const quizHTML = selectedQuestions
+                    .map((q, index) => `
+                        <div class="question">
+                            <h3>${index + 1}. ${q.question}</h3>
+                            <div class="options">
+                                ${q.options.map((opt, i) => `
+                                    <div>
+                                        <input type="radio" 
+                                               name="q${index}" 
+                                               value="${i}" 
+                                               id="q${index}opt${i}">
+                                        <label for="q${index}opt${i}">${opt}</label>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `).join('');
+                
+                document.getElementById('quiz').innerHTML = quizHTML;
+            } catch (error) {
+                console.error('初始化失败:', error);
+                document.getElementById('quiz').innerHTML = 
+                    '<p style="color: red">⚠️ 系统异常，请刷新页面</p>';
+            }
+        }
         // 计算得分
         function calculateScore() {
             let score = 0;
@@ -257,7 +287,10 @@
         }
 
         // 初始化
-        initQuiz();
+         document.addEventListener('DOMContentLoaded', () => {
+            showSection('intro');
+            initQuiz();
+        });
     </script>
 </body>
 </html>
