@@ -2,11 +2,13 @@
 <html>
 <head>
     <title>长汀一中动漫社-幻想次元部</title>
-<link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-<link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
             --main-color: #ff6b6b;
+            --accent-color: #56a1e6;
             --bg-image: url('images/new_bg.jpg');
         }
         body {
@@ -15,6 +17,7 @@
             background: var(--bg-image) no-repeat center/cover fixed;
             min-height: 100vh;
             position: relative;
+            color: #333;
         }
 
         .header {
@@ -51,6 +54,7 @@
             background: rgba(255,107,107,0.8);
             color: white;
             transition: all 0.3s ease;
+            white-space: nowrap;
         }
 
         .nav-item:hover {
@@ -63,8 +67,8 @@
             padding: 2rem;
             background: rgba(255,255,255,0.9);
             margin: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
 
         @media (max-width: 768px) {
@@ -85,6 +89,10 @@
             .nav-item {
                 padding: 8px 15px;
                 font-size: 0.9em;
+            }
+            .section {
+                margin: 0.8rem;
+                padding: 1.2rem;
             }
         }
 
@@ -137,7 +145,90 @@
         }
         #result { margin-top: 30px; font-size: 1.2em; }
         
-        /* 新增访问量计数器样式 */
+        /* 资源分享卡片样式 */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .resource-card {
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border-top: 4px solid var(--accent-color);
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+        }
+        
+        .resource-header {
+            padding: 20px 20px 10px;
+            background: rgba(86, 161, 230, 0.1);
+            border-bottom: 1px solid #eee;
+        }
+        
+        .resource-icon {
+            font-size: 2em;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+        
+        .resource-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin: 0;
+            color: #222;
+        }
+        
+        .resource-content {
+            padding: 20px;
+            flex-grow: 1;
+        }
+        
+        .resource-description {
+            color: #555;
+            line-height: 1.6;
+            margin-top: 10px;
+        }
+        
+        .resource-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            font-size: 0.9em;
+        }
+        
+        .resource-link:hover {
+            background: #3d8bd6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .resource-footer {
+            padding: 15px 20px;
+            background: rgba(0,0,0,0.03);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85em;
+            color: #777;
+        }
+        
+        /* 访问量计数器样式 */
         .visit-counter {
             position: fixed;
             bottom: 20px;
@@ -163,6 +254,32 @@
             padding: 3px 0;
             font-size: 0.7em;
         }
+        
+        .section-title {
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            color: #e74c3c;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--main-color);
+            border-radius: 2px;
+        }
+        
+        .welcome-note {
+            background: rgba(255, 229, 229, 0.6);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 4px solid var(--main-color);
+        }
     </style>
 </head>
 <body>
@@ -178,6 +295,7 @@
             <div class="nav-item" onclick="showSection('activity')">最新活动</div>
             <div class="nav-item" onclick="showSection('test')">浓度测试</div>
             <div class="nav-item" onclick="showSection('about')">关于长汀一中</div>
+            <div class="nav-item" onclick="showSection('resources')">资源分享</div>
         </nav>
     </header>
 
@@ -192,10 +310,10 @@
             <h3>杰出校友</h3>
             <p>学校培养了初、高中毕业生共六万余人，他们遍布五洲四海，立勋军政学商。著名校友有杨成武上将、刘亚楼上将等六位共和国将军，张存浩（2013年度国家最高科学技术奖获得者）、王业键两院士等大批科技精英，张浚生、谢先文等一批党政高级领导干部。</p>
             <h3>办学思想</h3>
-     <p>校训：厚德 重思 至善 日新</p> 
-    <p>校风：求真 务实 践行 创新</p> 
-    <p>学风：勤学 巧思 善疑 贯通</p>
-   <p>教风：民主 科学 严谨 鲜活</p> 
+            <p>校训：厚德 重思 至善 日新</p> 
+            <p>校风：求真 务实 践行 创新</p> 
+            <p>学风：勤学 巧思 善疑 贯通</p>
+            <p>教风：民主 科学 严谨 鲜活</p> 
         </div>
     </section>
     
@@ -205,7 +323,6 @@
           <p class="center-text">活力社团 · 创意无限 · 梦想起航</p>
           
           <p>(长汀县第一中学 官方认证社团)</p>
-
 
           <h3>社团定位</h3>
 
@@ -229,7 +346,6 @@
 
           <p>•官网网址：https://ctyz-acgn.netlify.app/（答题游戏/活动指南/资源分享）</p>
 
-
           <h3>社团文化双重价值</h3>
 
           <p>维度	文化表达	主流价值体现</p>
@@ -252,7 +368,6 @@
           <p>• 创意孵化：优秀作品展示</p>
 
           <p>• 自我成长：参与活动 获得管理 组织经验</p>
-
 
           <h3>联结通道</h3>
         
@@ -343,6 +458,126 @@
             </a>
         </div>
     </section>
+    
+    <section id="resources" class="section" style="display:none;">
+        <div class="section-content">
+            <h2 class="section-title">资源分享</h2>
+            <div class="welcome-note">
+                <p>长汀一中动漫社为大家精心挑选了一系列优质动漫资源平台，涵盖评分、追番、百科、游戏资源和工具。无论是追番达人、二次元学者还是同人创作者，都能在这里找到所需资源！</p>
+            </div>
+            
+            <div class="resources-grid">
+                <!-- Bangumi 卡片 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <div class="resource-icon">
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <h3 class="resource-title">Bangumi</h3>
+                    </div>
+                    <div class="resource-content">
+                        <p class="resource-description">专业的动漫评分平台，记录你的追番历史，发现同好讨论社区。</p>
+                        <a href="https://bgm.tv/" class="resource-link" target="_blank">访问网站</a>
+                    </div>
+                    <div class="resource-footer">
+                        <span><i class="fas fa-tag"></i> 评分 · 社区</span>
+                        <span>https://bgm.tv/</span>
+                    </div>
+                </div>
+                
+                <!-- 吐槽网 卡片 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <div class="resource-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h3 class="resource-title">吐槽网</h3>
+                    </div>
+                    <div class="resource-content">
+                        <p class="resource-description">提供最新动漫观看和弹幕评论功能，随时加入讨论热潮。</p>
+                        <a href="https://www.tucao.my/" class="resource-link" target="_blank">访问网站</a>
+                    </div>
+                    <div class="resource-footer">
+                        <span><i class="fas fa-tag"></i> 看番 · 弹幕</span>
+                        <span>https://www.tucao.my/</span>
+                    </div>
+                </div>
+                
+                <!-- 萌娘百科 卡片 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <div class="resource-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h3 class="resource-title">萌娘百科</h3>
+                    </div>
+                    <div class="resource-content">
+                        <p class="resource-description">最全面的ACGN百科知识库，涵盖动漫、游戏及相关文化内容。</p>
+                        <a href="https://mzh.moegirl.org.cn/" class="resource-link" target="_blank">访问网站</a>
+                    </div>
+                    <div class="resource-footer">
+                        <span><i class="fas fa-tag"></i> 百科 · ACGN</span>
+                        <span>https://mzh.moegirl.org.cn/</span>
+                    </div>
+                </div>
+                
+                <!-- TouchGal 卡片 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <div class="resource-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <h3 class="resource-title">TouchGal</h3>
+                    </div>
+                    <div class="resource-content">
+                        <p class="resource-description">专注于Galgame资源分享，收录各类经典和最新视觉小说游戏。</p>
+                        <a href="https://www.touchgal.us/" class="resource-link" target="_blank">访问网站</a>
+                    </div>
+                    <div class="resource-footer">
+                        <span><i class="fas fa-tag"></i> Galgame · 资源</span>
+                        <span>https://www.touchgal.us/</span>
+                    </div>
+                </div>
+                
+                <!-- 蔚蓝档案图标生成器 卡片 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <div class="resource-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h3 class="resource-title">蔚蓝档案图标生成器</h3>
+                    </div>
+                    <div class="resource-content">
+                        <p class="resource-description">轻松生成《碧蓝档案》游戏风格图标，提升你的二次元创作。</p>
+                        <a href="https://lab.nulla.top/" class="resource-link" target="_blank">访问网站</a>
+                    </div>
+                    <div class="resource-footer">
+                        <span><i class="fas fa-tag"></i> 创作 · 工具</span>
+                        <span>https://lab.nulla.top/</span>
+                    </div>
+                </div>
+                
+                <!-- 莉莉云 卡片 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <div class="resource-icon">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                        <h3 class="resource-title">莉莉云</h3>
+                    </div>
+                    <div class="resource-content">
+                        <p class="resource-description">东方Project主题资源云存储，获取音乐、游戏、视频等丰富内容。</p>
+                        <a href="https://cloud.lilywhite.cc/" class="resource-link" target="_blank">访问网站</a>
+                    </div>
+                    <div class="resource-footer">
+                        <span><i class="fas fa-tag"></i> 东方 · 资源</span>
+                        <span>https://cloud.lilywhite.cc/</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="test" class="section quiz-section" style="display:none;">
         <div class="section-content">
             <h1>二次元浓度检测器（题目不一定全，玩个乐就行了，别当真）</h1>
@@ -363,6 +598,11 @@
                 sec.style.display = 'none';
             });
             document.getElementById(sectionId).style.display = 'block';
+            
+            // 当切换到资源页时，滚动到页面顶部
+            if(sectionId === 'resources') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
         }
 
         // 增强版题库加载
@@ -472,5 +712,3 @@
     </script>
 </body>
 </html>
-
-
