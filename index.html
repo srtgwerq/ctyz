@@ -11,6 +11,8 @@
     
     <!-- 添加PixiJS和Live2D库 -->
     <script src="https://cdn.jsdelivr.net/npm/pixi.js@5.3.0/dist/pixi.min.js"></script>
+    <!-- 添加Cubism 4运行时库 -->
+    <script src="https://cdn.jsdelivr.net/npm/pixi-live2d-display@latest/dist/live2dcubismcore.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/pixi-live2d-display@latest/dist/cubism4.min.js"></script>
     
     <style>
@@ -226,6 +228,7 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             margin: 20px 0;
             overflow: hidden;
+            display:极客
             display: flex;
             transition: transform 0.3s;
             flex-direction: column;
@@ -243,6 +246,7 @@
             border-bottom: 3px solid #ff6b6b;
         }
         
+极客
         .activity-content {
             padding: 1.5rem;
             flex-grow: 1;
@@ -266,6 +270,7 @@
         }
         
         .activity-location {
+            margin-left: 15极客
             margin-left: 15px;
         }
         
@@ -574,7 +579,6 @@
         <nav class="nav-menu">
             <div class="nav-item" onclick="showSection('intro')">社团介绍</div>
             <div class="nav-item" onclick="showSection('activity')">最新活动</div>
-            <极客
             <div class="nav-item" onclick="showSection('test')">浓度测试</div>
             <div class="nav-item" onclick="showSection('resources')">资源分享</div>
             <div class="nav-item" onclick="showSection('about')">关于长汀一中</div>
@@ -613,7 +617,7 @@
           <p>传播观	新媒体创意运营	青年网络文明公约践行者</p>
                 
                 <h3>📣 致家长的一封信</h3>
-                <p>我们理解您的关切，因此：</极客
+                <p>我们理解您的关切，因此：</p>
                 <p>• 所有活动由校团委及社团干部指导</p>
                 <p>• 创作内容经社团干部审核</p>
                 <p>考上长汀一中，加入长汀一中动漫社，你将获得：</p>
@@ -624,6 +628,7 @@
         
           <p>▸网站制作QQ：2789290042</p>
 
+          <极客
           <p>▸社长QQ：2704168175</p>
 
           <p>动漫社同好QQ群：858655372</p>
@@ -775,7 +780,7 @@
                     </div>
                     <div class="resource-footer">
                         <span><i class="fas fa-tag"></i> 看番 · 弹幕</span>
-                        <span>https://www.tucao.my/</极客
+                        <span>https://www.tucao.my/</span>
                     </div>
                 </div>
                 
@@ -792,6 +797,7 @@
                         <a href="https://mzh.moegirl.org.cn/" class="resource-link" target="_blank">访问网站</a>
                     </div>
                     <div class="resource-footer">
+                        <span><i class="fas fa-tag"></极客
                         <span><i class="fas fa-tag"></i> 百科 · ACGN</span>
                         <span>https://mzh.moegirl.org.cn/</span>
                     </div>
@@ -805,6 +811,7 @@
                         </div>
                         <h3 class="resource-title">TouchGal</h3>
                     </div>
+                    <div class极客
                     <div class="resource-content">
                         <p class="resource-description">专注于Galgame资源分享，收录各类经典和最新视觉小说游戏。</p>
                         <a href="https://www.touchgal.us/" class="resource-link" target="_blank">访问网站</a>
@@ -876,265 +883,264 @@
     </footer>
     
     <script>
-        <script>
-    // 全局变量
-    let allQuestions = [];
-    let selectedQuestions = [];
-    
-    // Live2D相关变量
-    let live2dApp = null;
-    let live2dModel = null;
-    let isDraggable = false;
-    let currentModelIndex = 0;
-    
-    // 模型路径 - 需要替换为您的实际路径
-    const modelPaths = [
-        'assets/live2d/Roxy/Roxy_V1.model3.json'
-    ];
+        // 全局变量
+        let allQuestions = [];
+        let selectedQuestions = [];
+        
+        // Live2D相关变量
+        let live2dApp = null;
+        let live2dModel = null;
+        let isDraggable = false;
+        let currentModelIndex = 0;
+        
+        // 模型路径 - 需要替换为您的实际路径
+        const modelPaths = [
+            'assets/live2d/Roxy/Roxy_V1.model3.json'
+        ];
 
-    // 栏目切换
-    function showSection(sectionId) {
-        document.querySelectorAll('.section').forEach(sec => {
-            sec.style.display = 'none';
-        });
-        document.getElementById(sectionId).style.display = 'block';
-    }
-
-    // 题库加载
-    async function loadQuestions() {
-        try {
-            const response = await fetch('q.txt');
-            const text = await response.text();
-            
-            return text.split(/\n\s*\n/)
-                .map(block => {
-                    const lines = block.split('\n')
-                        .map(line => line.trim())
-                        .filter(line => line);
-                    
-                    if (lines.length < 3) return null;
-                    
-                    return {
-                        question: lines[0].replace(/^Q:\s*/, ''),
-                        options: lines[1].replace(/^A:\s*/, '').split(/\s*,\s*/),
-                        correct: parseInt(lines[2].replace(/^C:\s*/, ''), 10)
-                    };
-                })
-                .filter(Boolean);
-        } catch (error) {
-            console.error('题库加载失败:', error);
-            return [];
-        }
-    }
-
-    // 随机选题
-    function getRandomQuestions() {
-        const clone = [...allQuestions];
-        for (let i = clone.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [clone[i], clone[j]] = [clone[j], clone[i]];
-        }
-        return clone.slice(0, Math.min(25, clone.length));
-    }
-
-    // 初始化测试
-    async function initQuiz() {
-        allQuestions = await loadQuestions();
-        
-        if (allQuestions.length < 1) {
-            document.getElementById('quiz').innerHTML = 
-                '<p>题库为空，请联系管理员</p>';
-            return;
-        }
-
-        selectedQuestions = getRandomQuestions();
-        
-        const quizHTML = selectedQuestions
-            .map((q, index) => `
-                <div class="question">
-                    <h3>${index + 1}. ${q.question}</h3>
-                    <div class="options">
-                        ${q.options.map((opt, i) => `
-                            <div class="option" onclick="selectOption(this, ${index}, ${i})">
-                                <input type="radio" name="q${index}" value="${i}" id="q${index}opt${i}">
-                                <label for="q${index}opt${i}">${opt}</label>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            `).join('');
-        
-        document.getElementById('quiz').innerHTML = quizHTML;
-    }
-    
-    // 选择选项
-    function selectOption(element, questionIndex, optionIndex) {
-        // 移除同组其他选项的选中状态
-        const options = element.parentElement.querySelectorAll('.option');
-        options.forEach(opt => opt.classList.remove('selected'));
-        
-        // 添加当前选项的选中状态
-        element.classList.add('selected');
-        
-        // 设置单选按钮选中状态
-        const radio = element.querySelector(`input[type="radio"]`);
-        radio.checked = true;
-    }
-    
-    // 计算得分
-    function calculateScore() {
-        let score = 0;
-        selectedQuestions.forEach((q, index) => {
-            const selected = document.querySelector(`input[name="q${index}"]:checked`);
-            if (selected && parseInt(selected.value) === q.correct) score++;
-        });
-        
-        const percentage = (score / 25 * 100).toFixed(1);
-        let resultText = `你的二次元浓度是：${percentage}%！`;
-        if (percentage >= 85) resultText += "<br>🎉二次元之神降临！";
-        else if (percentage >= 70) resultText += "<br>👓资深老宅认证！";
-        else if (percentage >= 50) resultText += "<br>📺日常追番群众";
-        else resultText += "<br>🤔萌新需要补课啦";
-        
-        document.getElementById('result').innerHTML = resultText;
-    }
-    
-    // 初始化Live2D
-    async function initLive2D() {
-        try {
-            // 创建Pixi应用
-            live2dApp = new PIXI.Application({
-                view: document.getElementById('live2d-canvas'),
-                backgroundAlpha: 0,
-                width: 280,
-                height: 350
+        // 栏目切换
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(sec => {
+                sec.style.display = 'none';
             });
-            
-            // 加载初始模型
-            await loadNextModel();
-        } catch (error) {
-            console.error('Live2D初始化失败:', error);
+            document.getElementById(sectionId).style.display = 'block';
         }
-    }
-    
-    // 加载模型 - 修复后的版本
-    async function loadNextModel() {
-        if (live2dModel) {
-            live2dModel.destroy();
+
+        // 题库加载
+        async function loadQuestions() {
+            try {
+                const response = await fetch('q.txt');
+                if (!response.ok) {
+                    throw new Error('题库文件加载失败');
+                }
+                const text = await response.text();
+                
+                return text.split(/\n\s*\n/)
+                    .map(block => {
+                        const lines = block.split('\n')
+                            .map(line => line.trim())
+                            .filter(line => line);
+                        
+                        if (lines.length < 3) return null;
+                        
+                        return {
+                            question: lines[0].replace(/^Q:\s*/, ''),
+                            options: lines[1].replace(/^A:\s*/, '').split(/\s*,\s*/),
+                            correct: parseInt(lines[2].replace(/^C:\s*/, ''), 10)
+                        };
+                    })
+                    .filter(Boolean);
+            } catch (error) {
+                console.error('题库加载失败:', error);
+                return [];
+            }
         }
-        
-        try {
-            // 修复：使用正确的加载方法
-            // 检查库是否提供了正确的加载方法
-            const Live2DModel = PIXI.live2d.Live2DModel || window.Live2DModel;
+
+        // 随机选题
+        function getRandomQuestions() {
+            const clone = [...allQuestions];
+            for (let i = clone.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [clone[i], clone[j]] = [clone[j], clone[i]];
+            }
+            return clone.slice(0, Math.min(25, clone.length));
+        }
+
+        // 初始化测试
+        async function initQuiz() {
+            allQuestions = await loadQuestions();
             
-            if (!Live2DModel) {
-                console.error('Live2DModel未定义');
+            if (allQuestions.length < 1) {
+                document.getElementById('quiz').innerHTML = 
+                    '<p>题库为空，请联系管理员</p>';
                 return;
             }
+
+            selectedQuestions = getRandomQuestions();
             
-            // 使用fromSync方法加载模型
-            live2dModel = await Live2DModel.fromSync(modelPaths[currentModelIndex]);
+            const quizHTML = selectedQuestions
+                .map((q, index) => `
+                    <div class="question">
+                        <h3>${index + 1}. ${q.question}</h3>
+                        <div class="options">
+                            ${q.options.map((opt, i) => `
+                                <div class="option" onclick="selectOption(this, ${index}, ${i})">
+                                    <input type="radio" name="q${index}" value="${i}" id="q${index}opt${i}">
+                                    <label for="q${index}opt${i}">${opt}</label>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `).join('');
             
-            live2dModel.anchor.set(0.5, 0.5);
-            live2dModel.position.set(140, 175);
-            live2dApp.stage.addChild(live2dModel);
+            document.getElementById('quiz').innerHTML = quizHTML;
+        }
+        
+        // 选择选项
+        function selectOption(element, questionIndex, optionIndex) {
+            // 移除同组其他选项的选中状态
+            const options = element.parentElement.querySelectorAll('.option');
+            options.forEach(opt => opt.classList.remove('selected'));
             
-            // 设置模型尺寸
-            live2dModel.scale.set(0.18);
+            // 添加当前选项的选中状态
+            element.classList.add('selected');
             
-            // 添加交互
-            live2dModel.interactive = true;
-            live2dModel.on('pointertap', () => {
-                if (live2dModel.motion) {
-                    live2dModel.motion('Tap');
+            // 设置单选按钮选中状态
+            const radio = element.querySelector(`input[type="radio"]`);
+            radio.checked = true;
+        }
+        
+        // 计算得分
+        function calculateScore() {
+            let score = 0;
+            selectedQuestions.forEach((q, index) => {
+                const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                if (selected && parseInt(selected.value) === q.correct) score++;
+            });
+            
+            const percentage = (score / 25 * 100).toFixed(1);
+            let resultText = `你的二次元浓度是：${percentage}%！`;
+            if (percentage >= 85) resultText += "<br>🎉二次元之神降临！";
+            else if (percentage >= 70) resultText += "<br>👓资深老宅认证！";
+            else if (percentage >= 50) resultText += "<br>📺日常追番群众";
+            else resultText += "<br>🤔萌新需要补课啦";
+            
+            document.getElementById('result').innerHTML = resultText;
+        }
+        
+        // 初始化Live2D
+        async function initLive2D() {
+            try {
+                // 创建Pixi应用
+                live2dApp = new PIXI.Application({
+                    view: document.getElementById('live2d-canvas'),
+                    backgroundAlpha: 0,
+                    width: 280,
+                    height: 350
+                });
+                
+                // 加载初始模型
+                await loadNextModel();
+            } catch (error) {
+                console.error('Live2D初始化失败:', error);
+            }
+        }
+        
+        // 加载模型
+        async function loadNextModel() {
+            if (live2dModel) {
+                live2dModel.destroy();
+            }
+            
+            try {
+                // 检查模型路径
+                if (!modelPaths[currentModelIndex]) {
+                    console.error('模型路径无效');
+                    return;
+                }
+                
+                // 加载模型
+                live2dModel = await PIXI.live2d.Live2DModel.from(modelPaths[currentModelIndex]);
+                live2dModel.anchor.set(0.5, 0.5);
+                live2dModel.position.set(140, 175);
+                live2dApp.stage.addChild(live2dModel);
+                
+                // 设置模型尺寸
+                live2dModel.scale.set(0.18);
+                
+                // 添加交互
+                live2dModel.interactive = true;
+                live2dModel.on('pointertap', () => {
+                    if (live2dModel.motion) {
+                        live2dModel.motion('Tap');
+                    }
+                });
+                
+                // 添加拖动功能
+                setupDragBehavior();
+                
+                // 下一个模型索引
+                currentModelIndex = (currentModelIndex + 1) % modelPaths.length;
+            } catch (error) {
+                console.error('Live2D模型加载失败:', error);
+            }
+        }
+        
+        // 设置模型的拖动行为
+        function setupDragBehavior() {
+            if (!live2dModel) return;
+            
+            let isDragging = false;
+            let startPosition = { x: 0, y: 0 };
+            let startModelPosition = { x: 0, y: 0 };
+            
+            live2dModel.on('pointerdown', (event) => {
+                isDragging = isDraggable;
+                startPosition = { x: event.data.global.x, y: event.data.global.y };
+                startModelPosition = { x: live2dModel.position.x, y: live2dModel.position.y };
+            });
+            
+            live2dApp.stage.on('pointermove', (event) => {
+                if (isDragging && live2dModel) {
+                    const dx = event.data.global.x - startPosition.x;
+                    const dy = event.data.global.y - startPosition.y;
+                    live2dModel.position.x = startModelPosition.x + dx;
+                    live2dModel.position.y = startModelPosition.y + dy;
                 }
             });
             
-            // 添加拖动功能
-            setupDragBehavior();
+            live2dApp.stage.on('pointerup', () => {
+                isDragging = false;
+            });
             
-            // 下一个模型索引
-            currentModelIndex = (currentModelIndex + 1) % modelPaths.length;
-        } catch (error) {
-            console.error('Live2D模型加载失败:', error);
+            live2dApp.stage.on('pointerupoutside', () => {
+                isDragging = false;
+            });
         }
-    }
-    
-    // 设置模型的拖动行为
-    function setupDragBehavior() {
-        if (!live2dModel) return;
         
-        let isDragging = false;
-        let startPosition = { x: 0, y: 0 };
-        let startModelPosition = { x: 0, y: 0 };
+        // 切换拖动模式
+        function toggleDragMode() {
+            isDraggable = !isDraggable;
+            const button = document.getElementById('drag-toggle');
+            button.innerHTML = isDraggable ? '<i class="fas fa-lock"></i>' : '<i class="fas fa-arrows-alt"></i>';
+            button.title = isDraggable ? '锁定位置' : '拖动模型';
+        }
         
-        live2dModel.on('pointerdown', (event) => {
-            isDragging = isDraggable;
-            startPosition = { x: event.data.global.x, y: event.data.global.y };
-            startModelPosition = { x: live2dModel.position.x, y: live2dModel.position.y };
-        });
+        // 切换模型显示
+        function toggleModelVisibility() {
+            const container = document.getElementById('live2d-container');
+            const isVisible = container.style.display !== 'none';
+            container.style.display = isVisible ? 'none' : 'block';
+            
+            const button = document.getElementById('toggle-model');
+            button.innerHTML = isVisible ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
+            button.title = isVisible ? '显示模型' : '隐藏模型';
+        }
         
-        live2dApp.stage.on('pointermove', (event) => {
-            if (isDragging && live2dModel) {
-                const dx = event.data.global.x - startPosition.x;
-                const dy = event.data.global.y - startPosition.y;
-                live2dModel.position.x = startModelPosition.x + dx;
-                live2dModel.position.y = startModelPosition.y + dy;
+        // 重置模型位置
+        function resetModelPosition() {
+            if (live2dModel) {
+                live2dModel.position.set(140, 175);
             }
-        });
-        
-        live2dApp.stage.on('pointerup', () => {
-            isDragging = false;
-        });
-        
-        live2dApp.stage.on('pointerupoutside', () => {
-            is极客
-            isDragging = false;
-        });
-    }
-    
-    // 切换拖动模式
-    function toggleDragMode() {
-        isDraggable = !isDraggable;
-        const button = document.getElementById('drag-toggle');
-        button.innerHTML = isDraggable ? '<i class="fas fa-lock"></i>' : '<i class="fas fa-arrows-alt"></i>';
-        button.title = isDraggable ? '锁定位置' : '拖动模型';
-    }
-    
-    // 切换模型显示
-    function toggleModelVisibility() {
-        const container = document.getElementById('live2d-container');
-        const isVisible = container.style.display !== 'none';
-        container.style.display = isVisible ? 'none' : 'block';
-        
-        const button = document.getElementById('toggle-model');
-        button.innerHTML = isVisible ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
-        button.title = isVisible ? '显示模型' : '隐藏模型';
-    }
-    
-    // 重置模型位置
-    function resetModelPosition() {
-        if (live2dModel) {
-            live2dModel.position.set(140, 175);
         }
-    }
 
-    // 初始化
-    document.addEventListener('DOMContentLoaded', () => {
-        showSection('intro');
-        initQuiz();
-        
-        // 添加Live2D初始化
-        initLive2D();
-        
-        // 绑定Live2D控制按钮
-        document.getElementById('drag-toggle').addEventListener('click', toggleDragMode);
-        document.getElementById('change-model').addEventListener('click', loadNextModel);
-        document.getElementById('reset-position').addEventListener('click', resetModelPosition);
-        document.getElementById('toggle-model').addEventListener('click', toggleModelVisibility);
-    });
-</script>
+        // 初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            // 初始化页面
+            showSection('intro');
+            
+            // 初始化测试
+            initQuiz();
+            
+            // 初始化Live2D
+            initLive2D();
+            
+            // 绑定Live2D控制按钮
+            document.getElementById('drag-toggle').addEventListener('click', toggleDragMode);
+            document.getElementById('change-model').addEventListener('click', loadNextModel);
+            document.getElementById('reset-position').addEventListener('click', resetModelPosition);
+            document.getElementById('toggle-model').addEventListener('click', toggleModelVisibility);
+        });
+    </script>
 </body>
 </html>
-
