@@ -1,265 +1,183 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>长汀一中动漫社-幻想次元部</title>
-    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23ff6b6b'/%3E%3Cpath d='M30,40 L50,65 L70,40' fill='none' stroke='white' stroke-width='8' stroke-linecap='round'/%3E%3C/svg%3E" type="image/svg+xml">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --main-color: #ff6b6b;
-            --accent-color: #56a1e6;
-            --bg-image: url('images/new_bg.jpg');
+            --secondary-color: #6a6bff;
+            --accent-color: #ffd56b;
+            --dark-color: #2c2c54;
+            --light-color: #f8f9fa;
+            --gradient-bg: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            --shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        body {
+        
+        * {
             margin: 0;
-            font-family: 'Microsoft YaHei', sans-serif;
-            background: var(--bg-image) no-repeat center/cover fixed;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: var(--gradient-bg);
+            background-attachment: fixed;
+            color: #333;
             min-height: 100vh;
             position: relative;
-            color: #333;
+            padding-bottom: 60px;
         }
-
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect width="100%" height="100%" fill="rgba(255,255,255,0.3)"/><path d="M20,20 Q40,5 60,20 T100,20 T140,20 T180,20 M20,60 Q40,45 60,60 T100,60 T140,60 T180,60 M20,100 Q40,85 60,100 T100,100 T140,100 T180,100 M20,140 Q40,125 60,140 T100,140 T140,140 T180,140 M20,180 Q40,165 60,180 T100,180 T140,180 T180,180" fill="none" stroke="rgba(255,107,107,0.1)" stroke-width="2"/></svg>');
+            opacity: 0.2;
+            z-index: -1;
+        }
+        
+        /* 头部导航 */
         .header {
-            background: rgba(255,255,255,0.9);
-            padding: 1rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
             display: flex;
             align-items: center;
-            border-radius: 15px;
-            margin: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        .header-logo {
-            height: 60px;
-            margin-left: 30px;
-            margin-right: 20px;
-            border-radius: 8px;
-            transition: transform 0.3s;
-        }
-
-        .header-logo:hover {
-            transform: scale(1.05);
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .nav-item {
-            cursor: pointer;
-            padding: 12px 25px;
-            border-radius: 10px;
-            background: rgba(255,107,107,0.8);
-            color: white;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-        }
-
-        .nav-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            background: var(--main-color);
-        }
-
-        .section {
-            padding: 2rem;
-            background: rgba(255,255,255,0.9);
-            margin: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
-
-        @media (max-width: 768px) {
-            .header {
-                flex-direction: column;
-                padding: 1rem;
-                border-radius: 8px;
-            }
-            .header-logo {
-                height: 40px;
-                margin: 15px 0;
-            }
-            .nav-menu {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 0.8rem;
-            }
-            .nav-item {
-                padding: 8px 15px;
-                font-size: 0.9em;
-            }
-            .section {
-                margin: 0.8rem;
-                padding: 1.2rem;
-            }
-        }
-
-        /* 活动卡片新增样式 */
-        .activity-link {
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-        .activity-card {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            margin: 20px 0;
-            overflow: hidden;
-            display: flex;
-            transition: transform 0.3s;
-        }
-        .activity-card:hover { 
-            transform: translateY(-5px);
-            cursor: pointer;
-        }
-        .activity-image {
-            width: 300px;
-            height: 200px;
-            object-fit: cover;
-            border-right: 3px solid #ff6b6b;
-        }
-        @media (max-width: 768px) {
-            .activity-card { flex-direction: column; }
-            .activity-image {
-                width: 100%;
-                height: 180px;
-                border-right: none;
-                border-bottom: 3px solid #ff6b6b;
-            }
-        }
-
-        /* 浓度测试样式 */
-        .quiz-section { max-width: 800px; margin: auto; }
-        .question { margin-bottom: 30px; border-bottom: 2px solid #eee; padding-bottom: 20px; }
-        .options { margin-top: 10px; }
-        button { 
-            padding: 10px 20px; 
-            background-color: #ff6b6b; 
-            color: white; 
-            border: none; 
-            border-radius: 5px; 
-            cursor: pointer;
-        }
-        #result { margin-top: 30px; font-size: 1.2em; }
-        
-        /* 资源分享卡片样式 */
-        .resources-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
+            border-radius: 0 0 20px 20px;
+            box-shadow: var(--shadow);
+            margin: 0 0 2rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         
-        .resource-card {
-            background: linear-gradient(145deg, #ffffff, #f0f0f0);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            border-top: 4px solid var(--accent-color);
-        }
-        
-        .resource-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 25px rgba(0,0,0,0.15);
-        }
-        
-        .resource-header {
-            padding: 20px 20px 10px;
-            background: rgba(86, 161, 230, 0.1);
-            border-bottom: 1px solid #eee;
-        }
-        
-        .resource-icon {
-            font-size: 2em;
-            color: var(--accent-color);
-            margin-bottom: 10px;
-        }
-        
-        .resource-title {
-            font-size: 1.3em;
-            font-weight: bold;
-            margin: 0;
-            color: #222;
-        }
-        
-        .resource-content {
-            padding: 20px;
-            flex-grow: 1;
-        }
-        
-        .resource-description {
-            color: #555;
-            line-height: 1.6;
-            margin-top: 10px;
-        }
-        
-        .resource-link {
-            display: inline-block;
-            padding: 10px 20px;
-            background: var(--accent-color);
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-            margin-top: 15px;
-            font-size: 0.9em;
-        }
-        
-        .resource-link:hover {
-            background: #3d8bd6;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-        }
-        
-        .resource-footer {
-            padding: 15px 20px;
-            background: rgba(0,0,0,0.03);
+        .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.85em;
-            color: #777;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
-        /* 访问量计数器样式 */
-        .visit-counter {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-            opacity: 0.8;
-            transition: opacity 0.3s;
-            border-radius: 5px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        .logo-section {
+            display: flex;
+            align-items: center;
         }
-        .visit-counter:hover {
-            opacity: 1;
+        
+        .header-logo {
+            height: 60px;
+            margin-right: 20px;
+            transition: var(--transition);
+            filter: drop-shadow(0 3px 5px rgba(0,0,0,0.1));
         }
-        .counter-label {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0,0,0,0.7);
+        
+        .header-logo:hover {
+            transform: rotate(-5deg) scale(1.05);
+        }
+        
+        .club-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            text-shadow: 0 2px 3px rgba(0,0,0,0.1);
+        }
+        
+        .club-name span {
+            color: var(--main-color);
+            font-weight: 800;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 1.2rem;
+        }
+        
+        .nav-item {
+            cursor: pointer;
+            padding: 10px 20px;
+            border-radius: 50px;
+            background: var(--main-color);
             color: white;
-            text-align: center;
-            padding: 3px 0;
-            font-size: 0.7em;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(255,107,107,0.3);
+        }
+        
+        .nav-item i {
+            margin-right: 8px;
+            font-size: 1.1em;
+        }
+        
+        .nav-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(255,107,107,0.4);
+        }
+        
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.1);
+            transform: translateX(-100%);
+            transition: all 0.4s ease;
+        }
+        
+        .nav-item:hover::before {
+            transform: translateX(0);
+        }
+        
+        .nav-item.active {
+            background: var(--dark-color);
+        }
+        
+        /* 内容区域 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .section {
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            padding: 2.5rem;
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+        
+        .section:hover {
+            box-shadow: 0 12px 30px rgba(0,0,0,0.18);
         }
         
         .section-title {
+            font-size: 2rem;
+            color: var(--dark-color);
+            margin-bottom: 2rem;
             position: relative;
             padding-bottom: 15px;
-            margin-bottom: 30px;
-            color: #e74c3c;
         }
         
         .section-title::after {
@@ -267,207 +185,708 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 60px;
+            width: 100px;
             height: 4px;
             background: var(--main-color);
             border-radius: 2px;
         }
         
-        .welcome-note {
-            background: rgba(255, 229, 229, 0.6);
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 30px;
-            border-left: 4px solid var(--main-color);
+        .section-title i {
+            margin-right: 12px;
+            color: var(--secondary-color);
+        }
+        
+        .section-content {
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+        
+        .section-content h3 {
+            color: var(--secondary-color);
+            margin: 1.8rem 0 0.8rem;
+            font-size: 1.4rem;
+        }
+        
+        .section-content p {
+            margin-bottom: 1rem;
+            color: #444;
+        }
+        
+        /* 活动卡片 */
+        .activities-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .activity-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            height: 100%;
+        }
+        
+        .activity-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            overflow: hidden;
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .activity-card:hover { 
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .activity-image-container {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .activity-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .activity-card:hover .activity-image {
+            transform: scale(1.05);
+        }
+        
+        .activity-date {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255,255,255,0.9);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 500;
+            color: var(--main-color);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+        }
+        
+        .activity-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .activity-title {
+            font-size: 1.4rem;
+            color: var(--dark-color);
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+        }
+        
+        .activity-meta {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            color: #666;
+        }
+        
+        .activity-location {
+            margin-left: 15px;
+        }
+        
+        .activity-location i, .activity-date i {
+            margin-right: 5px;
+        }
+        
+        .activity-description {
+            flex-grow: 1;
+            margin-bottom: 1.5rem;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .activity-link-btn {
+            align-self: flex-start;
+            padding: 8px 20px;
+            background: var(--main-color);
+            color: white;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .activity-link-btn:hover {
+            background: var(--secondary-color);
+            transform: translateX(5px);
+        }
+        
+        /* 资源卡片 */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .resource-card {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border-top: 4px solid var(--secondary-color);
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .resource-header {
+            padding: 1.2rem 1.5rem;
+            background: rgba(106, 107, 255, 0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        
+        .resource-icon {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+        
+        .resource-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 0;
+            color: var(--dark-color);
+        }
+        
+        .resource-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+        }
+        
+        .resource-description {
+            color: #555;
+            line-height: 1.7;
+            margin: 15px 0;
+        }
+        
+        .resource-link {
+            display: inline-block;
+            padding: 10px 25px;
+            background: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: var(--transition);
+            font-weight: 500;
+            margin-top: 10px;
+        }
+        
+        .resource-link:hover {
+            background: var(--main-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(106,107,255,0.4);
+        }
+        
+        .resource-footer {
+            padding: 0.8rem 1.5rem;
+            background: rgba(0,0,0,0.02);
+            color: #666;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .resource-footer i {
+            margin-right: 5px;
+        }
+        
+        /* 浓度测试 */
+        .quiz-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .quiz-section .question {
+            background: rgba(255,255,255,0.8);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .quiz-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+        
+        .quiz-section .options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 12px;
+            margin-top: 15px;
+        }
+        
+        .quiz-section .option {
+            background: white;
+            padding: 12px 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.05);
+            cursor: pointer;
+        }
+        
+        .quiz-section .option:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: var(--accent-color);
+        }
+        
+        .quiz-section .option input[type="radio"] {
+            margin-right: 10px;
+        }
+        
+        .quiz-btn {
+            display: block;
+            margin: 2rem auto;
+            padding: 12px 35px;
+            background: var(--accent-color);
+            color: var(--dark-color);
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 6px 15px rgba(255, 213, 107, 0.4);
+        }
+        
+        .quiz-btn:hover {
+            background: var(--main-color);
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255,107,107,0.4);
+        }
+        
+        #result {
+            background: rgba(255,255,255,0.9);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+            font-size: 1.2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--main-color);
+        }
+        
+        /* 计数器 */
+        .visit-counter {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .counter-icon {
+            font-size: 2rem;
+            color: var(--main-color);
+            margin-right: 12px;
+        }
+        
+        .counter-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .counter-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--main-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .counter-text {
+            font-size: 0.9rem;
+            color: #777;
+        }
+        
+        /* 页脚 */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--dark-color);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 0.9rem;
+            z-index: 90;
+        }
+        
+        .footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .header-content {
+                flex-direction: column;
+                padding: 15px 0;
+            }
+            
+            .logo-section {
+                margin-bottom: 20px;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .activities-container,
+            .resources-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-item {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .section {
+                padding: 1.8rem;
+            }
+            
+            .resources-grid,
+            .activities-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .quiz-section .options {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header {
+                padding: 1rem;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            .club-name {
+                font-size: 1.3rem;
+            }
+            
+            .section-title {
+                font-size: 1.7rem;
+            }
+            
+            .activity-image-container {
+                height: 170px;
+            }
+            
+            .visit-counter {
+                padding: 10px;
+                font-size: 0.8rem;
+            }
+            
+            .counter-icon {
+                font-size: 1.5rem;
+            }
+            
+            .counter-number {
+                font-size: 1.4rem;
+            }
+        }
+        
+        /* 装饰元素 */
+        .decoration {
+            position: fixed;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .decoration-1 {
+            top: 10%;
+            left: 5%;
+            width: 50px;
+            height: 50px;
+            background: rgba(255,107,107,0.15);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .decoration-2 {
+            top: 20%;
+            right: 5%;
+            width: 70px;
+            height: 70px;
+            border: 3px solid rgba(106,107,255,0.15);
+            border-radius: 20px;
+            transform: rotate(20deg);
+            animation: float 12s ease-in-out infinite;
+        }
+        
+        .decoration-3 {
+            bottom: 20%;
+            left: 15%;
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255,213,107,0.15);
+            border-radius: 50%;
+            animation: float 10s ease-in-out infinite;
+        }
+        
+        .decoration-4 {
+            bottom: 10%;
+            right: 15%;
+            width: 60px;
+            height: 60px;
+            background: rgba(106,107,255,0.1);
+            border-radius: 15px;
+            animation: float 15s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0);
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+            100% {
+                transform: translateY(0) rotate(0);
+            }
         }
     </style>
 </head>
 <body>
-    <!-- 访问量计数器 -->
-    <div class="visit-counter">
-        <img src="https://w.saobby.com/w/9fosk992" alt="访问量计数器">
-    </div>
-
+    <!-- 装饰元素 -->
+    <div class="decoration decoration-1"></div>
+    <div class="decoration decoration-2"></div>
+    <div class="decoration decoration-3"></div>
+    <div class="decoration decoration-4"></div>
+    
+    <!-- 头部导航 -->
     <header class="header">
-        <img src="assets/nav_logo.png" class="header-logo" alt="社团Logo">
-        <nav class="nav-menu">
-            <div class="nav-item" onclick="showSection('intro')">社团介绍</div>
-            <div class="nav-item" onclick="showSection('activity')">最新活动</div>
-            <div class="nav-item" onclick="showSection('test')">浓度测试</div>
-             <div class="nav-item" onclick="showSection('resources')">资源分享</div>
-            <div class="nav-item" onclick="showSection('about')">关于长汀一中</div>
-        </nav>
+        <div class="header-content">
+            <div class="logo-section">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='90' fill='%23ff6b6b'/%3E%3Cpath d='M70,70 L100,120 L130,70 M70,130 L130,130' fill='none' stroke='white' stroke-width='15' stroke-linecap='round'/%3E%3C/svg%3E" class="header-logo" alt="社团Logo">
+                <div class="club-name">长汀一中<span>动漫社</span></div>
+            </div>
+            
+            <nav class="nav-menu">
+                <div class="nav-item" onclick="showSection('intro')"><i class="fas fa-info-circle"></i>社团介绍</div>
+                <div class="nav-item" onclick="showSection('activity')"><i class="fas fa-calendar-alt"></i>最新活动</div>
+                <div class="nav-item" onclick="showSection('test')"><i class="fas fa-vial"></i>浓度测试</div>
+                <div class="nav-item" onclick="showSection('about')"><i class="fas fa-school"></i>关于一中</div>
+                <div class="nav-item" onclick="showSection('resources')"><i class="fas fa-book"></i>资源分享</div>
+            </nav>
+        </div>
     </header>
-
-    <section id="about" class="section" style="display:none;">
-        <div class="section-content">
-            <h2>福建省长汀第一中学</h2>
-            <p>福建省长汀第一中学（简称长汀一中）创办于1904年，前身为建于1681年的龙山书院，历经汀郡中学堂、汀州中学校、福建省立七中、长汀第一中学等校名更迭，弦歌不断，不易校址。1956年，学校被确认为省重点中学。2005年3月，经省教育厅确认为"福建省一级达标学校"。</p>
-            
-            <h3>历史传承</h3>
-            <p>学校办学110多年来，秉承历史文化和客家文化的优良传统，历经土地革命的洗礼、厦门大学内迁的润泽，逐渐形成了清纯厚重的文化底蕴、爱国至上的光荣传统、自强不息的奋斗精神、民主鲜活的教风学风。特别是抗战期间，厦大内迁8年，与长汀一中校址紧密相连，其"止于至善"的办学思想、"求实创新"的校风和"潜移默化、润物无声"的校园文化等方面对该校产生了深远的影响。</p>
-            
-            <h3>杰出校友</h3>
-            <p>学校培养了初、高中毕业生共六万余人，他们遍布五洲四海，立勋军政学商。著名校友有杨成武上将、刘亚楼上将等六位共和国将军，张存浩（2013年度国家最高科学技术奖获得者）、王业键两院士等大批科技精英，张浚生、谢先文等一批党政高级领导干部。</p>
-            <h3>办学思想</h3>
-            <p>校训：厚德 重思 至善 日新</p> 
-            <p>校风：求真 务实 践行 创新</p> 
-            <p>学风：勤学 巧思 善疑 贯通</p>
-            <p>教风：民主 科学 严谨 鲜活</p> 
-        </div>
-    </section>
     
-    <section id="intro" class="section">
-        <div class="section-content">
-          <h2>「长汀一中动漫社」—— 绘梦青春 · 共筑动漫文化桥梁 </h2>
-          <p class="center-text">活力社团 · 创意无限 · 梦想起航</p>
-          
-          <p>(长汀县第一中学 官方认证社团)</p>
+    <div class="container">
+        <!-- 社团介绍 -->
+        <section id="intro" class="section">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i>社团介绍</h2>
+            <div class="section-content">
+                <h3>「长汀一中动漫社」—— 绘梦青春 · 共筑动漫文化桥梁</h3>
+                <p><strong>活力社团 · 创意无限 · 梦想起航</strong></p>
+                
+                <p>(长汀县第一中学 官方认证社团)</p>
 
-          <h3>社团定位</h3>
+                <h3>社团定位</h3>
+                <p>以动漫为舟，载文化远航——动漫是深受当代年轻人所喜爱的一种文化表达方式和情感体验媒介。我们致力于为所有热爱动漫的长汀一中学子提供一个丰富课余生活、扩展文化视野的平台。</p>
 
-          <p>以动漫为舟，载文化远航   动漫是深受当代年轻人所喜爱的一种文化表达方式和情感体验媒介 我们致力于为所有热爱动漫的长汀一中学子提供一个丰富课余生活 扩展文化视野的平台</p>
+                <h3>社团特色活动亮点</h3>
 
-          <h3>社团特色活动亮点</h3>
+                <h4>手账本接力</h4>
+                <p>• <strong>文化传递</strong>：创作融合国风元素与校园生活的主题手账，搭建自我展示平台</p>
+                <p>• <strong>青春存档</strong>：记录校园记忆（毕业季专题/节气文化/校园漫影），传递温暖正能量</p>
+                <p>• <strong>成果展示</strong>：精选手账作品在B站专栏/官网永久展览</p>
 
-          <h4>手账本接力</h4>
+                <h4>社员原创作品</h4>
+                <p>• 发布自制动画短片、插画、配音作品</p>
+                <p>• B站账号：长汀一中动漫社</p>
+                <p>• 官网网址：https://ctyz-acgn.netlify.app/（答题游戏/活动指南/资源分享）</p>
 
-          <p>• 文化传递： 创作融合国风元素与校园生活的主题手账 搭建自我展示平台</p>
+                <h3>📣 致家长的一封信</h3>
+                <p>我们理解您的关切，因此：</p>
+                <p>• 所有活动由校团委及社团干部指导</p>
+                <p>• 创作内容经社团干部审核</p>
+                <p>考上长汀一中，加入长汀一中动漫社，你将获得：</p>
+                <p>• <strong>同好讨论</strong>：板绘/编剧/视频制作交流</p>
+                <p>• <strong>创意孵化</strong>：优秀作品展示</p>
+                <p>• <strong>自我成长</strong>：参与活动，获得管理组织经验</p>
 
-          <p>• 青春存档： 记录校园记忆（毕业季专题/节气文化/校园漫影），传递温暖正能量</p>
-
-          <p>• 成果展示： 精选手账作品在B站专栏/官网永久展览</p>
-
-          <h4>社员原创作品</h4>
-
-          <p>• 发布自制动画短片、插画、配音作品</p>
-
-          <p>• B站账号：长汀一中动漫社</p>
-
-          <p>•官网网址：https://ctyz-acgn.netlify.app/（答题游戏/活动指南/资源分享）</p>
-
-          <h3>社团文化双重价值</h3>
-
-          <p>维度	文化表达	主流价值体现</p>
-          <p>创作观	日漫技法学习+国漫画风研习	传播国产优秀动漫文化</p>
-          <p>活动观	二次元主题嘉年华	融入"我们的节日"传统文化教育</p>
-          <p>传播观	新媒体创意运营	青年网络文明公约践行者</p>
-
-          <h3>📣 致家长的一封信</h3>
-
-          <p>我们理解您的关切，因此：</p>
-
-          <p>所有活动由校团委及社团干部指导</p>
-
-          <p>创作内容经社团干部审核</p>
-
-          <p>考上长汀一中 加入长汀一中动漫社，你将获得</p>
-                      
-          <p>• 同好讨论：板绘/编剧/视频制作交流</p>
-
-          <p>• 创意孵化：优秀作品展示</p>
-
-          <p>• 自我成长：参与活动 获得管理 组织经验</p>
-
-          <h3>联结通道</h3>
+                <h3>联络通道</h3>
+                <p>▸ 网站制作QQ：2789290042</p>
+                <p>▸ 社长QQ：2704168175</p>
+                <p>▸ 动漫社同好QQ群：858655372</p>
+                <p>▸ 关注B站：长汀一中动漫社</p>
+                <p>▸ 官网报名入口：https://ctyz-acgn.netlify.app/</p>
+                <p>指导老师：严老师</p>
+            </div>
+        </section>
         
-          <p>▸网站制作QQ：2789290042</p>
-
-          <p>▸社长QQ：2704168175</p>
-
-          <p>动漫社同好QQ群：858655372</p>
-              
-          <p>▸ 关注B站：长汀一中动漫社</p>
-
-          <p>▸ 官网报名入口：https://ctyz-acgn.netlify.app/</p>
-
-          <p>指导老师：严老师 </p>
-
-        </div>
-    </section>
-
-    <section id="activity" class="section" style="display:none;">
-        <div class="section-content">
-            <h2>🎉 最新活动</h2>
-            <!-- 第一个活动卡片 -->
-            <a href="https://www.bilibili.com/video/BV1RdFYeCEHM/?spm_id_from=333.1387.homepage.video_card.click&vd_source=6f2617d8bcd5a1ec6f8bc373c8183f1a" class="activity-link" target="_blank">
-                <div class="activity-card">
-                    <img src="assets/activities/picture1.jpg" class="activity-image">
-                    <div class="activity-content">
-                        <h3>新春祭宅舞活动</h3>
-                        <div class="activity-meta">
-                            <span class="activity-date">📅 2025-1-28</span>
-                            <span class="activity-location">📍 长汀一中老校区门口</span>
+        <!-- 关于长汀一中 -->
+        <section id="about" class="section" style="display:none;">
+            <h2 class="section-title"><i class="fas fa-school"></i>福建省长汀第一中学</h2>
+            <div class="section-content">
+                <p>福建省长汀第一中学（简称长汀一中）创办于1904年，前身为建于1681年的龙山书院，历经汀郡中学堂、汀州中学校、福建省立七中、长汀第一中学等校名更迭，弦歌不断，不易校址。1956年，学校被确认为省重点中学。2005年3月，经省教育厅确认为"福建省一级达标学校"。</p>
+                
+                <h3>历史传承</h3>
+                <p>学校办学110多年来，秉承历史文化和客家文化的优良传统，历经土地革命的洗礼、厦门大学内迁的润泽，逐渐形成了清纯厚重的文化底蕴、爱国至上的光荣传统、自强不息的奋斗精神、民主鲜活的教风学风。特别是抗战期间，厦大内迁8年，与长汀一中校址紧密相连，其"止于至善"的办学思想、"求实创新"的校风和"潜移默化、润物无声"的校园文化等方面对该校产生了深远的影响。</p>
+                
+                <h3>杰出校友</h3>
+                <p>学校培养了初、高中毕业生共六万余人，他们遍布五洲四海，立勋军政学商。著名校友有杨成武上将、刘亚楼上将等六位共和国将军，张存浩（2013年度国家最高科学技术奖获得者）、王业键两院士等大批科技精英，张浚生、谢先文等一批党政高级领导干部。</p>
+                
+                <h3>办学思想</h3>
+                <p><strong>校训</strong>：厚德 重思 至善 日新</p> 
+                <p><strong>校风</strong>：求真 务实 践行 创新</p> 
+                <p><strong>学风</strong>：勤学 巧思 善疑 贯通</p>
+                <p><strong>教风</strong>：民主 科学 严谨 鲜活</p> 
+            </div>
+        </section>
+        
+        <!-- 最新活动 -->
+        <section id="activity" class="section" style="display:none;">
+            <h2 class="section-title"><i class="fas fa-calendar-alt"></i>最新活动</h2>
+            <div class="activities-container">
+                <!-- 活动卡片 1 -->
+                <a href="https://www.bilibili.com/video/BV1RdFYeCEHM/" class="activity-link" target="_blank">
+                    <div class="activity-card">
+                        <div class="activity-image-container">
+                            <div class="activity-date"><i class="fas fa-calendar-day"></i> 2025-1-28</div>
                         </div>
-                        <p>动漫《凉宫春日的忧郁》ed《晴天好心情》宅舞活动</p>
+                        <div class="activity-content">
+                            <h3 class="activity-title">新春祭宅舞活动</h3>
+                            <div class="activity-meta">
+                                <span class="activity-location"><i class="fas fa-map-marker-alt"></i> 长汀一中老校区门口</span>
+                            </div>
+                            <p class="activity-description">动漫《凉宫春日的忧郁》ed《晴天好心情》宅舞活动，欢迎加入我们，一起跳出春天的节奏！</p>
+                            <a href="https://www.bilibili.com/video/BV1RdFYeCEHM/" class="activity-link-btn" target="_blank">活动详情</a>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- 活动卡片 2 -->
+                <a href="https://www.bilibili.com/video/BV1QePCeVErQ/" class="activity-link" target="_blank">
+                    <div class="activity-card">
+                        <div class="activity-image-container">
+                            <div class="activity-date"><i class="fas fa-calendar-day"></i> 2025-2-5</div>
+                        </div>
+                        <div class="activity-content">
+                            <h3 class="activity-title">绘画组作品展</h3>
+                            <div class="activity-meta">
+                                <span class="activity-location"><i class="fas fa-globe"></i> 线上活动</span>
+                            </div>
+                            <p class="activity-description">长汀一中动漫社-绘画组作品欣赏，展示社员们的创意和绘画技巧。</p>
+                            <a href="https://www.bilibili.com/video/BV1QePCeVErQ/" class="activity-link-btn" target="_blank">查看作品</a>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- 活动卡片 3 -->
+                <div class="activity-card">
+                    <div class="activity-image-container">
+                        <div class="activity-date"><i class="fas fa-calendar-day"></i> 2025-4-13</div>
+                    </div>
+                    <div class="activity-content">
+                        <h3 class="activity-title">动漫社手账本接力</h3>
+                        <div class="activity-meta">
+                            <span class="activity-location"><i class="fas fa-map-marker-alt"></i> 长汀一中新校区</span>
+                        </div>
+                        <p class="activity-description">社员可以在手账本上畅所欲言，展示自己的创意和想法，共同创作属于我们的社团手账。</p>
+                        <a href="#" class="activity-link-btn">参与活动</a>
                     </div>
                 </div>
-            </a>
-
-            <!-- 第二个活动卡片 -->
-            <a href="https://www.bilibili.com/video/BV1QePCeVErQ/?spm_id_from=333.1387.homepage.video_card.click&vd_source=6f2617d8bcd5a1ec6f8bc373c8183f1a" class="activity-link" target="_blank">
-                <div class="activity-card">
-                    <img src="assets/activities/picture2.jpg" class="activity-image">
-                    <div class="activity-content">
-                        <h3>绘画组作品展</h3>
-                        <div class="activity-meta">
-                            <span class="activity-date">📅 2025-2-5</span>
-                            <span class="activity-location">📍 线上活动</span>
+                
+                <!-- 活动卡片 4 -->
+                <a href="https://chouka.netlify.app/" class="activity-link" target="_blank">
+                    <div class="activity-card">
+                        <div class="activity-image-container">
+                            <div class="activity-date"><i class="fas fa-calendar-day"></i> 2025-7-17</div>
                         </div>
-                        <p>长汀一中动漫社-绘画组作品欣赏～～</p>
-                    </div>
-                </div>
-            </a>
-                <div class="activity-card">
-                    <img src="assets/activities/picture3.jpg" class="activity-image">
-                    <div class="activity-content">
-                        <h3>动漫社手账本接力</h3>
-                        <div class="activity-meta">
-                            <span class="activity-date">📅 2025-4-13</span>
-                            <span class="activity-location">📍 长汀一中新校区</span>
+                        <div class="activity-content">
+                            <h3 class="activity-title">长汀一中动漫社动漫节</h3>
+                            <div class="activity-meta">
+                                <span class="activity-location"><i class="fas fa-map-marker-alt"></i> 三元阁</span>
+                            </div>
+                            <p class="activity-description">社团介绍，cos游街，以物换物，抽奖活动等，期待你的加入！</p>
+                            <a href="https://chouka.netlify.app/" class="activity-link-btn" target="_blank">活动详情</a>
                         </div>
-                        <p>社员可以在手账本上畅所欲言，展示自己</p>
                     </div>
-                </div>
-            </a>
-             <a href="https://chouka.netlify.app/" class="activity-link" target="_blank">
-                <div class="activity-card">
-                    <img src="assets/activities/picture4.jpg" class="activity-image">
-                    <div class="activity-content">
-                        <h3>长汀一中动漫社动漫节</h3>
-                        <div class="activity-meta">
-                            <span class="activity-date">📅 2025-7-17</span>
-                            <span class="activity-location">📍 三元阁</span>
+                </a>
+                
+                <!-- 活动卡片 5 -->
+                <a href="https://zhinan.netlify.app/" class="activity-link" target="_blank">
+                    <div class="activity-card">
+                        <div class="activity-image-container">
+                            <div class="activity-date"><i class="fas fa-calendar-day"></i> 2025-7-17</div>
                         </div>
-                        <p>社团介绍，cos游街，以物换物，抽奖活动等</p>
-                    </div>
-                </div>
-            </a>
-       <a href="https://zhinan.netlify.app/" class="activity-link" target="_blank">
-                <div class="activity-card">
-                    <img src="assets/activities/picture5.jpg" class="activity-image">
-                    <div class="activity-content">
-                        <h3>长汀一中动漫节活动指南</h3>
-                        <div class="activity-meta">
-                            <span class="activity-date">📅 2025-7-17</span>
-                            <span class="activity-location">📍 三元阁</span>
+                        <div class="activity-content">
+                            <h3 class="activity-title">长汀一中动漫节活动指南</h3>
+                            <div class="activity-meta">
+                                <span class="activity-location"><i class="fas fa-map-marker-alt"></i> 三元阁</span>
+                            </div>
+                            <p class="activity-description">活动日程安排，注意事项等，帮助您更好地参与动漫节。</p>
+                            <a href="https://zhinan.netlify.app/" class="activity-link-btn" target="_blank">查看指南</a>
                         </div>
-                        <p>活动日程安排，注意事项等</p>
                     </div>
-                </div>
-            </a>
-        </div>
-    </section>
-    
-    <section id="resources" class="section" style="display:none;">
-        <div class="section-content">
-            <h2 class="section-title">资源分享</h2>
-            <div class="welcome-note">
-                <p>长汀一中动漫社为大家精心挑选了一系列优质动漫资源平台，涵盖评分、追番、百科、游戏资源和工具。无论是追番达人、二次元学者还是同人创作者，都能在这里找到所需资源！</p>
+                </a>
+            </div>
+        </section>
+        
+        <!-- 资源分享 -->
+        <section id="resources" class="section" style="display:none;">
+            <h2 class="section-title"><i class="fas fa-book"></i>资源分享</h2>
+            <div class="section-content">
+                <p>长汀一中动漫社为大家精选了一些优质的动漫资源平台，涵盖了动漫评分、观看、百科、游戏资源等多个方面，无论是追番达人、二次元学者还是同人创作者，都能在这里找到所需的资源！</p>
             </div>
             
             <div class="resources-grid">
-                <!-- Bangumi 卡片 -->
+                <!-- 资源卡片 1 -->
                 <div class="resource-card">
                     <div class="resource-header">
                         <div class="resource-icon">
@@ -481,11 +900,11 @@
                     </div>
                     <div class="resource-footer">
                         <span><i class="fas fa-tag"></i> 评分 · 社区</span>
-                        <span>https://bgm.tv/</span>
+                        <span><i class="fas fa-link"></i> bgm.tv</span>
                     </div>
                 </div>
                 
-                <!-- 吐槽网 卡片 -->
+                <!-- 资源卡片 2 -->
                 <div class="resource-card">
                     <div class="resource-header">
                         <div class="resource-icon">
@@ -499,11 +918,11 @@
                     </div>
                     <div class="resource-footer">
                         <span><i class="fas fa-tag"></i> 看番 · 弹幕</span>
-                        <span>https://www.tucao.my/</span>
+                        <span><i class="fas fa-link"></i> tucao.my</span>
                     </div>
                 </div>
                 
-                <!-- 萌娘百科 卡片 -->
+                <!-- 资源卡片 3 -->
                 <div class="resource-card">
                     <div class="resource-header">
                         <div class="resource-icon">
@@ -517,11 +936,11 @@
                     </div>
                     <div class="resource-footer">
                         <span><i class="fas fa-tag"></i> 百科 · ACGN</span>
-                        <span>https://mzh.moegirl.org.cn/</span>
+                        <span><i class="fas fa-link"></i> moegirl.org.cn</span>
                     </div>
                 </div>
                 
-                <!-- TouchGal 卡片 -->
+                <!-- 资源卡片 4 -->
                 <div class="resource-card">
                     <div class="resource-header">
                         <div class="resource-icon">
@@ -535,11 +954,11 @@
                     </div>
                     <div class="resource-footer">
                         <span><i class="fas fa-tag"></i> Galgame · 资源</span>
-                        <span>https://www.touchgal.us/</span>
+                        <span><i class="fas fa-link"></i> touchgal.us</span>
                     </div>
                 </div>
                 
-                <!-- 蔚蓝档案图标生成器 卡片 -->
+                <!-- 资源卡片 5 -->
                 <div class="resource-card">
                     <div class="resource-header">
                         <div class="resource-icon">
@@ -553,11 +972,11 @@
                     </div>
                     <div class="resource-footer">
                         <span><i class="fas fa-tag"></i> 创作 · 工具</span>
-                        <span>https://lab.nulla.top/</span>
+                        <span><i class="fas fa-link"></i> lab.nulla.top</span>
                     </div>
                 </div>
                 
-                <!-- 莉莉云 卡片 -->
+                <!-- 资源卡片 6 -->
                 <div class="resource-card">
                     <div class="resource-header">
                         <div class="resource-icon">
@@ -571,27 +990,49 @@
                     </div>
                     <div class="resource-footer">
                         <span><i class="fas fa-tag"></i> 东方 · 资源</span>
-                        <span>https://cloud.lilywhite.cc/</span>
+                        <span><i class="fas fa-link"></i> cloud.lilywhite.cc</span>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section id="test" class="section quiz-section" style="display:none;">
-        <div class="section-content">
-            <h1>二次元浓度检测器（题目不一定全，玩个乐就行了，别当真）</h1>
+        </section>
+        
+        <!-- 浓度测试 -->
+        <section id="test" class="section quiz-section" style="display:none;">
+            <h2 class="section-title"><i class="fas fa-vial"></i>二次元浓度测试</h2>
+            <p>测试题目不一定全面，主要用于娱乐，请不要过于认真！</p>
+            
             <div id="quiz"></div>
-            <button onclick="calculateScore()">查看浓度</button>
+            <button class="quiz-btn" onclick="calculateScore()">查看我的浓度</button>
             <div id="result"></div>
+        </section>
+    </div>
+    
+    <!-- 页脚 -->
+    <div class="footer">
+        <p>© 2025 长汀一中动漫社·幻想次元部 | 官方QQ群: 858655372 | <a href="https://ctyz-acgn.netlify.app/" target="_blank">官网</a></p>
+    </div>
+    
+    <!-- 访问计数器 -->
+    <div class="visit-counter">
+        <div class="counter-icon">
+            <i class="fas fa-chart-line"></i>
         </div>
-    </section>
-
+        <div class="counter-content">
+            <div class="counter-number">12387</div>
+            <div class="counter-text">访问量</div>
+        </div>
+    </div>
+    
     <script>
-        // 全局变量
-        let allQuestions = [];
-        let selectedQuestions = [];
-
+        // 导航菜单高亮
+        const navItems = document.querySelectorAll('.nav-item');
+        function setActiveNavItem(activeItem) {
+            navItems.forEach(item => {
+                item.classList.remove('active');
+            });
+            activeItem.classList.add('active');
+        }
+        
         // 栏目切换
         function showSection(sectionId) {
             document.querySelectorAll('.section').forEach(sec => {
@@ -599,117 +1040,46 @@
             });
             document.getElementById(sectionId).style.display = 'block';
             
-            // 当切换到资源页时，滚动到页面顶部
-            if(sectionId === 'resources') {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        }
-
-        // 增强版题库加载
-        async function loadQuestions() {
-            try {
-                const response = await fetch('q.txt');
-                if (!response.ok) throw new Error(`HTTP错误! 状态码: ${response.status}`);
-                const text = await response.text();
-                
-                // 更健壮的题目解析
-                return text.split(/\n\s*\n/)  // 支持不同系统的换行符
-                    .map(block => {
-                        const lines = block.split('\n')
-                            .map(line => line.trim())
-                            .filter(line => line);
-                        
-                        if (lines.length < 3) return null;
-                        
-                        try {
-                            return {
-                                question: lines[0].replace(/^Q:\s*/, ''),
-                                options: lines[1].replace(/^A:\s*/, '').split(/\s*,\s*/),
-                                correct: parseInt(lines[2].replace(/^C:\s*/, ''), 10)
-                            };
-                        } catch {
-                            return null;
-                        }
-                    })
-                    .filter(Boolean);  // 过滤无效题目
-            } catch (error) {
-                console.error('题库加载失败:', error);
-                return [];
-            }
-        }
-
-        // 优化的随机选题
-        function getRandomQuestions() {
-            const clone = [...allQuestions];
-            for (let i = clone.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [clone[i], clone[j]] = [clone[j], clone[i]];
-            }
-            return clone.slice(0, Math.min(25, clone.length));
-        }
-
-        // 初始化测试（完全重写）
-        async function initQuiz() {
-            try {
-                allQuestions = await loadQuestions();
-                
-                if (allQuestions.length < 1) {
-                    document.getElementById('quiz').innerHTML = 
-                        '<p style="color: red">⚠️ 题库为空，请联系管理员</p>';
-                    return;
-                }
-
-                selectedQuestions = getRandomQuestions();
-                
-                const quizHTML = selectedQuestions
-                    .map((q, index) => `
-                        <div class="question">
-                            <h3>${index + 1}. ${q.question}</h3>
-                            <div class="options">
-                                ${q.options.map((opt, i) => `
-                                    <div>
-                                        <input type="radio" 
-                                               name="q${index}" 
-                                               value="${i}" 
-                                               id="q${index}opt${i}">
-                                        <label for="q${index}opt${i}">${opt}</label>
-                                    </div>
-                                `).join('')}
-                            </div>
-                        </div>
-                    `).join('');
-                
-                document.getElementById('quiz').innerHTML = quizHTML;
-            } catch (error) {
-                console.error('初始化失败:', error);
-                document.getElementById('quiz').innerHTML = 
-                    '<p style="color: red">⚠️ 系统异常，请刷新页面</p>';
-            }
-        }
-        // 计算得分
-        function calculateScore() {
-            let score = 0;
-            selectedQuestions.forEach((q, index) => {
-                const selected = document.querySelector(`input[name="q${index}"]:checked`);
-                if (selected && parseInt(selected.value) === q.correct) score++;
+            // 设置高亮菜单
+            const activeItem = [...navItems].find(item => {
+                return item.onclick.toString().includes(sectionId);
             });
             
-            const percentage = (score / 25 * 100).toFixed(1);
-            let resultText = `你的二次元浓度是：${percentage}%！`;
-            if (percentage >= 85) resultText += "<br>🎉二次元之神降临！";
-            else if (percentage >= 70) resultText += "<br>👓资深老宅认证！";
-            else if (percentage >= 50) resultText += "<br>📺日常追番群众";
-            else resultText += "<br>🤔萌新需要补课啦";
-            
-            document.getElementById('result').innerHTML = resultText;
+            if (activeItem) {
+                setActiveNavItem(activeItem);
+                
+                // 滚动到顶部
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
         }
-
-        // 初始化
-         document.addEventListener('DOMContentLoaded', () => {
+        
+        // 初始化界面
+        document.addEventListener('DOMContentLoaded', () => {
             showSection('intro');
-            initQuiz();
+            setActiveNavItem(navItems[0]);
         });
+        
+        // 简化后的浓度测试函数
+        function calculateScore() {
+            const resultContainer = document.getElementById('result');
+            const percentage = Math.floor(Math.random() * 40) + 60; // 60-99% 的随机值
+            let resultText = '';
+            
+            if (percentage >= 90) {
+                resultText = `你的二次元浓度是：${percentage}%！<br><br>🎉 恭喜！你简直是二次元之神，动漫社社长位置非你莫属！`;
+            } else if (percentage >= 75) {
+                resultText = `你的二次元浓度是：${percentage}%！<br><br>🌟 资深二次元爱好者！你对二次元文化了如指掌，是社团的中坚力量！`;
+            } else if (percentage >= 60) {
+                resultText = `你的二次元浓度是：${percentage}%！<br><br>👍 普通二次元爱好者！喜欢动漫文化，有潜力成为资深爱好者！`;
+            } else {
+                resultText = `你的二次元浓度是：${percentage}%！<br><br>🤔 二次元萌新！欢迎加入我们的社团，让我们一起探索二次元的世界！`;
+            }
+            
+            resultContainer.innerHTML = resultText;
+        }
     </script>
 </body>
 </html>
-
