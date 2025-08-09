@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>长汀一中动漫社-幻想次元部</title>
+    <title>长汀一中动漫社-幻想次元部 | ACGN知识RPG</title>
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -40,6 +40,19 @@
             flex-direction: column;
             min-height: 100vh;
             position: relative;
+        }
+        
+        /* RPG风格背景 */
+        .rpg-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1518655048521-f130df041f66?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center;
+            background-size: cover;
+            opacity: 0.9;
         }
         
         /* 头部导航 */
@@ -172,6 +185,7 @@
         .activity-card:hover { 
             transform: translateY(-5px);
             cursor: pointer;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
         }
         
         .activity-image {
@@ -212,158 +226,220 @@
             line-height: 1.6;
         }
         
-        /* 资源卡片 */
-        .resources-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-        
-        .resource-card {
-            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+        /* RPG游戏界面 */
+        .rpg-game {
+            background: rgba(255, 255, 255, 0.85);
             border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .game-scene {
+            position: relative;
+            height: 400px;
+            border-radius: 10px;
+            background: linear-gradient(rgba(100, 100, 150, 0.5), rgba(50, 50, 100, 0.8)), 
+                        url('https://images.unsplash.com/photo-1494526585095-c41746248156?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') no-repeat center center;
+            background-size: cover;
+            margin-bottom: 1.5rem;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            border-top: 4px solid var(--secondary-color);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+            border: 3px solid #d4af37;
         }
         
-        .resource-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 25px rgba(0,0,0,0.15);
-        }
-        
-        .resource-header {
-            padding: 20px 20px 10px;
-            background: rgba(86, 161, 230, 0.1);
-            border-bottom: 1px solid #eee;
-            text-align: center;
-        }
-        
-        .resource-icon {
-            font-size: 2em;
-            color: var(--secondary-color);
-            margin-bottom: 10px;
-        }
-        
-        .resource-title {
-            font-size: 1.3em;
-            font-weight: bold;
-            margin: 0;
-            color: #222;
-        }
-        
-        .resource-content {
-            padding: 20px;
-            flex-grow: 1;
-        }
-        
-        .resource-description {
-            color: #555;
-            line-height: 1.6;
-            margin-top: 10px;
-        }
-        
-        .resource-link {
-            display: inline-block;
-            padding: 10px 20px;
-            background: var(--secondary-color);
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
+        .character {
+            position: absolute;
+            width: 80px;
+            height: 120px;
+            background: url('https://i.imgur.com/4GxqG0x.png') no-repeat center center;
+            background-size: contain;
+            bottom: 60px;
+            left: 100px;
+            z-index: 2;
             transition: all 0.3s ease;
-            margin-top: 15px;
-            font-size: 0.9em;
         }
         
-        .resource-link:hover {
-            background: #3d8bd6;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        .monster {
+            position: absolute;
+            width: 120px;
+            height: 140px;
+            background: url('https://i.imgur.com/1f0rVzr.png') no-repeat center center;
+            background-size: contain;
+            bottom: 50px;
+            right: 100px;
+            z-index: 2;
+            transition: all 0.3s ease;
         }
         
-        .resource-footer {
-            padding: 15px 20px;
-            background: rgba(0,0,0,0.03);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.85em;
-            color: #777;
+        .health-bar {
+            position: absolute;
+            width: 200px;
+            height: 20px;
+            background: #555;
+            border-radius: 10px;
+            border: 2px solid #333;
+            overflow: hidden;
+            z-index: 3;
         }
         
-        /* 浓度测试 */
-        .quiz-section {
-            max-width: 800px;
-            margin: auto;
+        .health-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #e74c3c, #2ecc71);
+            width: 100%;
+            transition: width 0.5s ease;
         }
         
-        .question {
-            margin-bottom: 30px;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 20px;
+        .hero-health {
+            top: 20px;
+            left: 100px;
+        }
+        
+        .monster-health {
+            top: 20px;
+            right: 100px;
+        }
+        
+        .health-label {
+            position: absolute;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px #000;
+            z-index: 4;
+        }
+        
+        .hero-label {
+            top: 20px;
+            left: 110px;
+        }
+        
+        .monster-label {
+            top: 20px;
+            right: 110px;
+        }
+        
+        .quest-box {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--secondary-color);
         }
         
         .options {
-            margin-top: 10px;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
         }
         
         .option {
-            background: white;
-            padding: 12px 15px;
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            border: 2px solid var(--secondary-color);
             border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            transition: var(--transition);
-            border: 1px solid rgba(0,0,0,0.05);
+            padding: 15px;
+            text-align: center;
             cursor: pointer;
-            position: relative;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         
         .option:hover {
+            background: var(--secondary-color);
+            color: white;
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            border-color: var(--accent-color);
         }
         
-        .option.selected {
-            background-color: rgba(255, 213, 107, 0.2);
-            border-color: var(--accent-color);
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
         }
         
-        .option input[type="radio"] {
-            margin-right: 10px;
-        }
-        
-        button {
-            padding: 10px 20px;
-            background-color: var(--main-color);
+        .rpg-button {
+            padding: 12px 25px;
+            background: linear-gradient(145deg, #ff6b6b, #e55a5a);
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
+            font-weight: bold;
             cursor: pointer;
-            font-size: 1.1em;
-            transition: var(--transition);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
         
-        button:hover {
-            background-color: #e55a5a;
-            transform: translateY(-2px);
+        .rpg-button:hover {
+            background: linear-gradient(145deg, #e55a5a, #ff6b6b);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.25);
         }
         
-        #result {
-            margin-top: 30px;
-            font-size: 1.2em;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.9);
+        .rpg-button.blue {
+            background: linear-gradient(145deg, #6a6bff, #5a5ae5);
+        }
+        
+        .rpg-button.blue:hover {
+            background: linear-gradient(145deg, #5a5ae5, #6a6bff);
+        }
+        
+        .rpg-button.green {
+            background: linear-gradient(145deg, #2ecc71, #27ae60);
+        }
+        
+        .rpg-button.green:hover {
+            background: linear-gradient(145deg, #27ae60, #2ecc71);
+        }
+        
+        .battle-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px 40px;
             border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            font-size: 1.8rem;
+            font-weight: bold;
+            animation: fadeInOut 2s forwards;
+            z-index: 10;
+            text-align: center;
+            width: 400px;
+            max-width: 80%;
+        }
+        
+        @keyframes fadeInOut {
+            0% { opacity: 0; }
+            20% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+            80% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+            100% { opacity: 0; }
+        }
+        
+        .game-over {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            color: white;
+        }
+        
+        .game-over h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: #ffd56b;
+            text-shadow: 0 0 10px rgba(255, 213, 107, 0.8);
         }
         
         /* 访问量计数器样式 */
@@ -393,6 +469,86 @@
             text-align: center;
             padding: 3px 0;
             font-size: 0.7em;
+        }
+        
+        /* 资源分享卡片翻转效果 */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .resource-card {
+            position: relative;
+            height: 300px;
+            perspective: 1000px;
+        }
+        
+        .resource-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .resource-card:hover .resource-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .resource-front, .resource-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .resource-front {
+            background: linear-gradient(135deg, var(--main-color), var(--secondary-color));
+            color: white;
+        }
+        
+        .resource-back {
+            background: white;
+            transform: rotateY(180deg);
+            padding: 20px;
+            color: #333;
+            text-align: left;
+        }
+        
+        .resource-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        
+        .resource-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .resource-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 8px 16px;
+            background: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .resource-link:hover {
+            background: #3d8bd6;
+            transform: translateY(-2px);
         }
         
         /* 响应式设计 */
@@ -440,8 +596,45 @@
                 grid-template-columns: 1fr;
             }
             
-            .quiz-section .options {
+            .rpg-game .options {
                 grid-template-columns: 1fr;
+            }
+            
+            .game-scene {
+                height: 300px;
+            }
+            
+            .character {
+                width: 60px;
+                height: 90px;
+                left: 20px;
+            }
+            
+            .monster {
+                width: 80px;
+                height: 100px;
+                right: 20px;
+            }
+            
+            .health-bar {
+                width: 150px;
+                height: 16px;
+            }
+            
+            .hero-health {
+                left: 20px;
+            }
+            
+            .monster-health {
+                right: 20px;
+            }
+            
+            .hero-label {
+                left: 25px;
+            }
+            
+            .monster-label {
+                right: 25px;
             }
         }
         
@@ -483,6 +676,9 @@
     </style>
 </head>
 <body>
+    <!-- RPG背景 -->
+    <div class="rpg-bg"></div>
+    
     <!-- 访问量计数器 -->
     <div class="visit-counter">
         <img src="https://w.saobby.com/w/9fosk992" alt="访问量计数器">
@@ -493,7 +689,7 @@
         <nav class="nav-menu">
             <div class="nav-item" onclick="showSection('intro')">社团介绍</div>
             <div class="nav-item" onclick="showSection('activity')">最新活动</div>
-            <div class="nav-item" onclick="showSection('test')">浓度测试</div>
+            <div class="nav-item" onclick="showSection('rpg')">ACGN知识RPG</div>
             <div class="nav-item" onclick="showSection('resources')">资源分享</div>
             <div class="nav-item" onclick="showSection('about')">关于长汀一中</div>
         </nav>
@@ -523,12 +719,6 @@
                 <p>• 发布自制动画短片、插画、配音作品</p>
                 <p>• B站账号：长汀一中动漫社</p>
                 <p>• 官网网址：https://ctyz-acgn.netlify.app/（答题游戏/活动指南/资源分享）</p>
-              <h3>社团文化双重价值</h3>
-
-          <p>维度	文化表达	主流价值体现</p>
-          <p>创作观	日漫技法学习+国漫画风研习	传播国产优秀动漫文化</p>
-          <p>活动观	二次元主题嘉年华	融入"我们的节日"传统文化教育</p>
-          <p>传播观	新媒体创意运营	青年网络文明公约践行者</p>
                 
                 <h3>📣 致家长的一封信</h3>
                 <p>我们理解您的关切，因此：</p>
@@ -538,19 +728,15 @@
                 <p>• <strong>同好讨论</strong>：板绘/编剧/视频制作交流</p>
                 <p>• <strong>创意孵化</strong>：优秀作品展示</p>
                 <p>• <strong>自我成长</strong>：参与活动，获得管理组织经验</p>
+                
                 <h3> 联结通道</h3>
         
-          <p>▸网站制作QQ：2789290042</p>
-
-          <p>▸社长QQ：2704168175</p>
-
-          <p>动漫社同好QQ群：858655372</p>
-              
-          <p>▸ 关注B站：长汀一中动漫社</p>
-
-          <p>▸ 官网报名入口：https://ctyz-acgn.netlify.app/</p>
-
-          <p>指导老师：严老师 </p>
+                <p>▸网站制作QQ：2789290042</p>
+                <p>▸社长QQ：2704168175</p>
+                <p>▸动漫社同好QQ群：858655372</p>
+                <p>▸ 关注B站：长汀一中动漫社</p>
+                <p>▸ 官网报名入口：https://ctyz-acgn.netlify.app/</p>
+                <p>指导老师：严老师 </p>
             </div>
         </section>
         
@@ -663,124 +849,162 @@
             <div class="resources-grid">
                 <!-- Bangumi 卡片 -->
                 <div class="resource-card">
-                    <div class="resource-header">
-                        <div class="resource-icon">
-                            <i class="fas fa-star-half-alt"></i>
+                    <div class="resource-inner">
+                        <div class="resource-front">
+                            <div class="resource-icon">
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <h3 class="resource-title">Bangumi</h3>
                         </div>
-                        <h3 class="resource-title">Bangumi</h3>
-                    </div>
-                    <div class="resource-content">
-                        <p class="resource-description">专业的动漫评分平台，记录你的追番历史，发现同好讨论社区。</p>
-                        <a href="https://bgm.tv/" class="resource-link" target="_blank">访问网站</a>
-                    </div>
-                    <div class="resource-footer">
-                        <span><i class="fas fa-tag"></i> 评分 · 社区</span>
-                        <span>https://bgm.tv/</span>
+                        <div class="resource-back">
+                            <h3 class="resource-title">Bangumi</h3>
+                            <p class="resource-description">专业的动漫评分平台，记录你的追番历史，发现同好讨论社区。</p>
+                            <p>网址：https://bgm.tv/</p>
+                            <a href="https://bgm.tv/" class="resource-link" target="_blank">前往网站</a>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- 吐槽网 卡片 -->
                 <div class="resource-card">
-                    <div class="resource-header">
-                        <div class="resource-icon">
-                            <i class="fas fa-video"></i>
+                    <div class="resource-inner">
+                        <div class="resource-front">
+                            <div class="resource-icon">
+                                <i class="fas fa-video"></i>
+                            </div>
+                            <h3 class="resource-title">吐槽网</h3>
                         </div>
-                        <h3 class="resource-title">吐槽网</h3>
-                    </div>
-                    <div class="resource-content">
-                        <p class="resource-description">提供最新动漫观看和弹幕评论功能，随时加入讨论热潮。</p>
-                        <a href="https://www.tucao.my/" class="resource-link" target="_blank">访问网站</a>
-                    </div>
-                    <div class="resource-footer">
-                        <span><i class="fas fa-tag"></i> 看番 · 弹幕</span>
-                        <span>https://www.tucao.my/</span>
+                        <极客
+                        <div class="resource-back">
+                            <h3 class="resource-title">吐槽网</h3>
+                            <p class="resource-description">提供最新动漫观看和弹幕评论功能，随时加入讨论热潮。</p>
+                            <p>网址：https://www.tucao.my/</p>
+                            <a href="https://www.tucao.my/" class="resource-link" target="_blank">前往网站</a>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- 萌娘百科 卡片 -->
                 <div class="resource-card">
-                    <div class="resource-header">
-                        <div class="resource-icon">
-                            <i class="fas fa-book-open"></i>
+                    <div class="resource-inner">
+                        <div class="resource-front">
+                            <div class="resource-icon">
+                                <i class="fas fa-book-open"></i>
+                            </div>
+                            <h3 class="resource-title">萌娘百科</h3>
                         </div>
-                        <h3 class="resource-title">萌娘百科</h3>
-                    </div>
-                    <div class="resource-content">
-                        <p class="resource-description">最全面的ACGN百科知识库，涵盖动漫、游戏及相关文化内容。</p>
-                        <a href="https://mzh.moegirl.org.cn/" class="resource-link" target="_blank">访问网站</a>
-                    </div>
-                    <极客
-                    <div class="resource-footer">
-                        <span><i class="fas fa-tag"></i> 百科 · ACGN</span>
-                        <span>https://mzh.moegirl.org.cn/</span>
+                        <div class="resource-back">
+                            <h3 class="resource-title">萌娘百科</h3>
+                            <p class="resource-description">最全面的ACGN百科知识库，涵盖动漫、游戏及相关文化内容。</p>
+                            <p>网址：https://mzh.moegirl.org.cn/</p>
+                            <a href="https://mzh.moegirl.org.cn/" class="resource-link" target="_blank">前往网站</a>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- TouchGal 卡片 -->
                 <div class="resource-card">
-                    <div class="resource-header">
-                        <div class="resource-icon">
-                            <i class="fas fa-gamepad"></i>
+                    <div class="resource-inner">
+                        <div class="resource-front">
+                            <div class="resource-icon">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <h3 class="resource-title">TouchGal</h3>
                         </div>
-                        <h3 class="resource-title">TouchGal</h3>
-                    </div>
-                    <div class="resource-content">
-                        <p class="resource-description">专注于Galgame资源分享，收录各类经典和最新视觉小说游戏。</p>
-                        <a href="https://www.touchgal.us/" class="resource-link" target="_blank">访问网站</a>
-                    </div>
-                    <div class="resource-footer">
-                        <span><i class="fas fa-tag"></i> Galgame · 资源</span>
-                        <span>https://www.touchgal.us/</span>
+                        <div class="resource-back">
+                            <h3 class="resource-title">TouchGal</h3>
+                            <p class="resource-description">专注于Galgame资源分享，收录各类经典和最新视觉小说游戏。</p>
+                            <p>网址：https://www.touchgal.us/</p>
+                            <a href="https://www.touchgal.us/" class="resource-link" target="_blank">前往网站</a>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- 蔚蓝档案图标生成器 卡片 -->
                 <div class="resource-card">
-                    <div class="resource-header">
-                        <div class="resource极客
-                        <div class="resource-icon">
-                            <i class="fas fa-paint-brush"></i>
+                    <div class="resource-inner">
+                        <div class="resource-front">
+                            <div class="resource-icon">
+                                <i class="fas fa-paint-brush"></i>
+                            </div>
+                            <h3 class="resource-title">蔚蓝档案图标生成器</h3>
                         </div>
-                        <h3 class="resource-title">蔚蓝档案图标生成器</h3>
-                    </div>
-                    <div class="resource-content">
-                        <p class="resource-description">轻松生成《碧蓝档案》游戏风格图标，提升你的二次元创作。</p>
-                        <a href="https://lab.nulla.top/" class="resource-link" target="_blank">访问网站</a>
-                    </div>
-                    <div class="resource-footer">
-                        <span><i class="fas fa-tag"></i> 创作 · 工具</span>
-                        <span>https://lab.nulla.top/</span>
+                        <div class="resource-back">
+                            <h3 class="resource-title">蔚蓝档案图标生成器</h3>
+                            <p class="resource-description">轻松生成《碧蓝档案》游戏风格图标，提升你的二次元创作。</p>
+                            <p>网址：https://lab.nulla.top/</p>
+                            <a href="https://lab.nulla.top/" class="resource-link" target="_blank">前往网站</a>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- 莉莉云 卡片 -->
                 <div class="resource-card">
-                    <div class="resource-header">
-                        <div class="resource-icon">
-                            <i class="fas fa-cloud"></i>
+                    <div class="resource-inner">
+                        <div class="resource-front">
+                            <div class="resource-icon">
+                                <i class="fas fa-cloud"></i>
+                            </div>
+                            <h3 class="resource-title">莉莉云</h3>
                         </div>
-                        <h3 class="resource-title">莉莉云</h3>
-                    </div>
-                    <div class="resource-content">
-                        <p class="resource-description">东方Project主题资源云存储，获取音乐、游戏、视频等丰富内容。</p>
-                        <a href="https://cloud.lilywhite.cc/" class="resource-link" target="_blank">访问网站</a>
-                    </div>
-                    <div class="resource-footer">
-                        <span><i class="fas fa-tag"></i> 东方 · 资源</span>
-                        <span>https://cloud.lilywhite.cc/</span>
+                        <div class="resource-back">
+                            <h3 class="resource-title">莉莉云</h3>
+                            <p class="resource-description">东方Project主题资源云存储，获取音乐、游戏、视频等丰富内容。</p>
+                            <p>网址：https://cloud.lilywhite.cc/</p>
+                            <a href="https://cloud.lilywhite.cc/" class="resource-link" target="_blank">前往网站</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
         
-        <!-- 浓度测试 -->
-        <section id="test" class="section quiz-section" style="display:none;">
-            <h2 class="section-title">二次元浓度检测器</h2>
-            <p>测试题目不一定全面，主要用于娱乐，请不要过于认真！</p>
+        <!-- ACGN知识RPG -->
+        <section id="rpg" class="section" style="display:none;">
+            <h2 class="section-title">ACGN知识RPG：勇者挑战赛</h2>
+            <p>扮演一位勇敢的动漫知识勇者，踏上征服ACGN魔王的冒险之旅！每答对一道题可攻击魔王，答错会被魔王攻击。</p>
             
-            <div id="quiz"></div>
-            <button onclick="calculateScore()">查看浓度</button>
-            <div id="result"></div>
+            <div class="rpg-game">
+                <!-- 游戏场景 -->
+                <div class="game-scene">
+                    <!-- 角色血条 -->
+                    <div class="health-bar hero-health">
+                        <div class="health-fill" id="hero-hp-bar"></div>
+                    </div>
+                    <div class="health-label hero-label">勇者: <span id="hero-hp">100</span></div>
+                    
+                    <!-- 敌人血条 -->
+                    <div class="health-bar monster-health">
+                        <div class="health-fill" id="monster-hp-bar"></div>
+                    </div>
+                    <div class="health-label monster-label">魔王: <span id="monster-hp">100</span></div>
+                    
+                    <!-- 勇者形象 -->
+                    <div class="character" id="hero-character"></div>
+                    
+                    <!-- 敌人形象 -->
+                    <div class="monster" id="monster-character"></div>
+                </div>
+                
+                <!-- 游戏状态/对话 -->
+                <div class="quest-box">
+                    <h3 id="quest-title">欢迎来到ACGN知识RPG！</h3>
+                    <p id="quest-description">你是一名勇者，目标是击败魔王库洛姆。只有通过ACGN知识考验，才能成功挑战魔王！准备好了吗？</p>
+                </div>
+                
+                <!-- 当前问题 -->
+                <div class="quest-box" id="question-area" style="display: none;">
+                    <h3 id="question-text"></h3>
+                    <div class="options" id="options-container"></div>
+                </div>
+                
+                <!-- 游戏操作按钮 -->
+                <div class="action-buttons">
+                    <button class="rpg-button green" id="start-btn" onclick="startGame()">开始冒险</button>
+                    <button class="rpg-button" id="attack-btn" style="display: none;" onclick="answerQuestion()">攻击魔王</button>
+                    <button class="rpg-button blue" id="next-btn" style="display: none;" onclick="nextQuestion()">继续挑战</button>
+                    <button class="rpg-button" id="restart-btn" style="display: none;" onclick="restartGame()">重新开始</button>
+                </div>
+            </div>
         </section>
     </div>
     
@@ -797,9 +1021,12 @@
     
     <script>
         // 全局变量
+        let heroHP = 100;
+        let monsterHP = 100;
+        let currentQuestionIndex = 0;
+        let correctAnswers = 0;
         let allQuestions = [];
-        let selectedQuestions = [];
-
+        
         // 栏目切换
         function showSection(sectionId) {
             document.querySelectorAll('.section').forEach(sec => {
@@ -808,7 +1035,7 @@
             document.getElementById(sectionId).style.display = 'block';
         }
 
-        // 题库加载
+        // 加载外部题库
         async function loadQuestions() {
             try {
                 const response = await fetch('q.txt');
@@ -835,82 +1062,185 @@
             }
         }
 
-        // 随机选题
-        function getRandomQuestions() {
-            const clone = [...allQuestions];
-            for (let i = clone.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [clone[i], clone[j]] = [clone[j], clone[i]];
-            }
-            return clone.slice(0, Math.min(25, clone.length));
+        // 游戏初始状态
+        function resetGame() {
+            heroHP = 100;
+            monsterHP = 100;
+            currentQuestionIndex = 0;
+            correctAnswers = 0;
+            
+            document.getElementById('hero-hp').textContent = heroHP;
+            document.getElementById('monster-hp').textContent = monsterHP;
+            document.getElementById('hero-hp-bar').style.width = '100%';
+            document.getElementById('monster-hp-bar').style.width = '100%';
+            
+            document.getElementById('start-btn').style.display = 'block';
+            document.getElementById('attack-btn').style.display = 'none';
+            document.getElementById('next-btn').style.display = 'none';
+            document.getElementById('restart-btn').style.display = 'none';
+            document.getElementById('question-area').style.display = 'none';
+            
+            document.getElementById('quest-title').textContent = "欢迎来到ACGN知识RPG！";
+            document.getElementById('quest-description').textContent = 
+                "你是一名勇者，目标是击败魔王库洛姆。只有通过ACGN知识考验，才能成功挑战魔王！准备好了吗？";
         }
 
-        // 初始化测试
-        async function initQuiz() {
+        // 开始游戏
+        async function startGame() {
+            // 加载题目
             allQuestions = await loadQuestions();
             
-            if (allQuestions.length < 1) {
-                document.getElementById('quiz').innerHTML = 
-                    '<p>题库为空，请联系管理员</p>';
+            if (allQuestions.length === 0) {
+                document.getElementById('quest-description').textContent = 
+                    "题库加载失败，请检查q.txt文件是否存在并格式正确！";
                 return;
             }
-
-            selectedQuestions = getRandomQuestions();
             
-            const quizHTML = selectedQuestions
-                .map((q, index) => `
-                    <div class="question">
-                        <h3>${index + 1}. ${q.question}</h3>
-                        <div class="options">
-                            ${q.options.map((opt, i) => `
-                                <div class="option" onclick="selectOption(this, ${index}, ${i})">
-                                    <input type="radio" name="q${index}" value="${i}" id="q${index}opt${i}">
-                                    <label for="q${index}opt${i}">${opt}</label>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                `).join('');
+            resetGame();
+            document.getElementById('start-btn').style.display = 'none';
+            document.getElementById('attack-btn').style.display = 'block';
+            document.getElementById('question-area').style.display = 'block';
             
-            document.getElementById('quiz').innerHTML = quizHTML;
+            showQuestion();
         }
         
-        // 选择选项
-        function selectOption(element, questionIndex, optionIndex) {
-            // 移除同组其他选项的选中状态
-            const options = element.parentElement.querySelectorAll('.option');
-            options.forEach(opt => opt.classList.remove('selected'));
+        // 显示当前问题
+        function showQuestion() {
+            if (currentQuestionIndex >= allQuestions.length) {
+                currentQuestionIndex = 0; // 循环问题
+            }
             
-            // 添加当前选项的选中状态
-            element.classList.add('selected');
+            const question = allQuestions[currentQuestionIndex];
+            document.getElementById('question-text').textContent = question.question;
             
-            // 设置单选按钮选中状态
-            const radio = element.querySelector(`input[type="radio"]`);
-            radio.checked = true;
-        }
-        
-        // 计算得分
-        function calculateScore() {
-            let score = 0;
-            selectedQuestions.forEach((q, index) => {
-                const selected = document.querySelector(`input[name="q${index}"]:checked`);
-                if (selected && parseInt(selected.value) === q.correct) score++;
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <input type="radio" name="answer" id="option${index}" value="${index}">
+                    <label for="option${index}">${option}</label>
+                `;
+                optionsContainer.appendChild(optionElement);
             });
             
-            const percentage = (score / 25 * 100).toFixed(1);
-            let resultText = `你的二次元浓度是：${percentage}%！`;
-            if (percentage >= 85) resultText += "<br>🎉二次元之神降临！";
-            else if (percentage >= 70) resultText += "<br>👓资深老宅认证！";
-            else if (percentage >= 50) resultText += "<br>📺日常追番群众";
-            else resultText += "<br>🤔萌新需要补课啦";
+            document.getElementById('quest-title').textContent = `挑战魔王第${currentQuestionIndex + 1}问`;
+            document.getElementById('quest-description').textContent = 
+                "选择正确答案来攻击魔王！答错的话魔王会反击！";
+        }
+        
+        // 回答问题
+        function answerQuestion() {
+            const selectedOption = document.querySelector('input[name="answer"]:checked');
+            if (!selectedOption) {
+                alert('请选择一个答案！');
+                return;
+            }
             
-            document.getElementById('result').innerHTML = resultText;
+            const userAnswer = parseInt(selectedOption.value);
+            const question = allQuestions[currentQuestionIndex];
+            const isCorrect = (userAnswer === question.correct);
+            
+            if (isCorrect) {
+                correctAnswers++;
+                // 玩家攻击
+                const damage = Math.floor(Math.random() * 15) + 15; // 15-30伤害
+                monsterHP = Math.max(0, monsterHP - damage);
+                document.getElementById('monster-hp').textContent = monsterHP;
+                document.getElementById('monster-hp-bar').style.width = `${monsterHP}%`;
+                
+                showBattleEffect(true, damage);
+                document.getElementById('quest-description').innerHTML = 
+                    `回答正确！你造成了${damage}点伤害！`;
+            } else {
+                // 怪物攻击
+                const damage = Math.floor(Math.random() * 10) + 10; // 10-20伤害
+                heroHP = Math.max(0, heroHP - damage);
+                document.getElementById('hero-hp').textContent = heroHP;
+                document.getElementById('hero-hp-bar').style.width = `${heroHP}%`;
+                
+                showBattleEffect(false, damage);
+                document.getElementById('quest-description').innerHTML = 
+                    `回答错误！魔王反击造成${damage}点伤害！`;
+            }
+            
+            // 检查游戏结束
+            if (monsterHP <= 0) {
+                endGame(true);
+                return;
+            }
+            
+            if (heroHP <= 0) {
+                endGame(false);
+                return;
+            }
+            
+            document.getElementById('attack-btn').style.display = 'none';
+            document.getElementById('next-btn').style.display = 'block';
+        }
+        
+        // 显示战斗特效
+        function showBattleEffect(isPlayerAttack, damage) {
+            const scene = document.querySelector('.game-scene');
+            const effect = document.createElement('div');
+            effect.className = 'battle-message';
+            
+            if (isPlayerAttack) {
+                effect.textContent = `-${damage} HP`;
+                effect.style.color = '#e74c3c';
+            } else {
+                effect.textContent = `-${damage} HP`;
+                effect.style.color = '#3498db';
+            }
+            
+            scene.appendChild(effect);
+            
+            // 移除特效
+            setTimeout(() => {
+                effect.remove();
+            }, 2000);
+        }
+        
+        // 下一题
+        function nextQuestion() {
+            currentQuestionIndex++;
+            document.getElementById('attack-btn').style.display = 'block';
+            document.getElementById('next-btn').style.display = 'none';
+            showQuestion();
+        }
+        
+        // 重新开始游戏
+        function restartGame() {
+            resetGame();
+            startGame();
+        }
+        
+        // 结束游戏
+        function endGame(isVictory) {
+            document.getElementById('attack-btn').style.display = 'none';
+            document.getElementById('next-btn').style.display = 'none';
+            document.getElementById('restart-btn').style.display = 'block';
+            document.getElementById('question-area').style.display = 'none';
+            
+            if (isVictory) {
+                document.getElementById('quest-title').textContent = "胜利！你击败了魔王！";
+                document.getElementById('quest-description').innerHTML = 
+                    `恭喜你成功击败魔王库洛姆！你的ACGN知识评分：${Math.round((correctAnswers * 100) / allQuestions.length)}%`;
+            } else {
+                document.getElementById('quest-title').textContent = "游戏结束！勇者倒下了";
+                document.getElementById('quest-description').innerHTML = 
+                    `魔王库洛姆的强大远超你的想象！你的ACGN知识评分：${Math.round((correctAnswers * 100) / allQuestions.length)}%<br>
+                     不要灰心，收集更多ACGN知识，再次挑战吧！`;
+            }
         }
 
         // 初始化
         document.addEventListener('DOMContentLoaded', () => {
             showSection('intro');
-            initQuiz();
+            // 隐藏RPG游戏部分直到用户点击导航
+            document.getElementById('rpg').style.display = 'none';
         });
     </script>
 </body>
