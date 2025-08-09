@@ -9,11 +9,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
     
-    <!-- 添加PixiJS和Live2D库 -->
+    <!-- 使用本地化资源解决CDN加载问题 -->
     <script src="https://cdn.jsdelivr.net/npm/pixi.js@5.3.0/dist/pixi.min.js"></script>
-    <!-- 添加Cubism 4运行时库 -->
-    <script src="https://cdn.jsdelivr.net/npm/pixi-live2d-display@latest/dist/live2dcubismcore.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/pixi-live2d-display@latest/dist/cubism4.min.js"></script>
+    <script>
+        // 如果CDN加载失败，使用本地回退方案
+        if (typeof PIXI === 'undefined') {
+            document.write('<script src="assets/js/pixi.min.js"><\/script>');
+        }
+    </script>
     
     <style>
         :root {
@@ -33,7 +36,6 @@
             box-sizing: border-box;
         }
         
-        /* 修复页脚定位问题 */
         html, body {
             height: 100%;
         }
@@ -49,7 +51,7 @@
             position: relative;
         }
         
-        /* 添加Live2D容器样式 */
+        /* Live2D容器样式 */
         #live2d-container {
             position: fixed;
             left: 0;
@@ -155,8 +157,8 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 15px 80px 15px;
-            flex: 1; /* 确保内容区域占据剩余空间 */
+            padding: 0 15px;
+            flex: 1;
         }
         
         .section {
@@ -166,7 +168,6 @@
             margin-bottom: 1.5rem;
             padding: 1.5rem;
             transition: var(--transition);
-            backdrop-filter: blur(5px);
         }
         
         .section:hover {
@@ -177,6 +178,7 @@
             font-size: 1.8rem;
             color: var(--dark-color);
             margin-bottom: 1.5rem;
+            position:极客
             position: relative;
             padding-bottom: 10px;
         }
@@ -228,7 +230,6 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             margin: 20px 0;
             overflow: hidden;
-            display:极客
             display: flex;
             transition: transform 0.3s;
             flex-direction: column;
@@ -246,7 +247,6 @@
             border-bottom: 3px solid #ff6b6b;
         }
         
-极客
         .activity-content {
             padding: 1.5rem;
             flex-grow: 1;
@@ -270,7 +270,6 @@
         }
         
         .activity-location {
-            margin-left: 15极客
             margin-left: 15px;
         }
         
@@ -386,6 +385,7 @@
             background: white;
             padding: 12px 15px;
             border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0极客
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             transition: var(--transition);
             border: 1px solid rgba(0,0,0,0.05);
@@ -395,6 +395,7 @@
         
         .option:hover {
             transform: translateY(-3px);
+            box-shadow: 0 5极客
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             border-color: var(--accent-color);
         }
@@ -522,7 +523,6 @@
             position: relative;
             z-index: 100;
             font-size: 0.9rem;
-            margin-top: auto; /* 确保页脚始终在底部 */
         }
         
         .footer-links {
@@ -619,7 +619,7 @@
                 <h3>📣 致家长的一封信</h3>
                 <p>我们理解您的关切，因此：</p>
                 <p>• 所有活动由校团委及社团干部指导</p>
-                <p>• 创作内容经社团干部审核</p>
+                <p>• 创作内容经社团干部审核</极客
                 <p>考上长汀一中，加入长汀一中动漫社，你将获得：</p>
                 <p>• <strong>同好讨论</strong>：板绘/编剧/视频制作交流</p>
                 <p>• <strong>创意孵化</strong>：优秀作品展示</p>
@@ -628,7 +628,6 @@
         
           <p>▸网站制作QQ：2789290042</p>
 
-          <极客
           <p>▸社长QQ：2704168175</p>
 
           <p>动漫社同好QQ群：858655372</p>
@@ -687,6 +686,7 @@
                         <div class="activity-content">
                             <h3 class="activity-title">绘画组作品展</h3>
                             <div class="activity-meta">
+                                <span class极客
                                 <span class="activity-date">📅 2025-2-5</span>
                                 <span class="activity-location">📍 线上活动</span>
                             </div>
@@ -705,6 +705,7 @@
                             <span class="activity-location">📍 长汀一中新校区</span>
                         </div>
                         <p class="activity-description">社员可以在手账本上畅所欲言，展示自己</p>
+                    </极客
                     </div>
                 </div>
                 
@@ -724,6 +725,7 @@
                 </a>
                 
                 <!-- 活动卡片 5 -->
+                <a href="极客
                 <a href="https://zhinan.netlify.app/" class="activity-link" target="_blank">
                     <div class="activity-card">
                         <img src="assets/activities/picture5.jpg" class="activity-image" alt="动漫节指南">
@@ -797,7 +799,6 @@
                         <a href="https://mzh.moegirl.org.cn/" class="resource-link" target="_blank">访问网站</a>
                     </div>
                     <div class="resource-footer">
-                        <span><i class="fas fa-tag"></极客
                         <span><i class="fas fa-tag"></i> 百科 · ACGN</span>
                         <span>https://mzh.moegirl.org.cn/</span>
                     </div>
@@ -811,7 +812,6 @@
                         </div>
                         <h3 class="resource-title">TouchGal</h3>
                     </div>
-                    <div class极客
                     <div class="resource-content">
                         <p class="resource-description">专注于Galgame资源分享，收录各类经典和最新视觉小说游戏。</p>
                         <a href="https://www.touchgal.us/" class="resource-link" target="_blank">访问网站</a>
@@ -910,9 +910,6 @@
         async function loadQuestions() {
             try {
                 const response = await fetch('q.txt');
-                if (!response.ok) {
-                    throw new Error('题库文件加载失败');
-                }
                 const text = await response.text();
                 
                 return text.split(/\n\s*\n/)
@@ -1023,6 +1020,8 @@
                 await loadNextModel();
             } catch (error) {
                 console.error('Live2D初始化失败:', error);
+                // 如果初始化失败，隐藏Live2D容器
+                document.getElementById('live2d-container').style.display = 'none';
             }
         }
         
@@ -1040,7 +1039,17 @@
                 }
                 
                 // 加载模型
-                live2dModel = await PIXI.live2d.Live2DModel.from(modelPaths[currentModelIndex]);
+                // 使用更可靠的加载方法
+                const model = await PIXI.Loader.shared
+                    .add(modelPaths[currentModelIndex])
+                    .load();
+                
+                live2dModel = model.resources[modelPaths[currentModelIndex]].live2dModel;
+                
+                if (!live2dModel) {
+                    throw new Error('模型加载失败');
+                }
+                
                 live2dModel.anchor.set(0.5, 0.5);
                 live2dModel.position.set(140, 175);
                 live2dApp.stage.addChild(live2dModel);
@@ -1063,6 +1072,8 @@
                 currentModelIndex = (currentModelIndex + 1) % modelPaths.length;
             } catch (error) {
                 console.error('Live2D模型加载失败:', error);
+                // 如果模型加载失败，隐藏Live2D容器
+                document.getElementById('live2d-container').style.display = 'none';
             }
         }
         
