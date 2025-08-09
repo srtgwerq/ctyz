@@ -15,7 +15,6 @@
             --accent-color: #ffd56b;
             --dark-color: #2c2c54;
             --light-color: #f8f9fa;
-            --gradient-bg: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
             --shadow: 0 4px 12px rgba(0,0,0,0.1);
             --transition: all 0.3s ease;
         }
@@ -28,24 +27,11 @@
         
         body {
             font-family: 'Noto Sans SC', sans-serif;
-            background: var(--gradient-bg);
-            background-attachment: fixed;
+            background: #ffffff; /* 改为纯白色背景 */
             color: #333;
             min-height: 100vh;
             position: relative;
             padding-bottom: 60px;
-        }
-        
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('images/new_bg.jpg') no-repeat center/cover;
-            opacity: 0.2;
-            z-index: -1;
         }
         
         /* 头部导航 */
@@ -314,11 +300,17 @@
             transition: var(--transition);
             cursor: pointer;
             position: relative;
+            border: 1px solid #ddd;
         }
         
         .quiz-section .option:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .quiz-section .option.selected {
+            background-color: rgba(106, 107, 255, 0.1);
+            border-color: var(--secondary-color);
         }
         
         .quiz-section .option input[type="radio"] {
@@ -445,7 +437,6 @@
             <div class="nav-item" onclick="showSection('test')">浓度测试</div>
              <div class="nav-item" onclick="showSection('resources')">资源分享</div>
             <div class="nav-item" onclick="showSection('about')">关于一中</div>
-
         </nav>
     </header>
 
@@ -470,9 +461,9 @@
                 <h4>社员原创作品</h4>
                 <p>• 发布自制动画短片、插画、配音作品</p>
                 <p>• B站账号：长汀一中动漫社</p>
-                <p>• 官网网址：https://ctyz-acgn.netlify.app/</p>
+                <p>• 官网网址：https://ctyz-acgn.netlify.app/（答题游戏/活动指南/资源分享）</p>
 
-                <h3>致家长的一封信</h3>
+                <h3>📣 致家长的一封信</h3>
                 <p>我们理解您的关切，因此：</p>
                 <p>• 所有活动由校团委及社团干部指导</p>
                 <p>• 创作内容经社团干部审核</p>
@@ -516,7 +507,7 @@
             <h2 class="section-title">最新活动</h2>
             <div class="activities-container">
                 <!-- 活动卡片 1 -->
-                <div class="activity-card">
+                <a href="https://www.bilibili.com/video/BV1RdFYeCEHM/" class="activity-card" target="_blank">
                     <img src="assets/activities/picture1.jpg" class="activity-image" alt="新春祭宅舞活动">
                     <div class="activity-content">
                         <h3 class="activity-title">新春祭宅舞活动</h3>
@@ -525,12 +516,12 @@
                             <span class="activity-location">📍 长汀一中老校区门口</span>
                         </div>
                         <p class="activity-description">动漫《凉宫春日的忧郁》ed《晴天好心情》宅舞活动</p>
-                        <a href="https://www.bilibili.com/video/BV1RdFYeCEHM/" class="activity-link-btn" target="_blank">活动详情</a>
+                        <div class="activity-link-btn">活动详情</div>
                     </div>
-                </div>
+                </a>
                 
                 <!-- 活动卡片 2 -->
-                <div class="activity-card">
+                <a href="https://www.bilibili.com/video/BV1QePCeVErQ/" class="activity-card" target="_blank">
                     <img src="assets/activities/picture2.jpg" class="activity-image" alt="绘画组作品展">
                     <div class="activity-content">
                         <h3 class="activity-title">绘画组作品展</h3>
@@ -539,13 +530,13 @@
                             <span class="activity-location">📍 线上活动</span>
                         </div>
                         <p class="activity-description">长汀一中动漫社-绘画组作品欣赏</p>
-                        <a href="https://www.bilibili.com/video/BV1QePCeVErQ/" class="activity-link-btn" target="_blank">查看作品</a>
+                        <div class="activity-link-btn">查看作品</div>
                     </div>
-                </div>
+                </a>
                 
                 <!-- 活动卡片 3 -->
-                <div class="activity-card">
-                    <img src="assets/activities/picture4.jpg" class="activity-image" alt="动漫社手账本接力">
+                <a href="#" class="activity-card">
+                    <img src="assets/activities/picture3.jpg" class="activity-image" alt="动漫社手账本接力">
                     <div class="activity-content">
                         <h3 class="activity-title">动漫社手账本接力</h3>
                         <div class="activity-meta">
@@ -553,12 +544,12 @@
                             <span class="activity-location">📍 长汀一中新校区</span>
                         </div>
                         <p class="activity-description">社员可以在手账本上畅所欲言，展示自己</p>
-                        <a href="#" class="activity-link-btn">参与活动</a>
+                        <div class="activity-link-btn">参与活动</div>
                     </div>
-                </div>
+                </a>
                 
                 <!-- 活动卡片 4 -->
-                <div class="activity-card">
+                <a href="https://chouka.netlify.app/" class="activity-card" target="_blank">
                     <img src="assets/activities/picture4.jpg" class="activity-image" alt="动漫节活动">
                     <div class="activity-content">
                         <h3 class="activity-title">长汀一中动漫社动漫节</h3>
@@ -567,9 +558,23 @@
                             <span class="activity-location">📍 三元阁</span>
                         </div>
                         <p class="activity-description">社团介绍，cos游街，以物换物，抽奖活动等</p>
-                        <a href="https://chouka.netlify.app/" class="activity-link-btn" target="_blank">活动详情</a>
+                        <div class="activity-link-btn">活动详情</div>
                     </div>
-                </div>
+                </a>
+                
+                <!-- 活动卡片 5 -->
+                <a href="https://zhinan.netlify.app/" class="activity-card" target="_blank">
+                    <img src="assets/activities/picture5.jpg" class="activity-image" alt="动漫节指南">
+                    <div class="activity-content">
+                        <h3 class="activity-title">长汀一中动漫节活动指南</h3>
+                        <div class="activity-meta">
+                            <span class="activity-date">📅 2025-7-17</span>
+                            <span class="activity-location">📍 三元阁</span>
+                        </div>
+                        <p class="activity-description">活动日程安排，注意事项等</p>
+                        <div class="activity-link-btn">查看指南</div>
+                    </div>
+                </a>
             </div>
         </section>
         
@@ -577,7 +582,7 @@
         <section id="resources" class="section" style="display:none;">
             <h2 class="section-title">资源分享</h2>
             <div class="section-content">
-                <p>长汀一中动漫社为大家精选了一些优质的动漫资源平台，涵盖了动漫评分、观看、百科、游戏资源等多个方面。</p>
+                <p>长汀一中动漫社为大家精心挑选了一系列优质动漫资源平台，涵盖评分、追番、百科、游戏资源和工具。无论是追番达人、二次元学者还是同人创作者，都能在这里找到所需资源！</p>
             </div>
             
             <div class="resources-grid">
@@ -593,6 +598,10 @@
                         <p class="resource-description">专业的动漫评分平台，记录你的追番历史，发现同好讨论社区。</p>
                         <a href="https://bgm.tv/" class="resource-link" target="_blank">访问网站</a>
                     </div>
+                    <div class="resource-footer">
+                        <span><i class="fas fa-tag"></i> 评分 · 社区</span>
+                        <span>https://bgm.tv/</span>
+                    </div>
                 </div>
                 
                 <!-- 吐槽网 卡片 -->
@@ -606,6 +615,10 @@
                     <div class="resource-content">
                         <p class="resource-description">提供最新动漫观看和弹幕评论功能，随时加入讨论热潮。</p>
                         <a href="https://www.tucao.my/" class="resource-link" target="_blank">访问网站</a>
+                    </div>
+                    <div class="resource-footer">
+                        <span><i class="fas fa-tag"></i> 看番 · 弹幕</span>
+                        <span>https://www.tucao.my/</span>
                     </div>
                 </div>
                 
@@ -621,6 +634,10 @@
                         <p class="resource-description">最全面的ACGN百科知识库，涵盖动漫、游戏及相关文化内容。</p>
                         <a href="https://mzh.moegirl.org.cn/" class="resource-link" target="_blank">访问网站</a>
                     </div>
+                    <div class="resource-footer">
+                        <span><i class="fas fa-tag"></i> 百科 · ACGN</span>
+                        <span>https://mzh.moegirl.org.cn/</span>
+                    </div>
                 </div>
                 
                 <!-- TouchGal 卡片 -->
@@ -634,6 +651,46 @@
                     <div class="resource-content">
                         <p class="resource-description">专注于Galgame资源分享，收录各类经典和最新视觉小说游戏。</p>
                         <a href="https://www.touchgal.us/" class="resource-link" target="_blank">访问网站</a>
+                    </div>
+                    <div class="resource-footer">
+                        <span><i class="fas fa-tag"></i> Galgame · 资源</span>
+                        <span>https://www.touchgal.us/</span>
+                    </div>
+                </div>
+                
+                <!-- 蔚蓝档案图标生成器 卡片 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <div class="resource-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h3 class="resource-title">蔚蓝档案图标生成器</h3>
+                    </div>
+                    <div class="resource-content">
+                        <p class="resource-description">轻松生成《碧蓝档案》游戏风格图标，提升你的二次元创作。</p>
+                        <a href="https://lab.nulla.top/" class="resource-link" target="_blank">访问网站</a>
+                    </div>
+                    <div class="resource-footer">
+                        <span><i class="fas fa-tag"></i> 创作 · 工具</span>
+                        <span>https://lab.nulla.top/</span>
+                    </div>
+                </div>
+                
+                <!-- 莉莉云 卡片 -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <div class="resource-icon">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                        <h3 class="resource-title">莉莉云</h3>
+                    </div>
+                    <div class="resource-content">
+                        <p class="resource-description">东方Project主题资源云存储，获取音乐、游戏、视频等丰富内容。</p>
+                        <a href="https://cloud.lilywhite.cc/" class="resource-link" target="_blank">访问网站</a>
+                    </div>
+                    <div class="resource-footer">
+                        <span><i class="fas fa-tag"></i> 东方 · 资源</span>
+                        <span>https://cloud.lilywhite.cc/</span>
                     </div>
                 </div>
             </div>
@@ -729,7 +786,7 @@
                         <h3>${index + 1}. ${q.question}</h3>
                         <div class="options">
                             ${q.options.map((opt, i) => `
-                                <div class="option">
+                                <div class="option" onclick="selectOption(this, ${index}, ${i})">
                                     <input type="radio" name="q${index}" value="${i}" id="q${index}opt${i}">
                                     <label for="q${index}opt${i}">${opt}</label>
                                 </div>
@@ -739,6 +796,20 @@
                 `).join('');
             
             document.getElementById('quiz').innerHTML = quizHTML;
+        }
+        
+        // 选择选项
+        function selectOption(element, questionIndex, optionIndex) {
+            // 移除同组其他选项的选中状态
+            const options = element.parentElement.querySelectorAll('.option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            
+            // 添加当前选项的选中状态
+            element.classList.add('selected');
+            
+            // 设置单选按钮选中状态
+            const radio = element.querySelector(`input[type="radio"]`);
+            radio.checked = true;
         }
         
         // 计算得分
