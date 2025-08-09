@@ -9,9 +9,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
     
-    <!-- 添加PixiJS库 -->
+    <!-- 添加PixiJS和Live2D库 -->
     <script src="https://cdn.jsdelivr.net/npm/pixi.js@5.3.0/dist/pixi.min.js"></script>
-    <!-- 添加Live2D核心库 -->
+    <!-- 添加Cubism 4运行时库 -->
+    <script src="https://cdn.jsdelivr.net/npm/pixi-live2d-display@latest/dist/live2dcubismcore.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/pixi-live2d-display@latest/dist/cubism4.min.js"></script>
     
     <style>
@@ -160,7 +161,6 @@
         .section {
             background: rgba(255, 255, 255, 0.92);
             border-radius: 15px;
-            box-shadow: var(--极客
             box-shadow: var(--shadow);
             margin-bottom: 1.5rem;
             padding: 1.5rem;
@@ -290,6 +290,7 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             height: 100%;
+            display:极客
             display: flex;
             flex-direction: column;
             border-top: 4px solid var(--secondary-color);
@@ -328,6 +329,7 @@
         .resource-description {
             color: #555;
             line-height: 1.6;
+            margin-top: 10极客
             margin-top: 10px;
         }
         
@@ -518,6 +520,7 @@
             position: relative;
             z-index: 100;
             font-size: 0.9rem;
+            margin-top: auto;
         }
         
         .footer-links {
@@ -556,6 +559,7 @@
                 <i class="fas fa-random"></i>
             </button>
             <button class="live2d-btn" title="重置位置" id="reset-position">
+                <i class="fas fa-sync"></极客
                 <i class="fas fa-sync"></i>
             </button>
             <button class="live2d-btn" title="隐藏/显示" id="toggle-model">
@@ -572,11 +576,11 @@
     <header class="header">
         <img src="assets/nav_logo.png" class="header-logo" alt="社团Logo">
         <nav class="nav-menu">
-            <div class="nav-item" data-section="intro">社团介绍</div>
-            <div class="nav-item" data-section="activity">最新活动</div>
-            <div class="nav-item" data-section="test">浓度测试</div>
-            <div class="nav-item" data-section="resources">资源分享</div>
-            <div class="nav-item" data-section="about">关于长汀一中</div>
+            <div class="nav-item" onclick="showSection('intro')">社团介绍</div>
+            <div class="nav-item" onclick="showSection('activity')">最新活动</div>
+            <div class="nav-item" onclick="showSection('test')">浓度测试</div>
+            <div class="nav-item" onclick="showSection('resources')">资源分享</div>
+            <div class="nav-item" onclick="showSection('about')">关于长汀一中</div>
         </nav>
     </header>
 
@@ -694,7 +698,6 @@
                     <img src="assets/activities/picture3.jpg" class="activity-image" alt="动漫社手账本接力">
                     <div class="activity-content">
                         <h3 class="activity-title">动漫社手账本接力</h3>
-                        <极客
                         <div class="activity-meta">
                             <span class="activity-date">📅 2025-4-13</span>
                             <span class="activity-location">📍 长汀一中新校区</span>
@@ -712,6 +715,7 @@
                             <div class="activity-meta">
                                 <span class="activity-date">📅 2025-7-17</span>
                                 <span class="activity-location">📍 三元阁</span>
+                            </极客
                             </div>
                             <p class="activity-description">社团介绍，cos游街，以物换物，抽奖活动等</p>
                         </div>
@@ -903,9 +907,6 @@
         async function loadQuestions() {
             try {
                 const response = await fetch('q.txt');
-                if (!response.ok) {
-                    throw new Error('题库文件加载失败');
-                }
                 const text = await response.text();
                 
                 return text.split(/\n\s*\n/)
@@ -1021,7 +1022,7 @@
             }
         }
         
-        // 加载模型
+        // 加载模型 - 修复后的版本
         async function loadNextModel() {
             if (live2dModel) {
                 live2dModel.destroy();
@@ -1034,13 +1035,11 @@
                     return;
                 }
                 
-                // 使用正确的Live2D加载方法
+                // 加载模型
+                // 使用正确的Live2DModel.from方法
                 live2dModel = await PIXI.live2d.Live2DModel.from(modelPaths[currentModelIndex]);
                 
-                if (!live2dModel) {
-                    throw new Error('模型加载失败');
-                }
-                
+                // 设置模型位置和尺寸
                 live2dModel.anchor.set(0.5, 0.5);
                 live2dModel.position.set(140, 175);
                 live2dApp.stage.addChild(live2dModel);
@@ -1102,6 +1101,7 @@
         
         // 切换拖动模式
         function toggleDragMode() {
+            isDraggable = !is极客
             isDraggable = !isDraggable;
             const button = document.getElementById('drag-toggle');
             button.innerHTML = isDraggable ? '<i class="fas fa-lock"></i>' : '<i class="fas fa-arrows-alt"></i>';
@@ -1125,22 +1125,6 @@
                 live2dModel.position.set(140, 175);
             }
         }
-        
-        // 设置事件监听器
-        function setupEventListeners() {
-            // 导航按钮事件
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.addEventListener('click', () => {
-                    showSection(item.dataset.section);
-                });
-            });
-            
-            // Live2D控制按钮事件
-            document.getElementById('drag-toggle').addEventListener('click', toggleDragMode);
-            document.getElementById('change-model').addEventListener('click', loadNextModel);
-            document.getElementById('reset-position').addEventListener('click', resetModelPosition);
-            document.getElementById('toggle-model').addEventListener('click', toggleModelVisibility);
-        }
 
         // 初始化
         document.addEventListener('DOMContentLoaded', () => {
@@ -1153,8 +1137,11 @@
             // 初始化Live2D
             initLive2D();
             
-            // 设置事件监听器
-            setupEventListeners();
+            // 绑定Live2D控制按钮
+            document.getElementById('drag-toggle').addEventListener('click', toggleDragMode);
+            document.getElementById('change-model').addEventListener('click', loadNextModel);
+            document.getElementById('reset-position').addEventListener('click', resetModelPosition);
+            document.getElementById('toggle-model').addEventListener('click', toggleModelVisibility);
         });
     </script>
 </body>
