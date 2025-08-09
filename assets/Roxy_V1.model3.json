@@ -1,0 +1,28 @@
+{
+	"Version": 3,
+	"FileReferences": {
+		"Moc": "Roxy_V1.moc3",
+		"Textures": [
+			"Roxy_V1.8192/texture_00.png"
+		],
+		"Physics": "Roxy_V1.physics3.json",
+		"DisplayInfo": "Roxy_V1.cdi3.json"
+	},
+	"Groups": [
+		{
+			"Target": "Parameter",
+			"Name": "LipSync",
+			"Ids": []
+		},
+		{
+			"Target": "Parameter",
+			"Name": "EyeBlink",
+			"Ids": [
+				"ParamMouthForm",
+				"ParamMouthOpenY",
+				"ParamEyeLOpen",
+				"ParamEyeROpen"
+			]
+		}
+	]
+}
