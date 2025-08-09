@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>长汀一中动漫社-幻想次元部 | ACGN知识RPG</title>
-    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
@@ -15,7 +13,11 @@
             --accent-color: #ffd56b;
             --dark-color: #2c2c54;
             --light-color: #f8f9fa;
-            --gradient-bg: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            --rpg-red: #e74c3c;
+            --rpg-blue: #3498db;
+            --rpg-green: #2ecc71;
+            --rpg-purple: #9b59b6;
+            --rpg-gold: #f1c40f;
             --shadow: 0 8px 20px rgba(0,0,0,0.15);
             --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
@@ -26,14 +28,13 @@
             box-sizing: border-box;
         }
         
-        /* 修复页脚定位问题 */
         html, body {
             height: 100%;
         }
         
         body {
             font-family: 'Noto Sans SC', sans-serif;
-            background: url('images/new_bg.jpg') no-repeat center center fixed;
+            background: url('images/local_bg.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #333;
             display: flex;
@@ -42,7 +43,7 @@
             position: relative;
         }
         
-        /* RPG风格背景 */
+        /* RPG背景 */
         .rpg-bg {
             position: fixed;
             top: 0;
@@ -50,7 +51,7 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1518655048521-f130df041f66?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center;
+            background: url('images/local_rpg_bg.jpg') no-repeat center center;
             background-size: cover;
             opacity: 0.9;
         }
@@ -66,6 +67,7 @@
             box-shadow: var(--shadow);
             max-width: 1200px;
             width: calc(100% - 30px);
+            backdrop-filter: blur(5px);
         }
         
         .header-logo {
@@ -106,7 +108,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 15px;
-            flex: 1; /* 确保内容区域占据剩余空间 */
+            flex: 1;
         }
         
         .section {
@@ -116,6 +118,7 @@
             margin-bottom: 1.5rem;
             padding: 1.5rem;
             transition: var(--transition);
+            backdrop-filter: blur(8px);
         }
         
         .section:hover {
@@ -239,8 +242,7 @@
             position: relative;
             height: 400px;
             border-radius: 10px;
-            background: linear-gradient(rgba(100, 100, 150, 0.5), rgba(50, 50, 100, 0.8)), 
-                        url('https://images.unsplash.com/photo-1494526585095-c41746248156?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') no-repeat center center;
+            background: url('images/local_game_bg.jpg') no-repeat center center;
             background-size: cover;
             margin-bottom: 1.5rem;
             overflow: hidden;
@@ -252,7 +254,7 @@
             position: absolute;
             width: 80px;
             height: 120px;
-            background: url('https://i.imgur.com/4GxqG0x.png') no-repeat center center;
+            background: url('images/hero.png') no-repeat center center;
             background-size: contain;
             bottom: 60px;
             left: 100px;
@@ -264,7 +266,7 @@
             position: absolute;
             width: 120px;
             height: 140px;
-            background: url('https://i.imgur.com/1f0rVzr.png') no-repeat center center;
+            background: url('images/monster.png') no-repeat center center;
             background-size: contain;
             bottom: 50px;
             right: 100px;
@@ -351,6 +353,13 @@
             background: var(--secondary-color);
             color: white;
             transform: translateY(-3px);
+        }
+        
+        .option.selected {
+            background: var(--accent-color);
+            color: var(--dark-color);
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
         
         .action-buttons {
@@ -442,33 +451,30 @@
             text-shadow: 0 0 10px rgba(255, 213, 107, 0.8);
         }
         
-        /* 访问量计数器样式 */
-        .visit-counter {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-            opacity: 0.8;
-            transition: opacity 0.3s;
-            border-radius: 5px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        }
-        
-        .visit-counter:hover {
-            opacity: 1;
-        }
-        
-        .counter-label {
+        .stage-indicator {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0,0,0,0.7);
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
             color: white;
-            text-align: center;
-            padding: 3px 0;
-            font-size: 0.7em;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            z-index: 5;
+        }
+        
+        .attack-info {
+            position: absolute;
+            top: 60px;
+            left: 100px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            z-index: 5;
         }
         
         /* 资源分享卡片翻转效果 */
@@ -552,19 +558,6 @@
         }
         
         /* 响应式设计 */
-        @media (min-width: 769px) {
-            .activity-card {
-                flex-direction: row;
-            }
-            
-            .activity-image {
-                width: 300px;
-                height: 200px;
-                border-right: 3px solid #ff6b6b;
-                border-bottom: none;
-            }
-        }
-        
         @media (max-width: 768px) {
             .header {
                 flex-direction: column;
@@ -636,6 +629,10 @@
             .monster-label {
                 right: 25px;
             }
+            
+            .game-over h2 {
+                font-size: 2rem;
+            }
         }
         
         /* 简化后的页脚样式 */
@@ -648,7 +645,7 @@
             position: relative;
             z-index: 100;
             font-size: 0.9rem;
-            margin-top: auto; /* 确保页脚始终在底部 */
+            margin-top: auto;
         }
         
         .footer-links {
@@ -799,6 +796,7 @@
                     <img src="assets/activities/picture3.jpg" class="activity-image" alt="动漫社手账本接力">
                     <div class="activity-content">
                         <h3 class="activity-title">动漫社手账本接力</h3>
+                        <极客
                         <div class="activity-meta">
                             <span class="activity-date">📅 2025-4-13</span>
                             <span class="activity-location">📍 长汀一中新校区</span>
@@ -874,7 +872,6 @@
                             </div>
                             <h3 class="resource-title">吐槽网</h3>
                         </div>
-                        <极客
                         <div class="resource-back">
                             <h3 class="resource-title">吐槽网</h3>
                             <p class="resource-description">提供最新动漫观看和弹幕评论功能，随时加入讨论热潮。</p>
@@ -959,13 +956,19 @@
         </section>
         
         <!-- ACGN知识RPG -->
-        <section id="rpg" class="section" style="display:none;">
+        <section id="rpg" class="section">
             <h2 class="section-title">ACGN知识RPG：勇者挑战赛</h2>
             <p>扮演一位勇敢的动漫知识勇者，踏上征服ACGN魔王的冒险之旅！每答对一道题可攻击魔王，答错会被魔王攻击。</p>
             
             <div class="rpg-game">
                 <!-- 游戏场景 -->
                 <div class="game-scene">
+                    <!-- 关卡指示器 -->
+                    <div class="stage-indicator">关卡: <span id="stage-display">1</span>/5</div>
+                    
+                    <!-- 攻击力信息 -->
+                    <div class="attack-info">攻击力: <span id="attack-power">15-30</span></div>
+                    
                     <!-- 角色血条 -->
                     <div class="health-bar hero-health">
                         <div class="health-fill" id="hero-hp-bar"></div>
@@ -976,7 +979,7 @@
                     <div class="health-bar monster-health">
                         <div class="health-fill" id="monster-hp-bar"></div>
                     </div>
-                    <div class="health-label monster-label">魔王: <span id="monster-hp">100</span></div>
+                    <div class="health-label monster-label">敌人: <span id="monster-hp">100</span></div>
                     
                     <!-- 勇者形象 -->
                     <div class="character" id="hero-character"></div>
@@ -1000,7 +1003,7 @@
                 <!-- 游戏操作按钮 -->
                 <div class="action-buttons">
                     <button class="rpg-button green" id="start-btn" onclick="startGame()">开始冒险</button>
-                    <button class="rpg-button" id="attack-btn" style="display: none;" onclick="answerQuestion()">攻击魔王</button>
+                    <button class="rpg-button" id="attack-btn" style="display: none;" onclick="answerQuestion()">攻击敌人</button>
                     <button class="rpg-button blue" id="next-btn" style="display: none;" onclick="nextQuestion()">继续挑战</button>
                     <button class="rpg-button" id="restart-btn" style="display: none;" onclick="restartGame()">重新开始</button>
                 </div>
@@ -1025,8 +1028,86 @@
         let monsterHP = 100;
         let currentQuestionIndex = 0;
         let correctAnswers = 0;
+        let currentStage = 1;
+        let baseAttack = 15;
         let allQuestions = [];
         
+        // 五个关卡配置（四天王+魔王）
+        const stages = [
+            {
+                name: "火焰天王",
+                hp: 100,
+                image: "images/enemies/fire_lord.png",
+                questions: []
+            },
+            {
+                name: "冰霜天王",
+                hp: 120,
+                image: "images/enemies/ice_lord.png",
+                questions: []
+            },
+            {
+                name: "雷电天王",
+                hp: 140,
+                image: "images/enemies/thunder_lord.png",
+                questions: []
+            },
+            {
+                name: "大地天王",
+                hp: 160,
+                image: "images/enemies/earth_lord.png",
+                questions: []
+            },
+            {
+                name: "魔王库洛姆",
+                hp: 200,
+                image: "images/enemies/demon_king.png",
+                questions: []
+            }
+        ];
+        
+        // 本地题库加载函数
+        async function loadQuestions() {
+            try {
+                const response = await fetch('q.txt');
+                const text = await response.text();
+                
+                // 解析题库文本
+                const questionBlocks = text.split(/\n\s*\n/)
+                    .map(block => block.trim())
+                    .filter(block => block);
+                
+                // 将问题分配到五个关卡
+                const questionsPerStage = Math.floor(questionBlocks.length / 5);
+                
+                for (let i = 0; i < 5; i++) {
+                    const start = i * questionsPerStage;
+                    const end = (i === 4) ? questionBlocks.length : (i + 1) * questionsPerStage;
+                    
+                    stages[i].questions = questionBlocks.slice(start, end)
+                        .map(block => {
+                            const lines = block.split('\n')
+                                .map(line => line.trim())
+                                .filter(line => line);
+                            
+                            if (lines.length < 3) return null;
+                            
+                            return {
+                                question: lines[0].replace(/^Q:\s*/, ''),
+                                options: lines[1].replace(/^A:\s*/, '').split(/\s*,\s*/),
+                                correct: parseInt(lines[2].replace(/^C:\s*/, ''), 10)
+                            };
+                        })
+                        .filter(Boolean);
+                }
+                
+                return true;
+            } catch (error) {
+                console.error('题库加载失败:', error);
+                return false;
+            }
+        }
+
         // 栏目切换
         function showSection(sectionId) {
             document.querySelectorAll('.section').forEach(sec => {
@@ -1035,44 +1116,21 @@
             document.getElementById(sectionId).style.display = 'block';
         }
 
-        // 加载外部题库
-        async function loadQuestions() {
-            try {
-                const response = await fetch('q.txt');
-                const text = await response.text();
-                
-                return text.split(/\n\s*\n/)
-                    .map(block => {
-                        const lines = block.split('\n')
-                            .map(line => line.trim())
-                            .filter(line => line);
-                        
-                        if (lines.length < 3) return null;
-                        
-                        return {
-                            question: lines[0].replace(/^Q:\s*/, ''),
-                            options: lines[1].replace(/^A:\s*/, '').split(/\s*,\s*/),
-                            correct: parseInt(lines[2].replace(/^C:\s*/, ''), 10)
-                        };
-                    })
-                    .filter(Boolean);
-            } catch (error) {
-                console.error('题库加载失败:', error);
-                return [];
-            }
-        }
-
         // 游戏初始状态
         function resetGame() {
             heroHP = 100;
-            monsterHP = 100;
+            monsterHP = stages[0].hp;
             currentQuestionIndex = 0;
             correctAnswers = 0;
+            currentStage = 1;
+            baseAttack = 15;
             
             document.getElementById('hero-hp').textContent = heroHP;
             document.getElementById('monster-hp').textContent = monsterHP;
             document.getElementById('hero-hp-bar').style.width = '100%';
             document.getElementById('monster-hp-bar').style.width = '100%';
+            document.getElementById('stage-display').textContent = currentStage;
+            document.getElementById('attack-power').textContent = `${baseAttack}-${baseAttack+15}`;
             
             document.getElementById('start-btn').style.display = 'block';
             document.getElementById('attack-btn').style.display = 'none';
@@ -1087,30 +1145,34 @@
 
         // 开始游戏
         async function startGame() {
-            // 加载题目
-            allQuestions = await loadQuestions();
+            resetGame();
             
-            if (allQuestions.length === 0) {
+            // 加载题库
+            const success = await loadQuestions();
+            if (!success) {
                 document.getElementById('quest-description').textContent = 
                     "题库加载失败，请检查q.txt文件是否存在并格式正确！";
                 return;
             }
             
-            resetGame();
             document.getElementById('start-btn').style.display = 'none';
             document.getElementById('attack-btn').style.display = 'block';
             document.getElementById('question-area').style.display = 'block';
+            
+            // 设置敌人图片
+            document.getElementById('monster-character').style.backgroundImage = 
+                `url('${stages[currentStage-1].image}')`;
             
             showQuestion();
         }
         
         // 显示当前问题
         function showQuestion() {
-            if (currentQuestionIndex >= allQuestions.length) {
+            if (currentQuestionIndex >= stages[currentStage-1].questions.length) {
                 currentQuestionIndex = 0; // 循环问题
             }
             
-            const question = allQuestions[currentQuestionIndex];
+            const question = stages[currentStage-1].questions[currentQuestionIndex];
             document.getElementById('question-text').textContent = question.question;
             
             const optionsContainer = document.getElementById('options-container');
@@ -1119,37 +1181,43 @@
             question.options.forEach((option, index) => {
                 const optionElement = document.createElement('div');
                 optionElement.className = 'option';
-                optionElement.innerHTML = `
-                    <input type="radio" name="answer" id="option${index}" value="${index}">
-                    <label for="option${index}">${option}</label>
-                `;
+                optionElement.innerHTML = option;
+                optionElement.dataset.index = index;
+                optionElement.onclick = function() {
+                    // 移除其他选项的选中状态
+                    document.querySelectorAll('.option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    // 选中当前选项
+                    this.classList.add('selected');
+                };
                 optionsContainer.appendChild(optionElement);
             });
             
-            document.getElementById('quest-title').textContent = `挑战魔王第${currentQuestionIndex + 1}问`;
+            document.getElementById('quest-title').textContent = `挑战${stages[currentStage-1].name}`;
             document.getElementById('quest-description').textContent = 
-                "选择正确答案来攻击魔王！答错的话魔王会反击！";
+                `第${currentStage}关：${stages[currentStage-1].name}（血量：${monsterHP}）`;
         }
         
         // 回答问题
         function answerQuestion() {
-            const selectedOption = document.querySelector('input[name="answer"]:checked');
+            const selectedOption = document.querySelector('.option.selected');
             if (!selectedOption) {
                 alert('请选择一个答案！');
                 return;
             }
             
-            const userAnswer = parseInt(selectedOption.value);
-            const question = allQuestions[currentQuestionIndex];
+            const userAnswer = parseInt(selectedOption.dataset.index);
+            const question = stages[currentStage-1].questions[currentQuestionIndex];
             const isCorrect = (userAnswer === question.correct);
             
             if (isCorrect) {
                 correctAnswers++;
                 // 玩家攻击
-                const damage = Math.floor(Math.random() * 15) + 15; // 15-30伤害
+                const damage = Math.floor(Math.random() * 15) + baseAttack; // 基础攻击力+随机伤害
                 monsterHP = Math.max(0, monsterHP - damage);
                 document.getElementById('monster-hp').textContent = monsterHP;
-                document.getElementById('monster-hp-bar').style.width = `${monsterHP}%`;
+                document.getElementById('monster-hp-bar').style.width = `${(monsterHP / stages[currentStage-1].hp) * 100}%`;
                 
                 showBattleEffect(true, damage);
                 document.getElementById('quest-description').innerHTML = 
@@ -1163,13 +1231,42 @@
                 
                 showBattleEffect(false, damage);
                 document.getElementById('quest-description').innerHTML = 
-                    `回答错误！魔王反击造成${damage}点伤害！`;
+                    `回答错误！${stages[currentStage-1].name}反击造成${damage}点伤害！`;
             }
             
             // 检查游戏结束
             if (monsterHP <= 0) {
-                endGame(true);
-                return;
+                // 击败当前敌人
+                if (currentStage < 5) {
+                    // 进入下一关
+                    currentStage++;
+                    baseAttack += 5; // 每击败一个敌人攻击力提升
+                    document.getElementById('stage-display').textContent = currentStage;
+                    document.getElementById('attack-power').textContent = `${baseAttack}-${baseAttack+15}`;
+                    
+                    // 加载新敌人
+                    monsterHP = stages[currentStage-1].hp;
+                    document.getElementById('monster-hp').textContent = monsterHP;
+                    document.getElementById('monster-hp-bar').style.width = '100%';
+                    
+                    // 更新敌人图片
+                    document.getElementById('monster-character').style.backgroundImage = 
+                        `url('${stages[currentStage-1].image}')`;
+                    
+                    currentQuestionIndex = 0;
+                    
+                    document.getElementById('quest-title').textContent = `进入第${currentStage}关！`;
+                    document.getElementById('quest-description').innerHTML = 
+                        `恭喜你击败了${stages[currentStage-2].name}！攻击力提升至${baseAttack}-${baseAttack+15}！准备挑战${stages[currentStage-1].name}！`;
+                    
+                    document.getElementById('attack-btn').style.display = 'none';
+                    document.getElementById('next-btn').style.display = 'block';
+                    return;
+                } else {
+                    // 通关游戏
+                    endGame(true);
+                    return;
+                }
             }
             
             if (heroHP <= 0) {
@@ -1225,13 +1322,13 @@
             document.getElementById('question-area').style.display = 'none';
             
             if (isVictory) {
-                document.getElementById('quest-title').textContent = "胜利！你击败了魔王！";
+                document.getElementById('quest-title').textContent = "胜利！你击败了魔王库洛姆！";
                 document.getElementById('quest-description').innerHTML = 
-                    `恭喜你成功击败魔王库洛姆！你的ACGN知识评分：${Math.round((correctAnswers * 100) / allQuestions.length)}%`;
+                    `恭喜你成功通关！你的ACGN知识评分：${Math.round((correctAnswers * 100) / allQuestions.length)}%`;
             } else {
-                document.getElementById('quest-title').textContent = "游戏结束！勇者倒下了";
+                document.getElementById('quest-title').textContent = `游戏结束！被${stages[currentStage-1].name}击败`;
                 document.getElementById('quest-description').innerHTML = 
-                    `魔王库洛姆的强大远超你的想象！你的ACGN知识评分：${Math.round((correctAnswers * 100) / allQuestions.length)}%<br>
+                    `${stages[currentStage-1].name}的强大远超你的想象！你的ACGN知识评分：${Math.round((correctAnswers * 100) / allQuestions.length)}%<br>
                      不要灰心，收集更多ACGN知识，再次挑战吧！`;
             }
         }
@@ -1239,8 +1336,6 @@
         // 初始化
         document.addEventListener('DOMContentLoaded', () => {
             showSection('intro');
-            // 隐藏RPG游戏部分直到用户点击导航
-            document.getElementById('rpg').style.display = 'none';
         });
     </script>
 </body>
