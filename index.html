@@ -26,14 +26,20 @@
             box-sizing: border-box;
         }
         
+        /* 修复页脚定位问题 */
+        html, body {
+            height: 100%;
+        }
+        
         body {
             font-family: 'Noto Sans SC', sans-serif;
             background: url('images/new_bg.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #333;
+            display: flex;
+            flex-direction: column;
             min-height: 100vh;
             position: relative;
-            padding-bottom: 60px;
         }
         
         /* 头部导航 */
@@ -87,6 +93,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 15px;
+            flex: 1; /* 确保内容区域占据剩余空间 */
         }
         
         .section {
@@ -448,6 +455,7 @@
             position: relative;
             z-index: 100;
             font-size: 0.9rem;
+            margin-top: auto; /* 确保页脚始终在底部 */
         }
         
         .footer-links {
@@ -515,7 +523,13 @@
                 <p>• 发布自制动画短片、插画、配音作品</p>
                 <p>• B站账号：长汀一中动漫社</p>
                 <p>• 官网网址：https://ctyz-acgn.netlify.app/（答题游戏/活动指南/资源分享）</p>
+              <h3>社团文化双重价值</h3>
 
+          <p>维度	文化表达	主流价值体现</p>
+          <p>创作观	日漫技法学习+国漫画风研习	传播国产优秀动漫文化</p>
+          <p>活动观	二次元主题嘉年华	融入"我们的节日"传统文化教育</p>
+          <p>传播观	新媒体创意运营	青年网络文明公约践行者</p>
+                
                 <h3>📣 致家长的一封信</h3>
                 <p>我们理解您的关切，因此：</p>
                 <p>• 所有活动由校团委及社团干部指导</p>
@@ -524,7 +538,7 @@
                 <p>• <strong>同好讨论</strong>：板绘/编剧/视频制作交流</p>
                 <p>• <strong>创意孵化</strong>：优秀作品展示</p>
                 <p>• <strong>自我成长</strong>：参与活动，获得管理组织经验</p>
-                  <h3>联结通道</h3>
+                <h3> 联结通道</h3>
         
           <p>▸网站制作QQ：2789290042</p>
 
@@ -695,6 +709,7 @@
                         <p class="resource-description">最全面的ACGN百科知识库，涵盖动漫、游戏及相关文化内容。</p>
                         <a href="https://mzh.moegirl.org.cn/" class="resource-link" target="_blank">访问网站</a>
                     </div>
+                    <极客
                     <div class="resource-footer">
                         <span><i class="fas fa-tag"></i> 百科 · ACGN</span>
                         <span>https://mzh.moegirl.org.cn/</span>
@@ -722,6 +737,7 @@
                 <!-- 蔚蓝档案图标生成器 卡片 -->
                 <div class="resource-card">
                     <div class="resource-header">
+                        <div class="resource极客
                         <div class="resource-icon">
                             <i class="fas fa-paint-brush"></i>
                         </div>
