@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>长汀一中动漫社-幻想次元部</title>
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23ff6b6b'/%3E%3Cpath d='M30,40 L50,65 L70,40' fill='none' stroke='white' stroke-width='8' stroke-linecap='round'/%3E%3C/svg%3E" type="image/svg+xml">
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
@@ -248,6 +249,10 @@
             height: 200px;
             overflow: hidden;
             position: relative;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .activity-image {
@@ -711,7 +716,7 @@
     <header class="header">
         <div class="header-content">
             <div class="logo-section">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='90' fill='%23ff6b6b'/%3E%3Cpath d='M70,70 L100,120 L130,70 M70,130 L130,130' fill='none' stroke='white' stroke-width='15' stroke-linecap='round'/%3E%3C/svg%3E" class="header-logo" alt="社团Logo">
+                <img src="assets/nav_logo.png" class="header-logo" alt="社团Logo">
                 <div class="club-name">长汀一中<span>动漫社</span></div>
             </div>
             
@@ -798,6 +803,7 @@
                     <div class="activity-card">
                         <div class="activity-image-container">
                             <div class="activity-date"><i class="fas fa-calendar-day"></i> 2025-1-28</div>
+                            <img src="assets/activities/picture1.jpg" class="activity-image" alt="新春祭宅舞活动">
                         </div>
                         <div class="activity-content">
                             <h3 class="activity-title">新春祭宅舞活动</h3>
@@ -815,6 +821,7 @@
                     <div class="activity-card">
                         <div class="activity-image-container">
                             <div class="activity-date"><i class="fas fa-calendar-day"></i> 2025-2-5</div>
+                            <img src="assets/activities/picture2.jpg" class="activity-image" alt="绘画组作品展">
                         </div>
                         <div class="activity-content">
                             <h3 class="activity-title">绘画组作品展</h3>
@@ -831,6 +838,7 @@
                 <div class="activity-card">
                     <div class="activity-image-container">
                         <div class="activity-date"><i class="fas fa-calendar-day"></i> 2025-4-13</div>
+                        <img src="assets/activities/picture3.jpg" class="activity-image" alt="动漫社手账本接力">
                     </div>
                     <div class="activity-content">
                         <h3 class="activity-title">动漫社手账本接力</h3>
@@ -847,6 +855,7 @@
                     <div class="activity-card">
                         <div class="activity-image-container">
                             <div class="activity-date"><i class="fas fa-calendar-day"></i> 2025-7-17</div>
+                            <img src="assets/activities/picture4.jpg" class="activity-image" alt="动漫节活动">
                         </div>
                         <div class="activity-content">
                             <h3 class="activity-title">长汀一中动漫社动漫节</h3>
@@ -864,6 +873,7 @@
                     <div class="activity-card">
                         <div class="activity-image-container">
                             <div class="activity-date"><i class="fas fa-calendar-day"></i> 2025-7-17</div>
+                            <img src="assets/activities/picture5.jpg" class="activity-image" alt="动漫节指南">
                         </div>
                         <div class="activity-content">
                             <h3 class="activity-title">长汀一中动漫节活动指南</h3>
@@ -1014,25 +1024,14 @@
     
     <!-- 访问计数器 -->
     <div class="visit-counter">
-        <div class="counter-icon">
-            <i class="fas fa-chart-line"></i>
-        </div>
-        <div class="counter-content">
-            <div class="counter-number">12387</div>
-            <div class="counter-text">访问量</div>
-        </div>
+        <img src="https://w.saobby.com/w/9fosk992" alt="访问量计数器">
     </div>
     
     <script>
-        // 导航菜单高亮
-        const navItems = document.querySelectorAll('.nav-item');
-        function setActiveNavItem(activeItem) {
-            navItems.forEach(item => {
-                item.classList.remove('active');
-            });
-            activeItem.classList.add('active');
-        }
-        
+        // 全局变量
+        let allQuestions = [];
+        let selectedQuestions = [];
+
         // 栏目切换
         function showSection(sectionId) {
             document.querySelectorAll('.section').forEach(sec => {
@@ -1041,45 +1040,131 @@
             document.getElementById(sectionId).style.display = 'block';
             
             // 设置高亮菜单
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.classList.remove('active');
+            });
+            
             const activeItem = [...navItems].find(item => {
                 return item.onclick.toString().includes(sectionId);
             });
             
             if (activeItem) {
-                setActiveNavItem(activeItem);
+                activeItem.classList.add('active');
+            }
+            
+            // 滚动到顶部
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // 增强版题库加载
+        async function loadQuestions() {
+            try {
+                const response = await fetch('q.txt');
+                if (!response.ok) throw new Error(`HTTP错误! 状态码: ${response.status}`);
+                const text = await response.text();
                 
-                // 滚动到顶部
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
+                // 更健壮的题目解析
+                return text.split(/\n\s*\n/)  // 支持不同系统的换行符
+                    .map(block => {
+                        const lines = block.split('\n')
+                            .map(line => line.trim())
+                            .filter(line => line);
+                        
+                        if (lines.length < 3) return null;
+                        
+                        try {
+                            return {
+                                question: lines[0].replace(/^Q:\s*/, ''),
+                                options: lines[1].replace(/^A:\s*/, '').split(/\s*,\s*/),
+                                correct: parseInt(lines[2].replace(/^C:\s*/, ''), 10)
+                            };
+                        } catch {
+                            return null;
+                        }
+                    })
+                    .filter(Boolean);  // 过滤无效题目
+            } catch (error) {
+                console.error('题库加载失败:', error);
+                return [];
+            }
+        }
+
+        // 优化的随机选题
+        function getRandomQuestions() {
+            const clone = [...allQuestions];
+            for (let i = clone.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [clone[i], clone[j]] = [clone[j], clone[i]];
+            }
+            return clone.slice(0, Math.min(25, clone.length));
+        }
+
+        // 初始化测试（完全重写）
+        async function initQuiz() {
+            try {
+                allQuestions = await loadQuestions();
+                
+                if (allQuestions.length < 1) {
+                    document.getElementById('quiz').innerHTML = 
+                        '<p style="color: red">⚠️ 题库为空，请联系管理员</p>';
+                    return;
+                }
+
+                selectedQuestions = getRandomQuestions();
+                
+                const quizHTML = selectedQuestions
+                    .map((q, index) => `
+                        <div class="question">
+                            <h3>${index + 1}. ${q.question}</h3>
+                            <div class="options">
+                                ${q.options.map((opt, i) => `
+                                    <div class="option">
+                                        <input type="radio" 
+                                               name="q${index}" 
+                                               value="${i}" 
+                                               id="q${index}opt${i}">
+                                        <label for="q${index}opt${i}">${opt}</label>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `).join('');
+                
+                document.getElementById('quiz').innerHTML = quizHTML;
+            } catch (error) {
+                console.error('初始化失败:', error);
+                document.getElementById('quiz').innerHTML = 
+                    '<p style="color: red">⚠️ 系统异常，请刷新页面</p>';
             }
         }
         
-        // 初始化界面
+        // 计算得分
+        function calculateScore() {
+            let score = 0;
+            selectedQuestions.forEach((q, index) => {
+                const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                if (selected && parseInt(selected.value) === q.correct) score++;
+            });
+            
+            const percentage = (score / 25 * 100).toFixed(1);
+            let resultText = `你的二次元浓度是：${percentage}%！`;
+            if (percentage >= 85) resultText += "<br>🎉二次元之神降临！";
+            else if (percentage >= 70) resultText += "<br>👓资深老宅认证！";
+            else if (percentage >= 50) resultText += "<br>📺日常追番群众";
+            else resultText += "<br>🤔萌新需要补课啦";
+            
+            document.getElementById('result').innerHTML = resultText;
+        }
+
+        // 初始化
         document.addEventListener('DOMContentLoaded', () => {
             showSection('intro');
-            setActiveNavItem(navItems[0]);
+            initQuiz();
         });
-        
-        // 简化后的浓度测试函数
-        function calculateScore() {
-            const resultContainer = document.getElementById('result');
-            const percentage = Math.floor(Math.random() * 40) + 60; // 60-99% 的随机值
-            let resultText = '';
-            
-            if (percentage >= 90) {
-                resultText = `你的二次元浓度是：${percentage}%！<br><br>🎉 恭喜！你简直是二次元之神，动漫社社长位置非你莫属！`;
-            } else if (percentage >= 75) {
-                resultText = `你的二次元浓度是：${percentage}%！<br><br>🌟 资深二次元爱好者！你对二次元文化了如指掌，是社团的中坚力量！`;
-            } else if (percentage >= 60) {
-                resultText = `你的二次元浓度是：${percentage}%！<br><br>👍 普通二次元爱好者！喜欢动漫文化，有潜力成为资深爱好者！`;
-            } else {
-                resultText = `你的二次元浓度是：${percentage}%！<br><br>🤔 二次元萌新！欢迎加入我们的社团，让我们一起探索二次元的世界！`;
-            }
-            
-            resultContainer.innerHTML = resultText;
-        }
     </script>
 </body>
 </html>
