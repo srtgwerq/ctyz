@@ -15,8 +15,9 @@
             --accent-color: #ffd56b;
             --dark-color: #2c2c54;
             --light-color: #f8f9fa;
-            --shadow: 0 4px 12px rgba(0,0,0,0.1);
-            --transition: all 0.3s ease;
+            --gradient-bg: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            --shadow: 0 8px 20px rgba(0,0,0,0.15);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
         * {
@@ -27,7 +28,8 @@
         
         body {
             font-family: 'Noto Sans SC', sans-serif;
-            background: #ffffff; /* 改为纯白色背景 */
+            background: url('images/new_bg.jpg') no-repeat center center fixed;
+            background-size: cover;
             color: #333;
             min-height: 100vh;
             position: relative;
@@ -40,18 +42,19 @@
             padding: 1rem;
             display: flex;
             align-items: center;
-            border-radius: 0 0 15px 15px;
+            border-radius: 15px;
+            margin: 15px auto;
             box-shadow: var(--shadow);
-            margin: 0 auto 1.5rem;
             max-width: 1200px;
             width: calc(100% - 30px);
         }
         
         .header-logo {
-            height: 50px;
-            margin: 0 15px;
+            height: 60px;
+            margin-left: 30px;
+            margin-right: 20px;
             border-radius: 8px;
-            transition: var(--transition);
+            transition: transform 0.3s;
         }
         
         .header-logo:hover {
@@ -60,22 +63,22 @@
         
         .nav-menu {
             display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
+            gap: 1.5rem;
         }
         
         .nav-item {
             cursor: pointer;
-            padding: 8px 15px;
+            padding: 12px 25px;
             border-radius: 10px;
             background: rgba(255,107,107,0.8);
             color: white;
-            transition: var(--transition);
-            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            white-space: nowrap;
         }
         
         .nav-item:hover {
-            transform: translateY(-2px);
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             background: var(--main-color);
         }
         
@@ -88,11 +91,15 @@
         
         .section {
             background: rgba(255, 255, 255, 0.92);
-            padding: 1.5rem;
             border-radius: 15px;
-            margin-bottom: 1.5rem;
             box-shadow: var(--shadow);
-            width: 100%;
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            transition: var(--transition);
+        }
+        
+        .section:hover {
+            box-shadow: 0 12px 30px rgba(0,0,0,0.18);
         }
         
         .section-title {
@@ -116,6 +123,7 @@
         
         .section-content {
             line-height: 1.7;
+            font-size: 1.05rem;
         }
         
         .section-content h3 {
@@ -126,56 +134,65 @@
         
         .section-content p {
             margin-bottom: 1rem;
+            color: #444;
         }
         
         /* 活动卡片 */
         .activities-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.2rem;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
             margin-top: 1.5rem;
+        }
+        
+        .activity-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
         }
         
         .activity-card {
             background: white;
             border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin: 20px 0;
             overflow: hidden;
-            transition: var(--transition);
+            display: flex;
+            transition: transform 0.3s;
         }
         
         .activity-card:hover { 
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            cursor: pointer;
         }
         
         .activity-image {
-            width: 100%;
-            height: 180px;
+            width: 300px;
+            height: 200px;
             object-fit: cover;
-            border-bottom: 3px solid var(--main-color);
+            border-right: 3px solid #ff6b6b;
         }
         
         .activity-content {
-            padding: 1.2rem;
+            padding: 1.5rem;
+            flex-grow: 1;
         }
         
         .activity-title {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
             color: var(--dark-color);
+            margin-bottom: 0.8rem;
         }
         
         .activity-meta {
             display: flex;
-            margin-bottom: 0.8rem;
-            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
             color: #666;
         }
         
-        .activity-date, .activity-location {
-            display: flex;
-            align-items: center;
+        .activity-date {
+            margin-right: 15px;
         }
         
         .activity-location {
@@ -183,22 +200,8 @@
         }
         
         .activity-description {
-            margin-bottom: 1.2rem;
             color: #555;
-        }
-        
-        .activity-link-btn {
-            padding: 8px 16px;
-            background: var(--main-color);
-            color: white;
-            border-radius: 5px;
-            text-decoration: none;
-            display: inline-block;
-            transition: var(--transition);
-        }
-        
-        .activity-link-btn:hover {
-            background: var(--secondary-color);
+            line-height: 1.6;
         }
         
         /* 资源卡片 */
@@ -210,155 +213,166 @@
         }
         
         .resource-card {
-            background: white;
-            border-radius: 12px;
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
             border-top: 4px solid var(--secondary-color);
         }
         
         .resource-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 25px rgba(0,0,0,0.15);
         }
         
         .resource-header {
-            padding: 1rem;
-            background: rgba(106, 107, 255, 0.05);
+            padding: 20px 20px 10px;
+            background: rgba(86, 161, 230, 0.1);
+            border-bottom: 1px solid #eee;
             text-align: center;
         }
         
         .resource-icon {
-            font-size: 2rem;
+            font-size: 2em;
             color: var(--secondary-color);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
         
         .resource-title {
-            font-size: 1.3rem;
-            font-weight: 700;
+            font-size: 1.3em;
+            font-weight: bold;
             margin: 0;
-            color: var(--dark-color);
+            color: #222;
         }
         
         .resource-content {
-            padding: 1.2rem;
+            padding: 20px;
+            flex-grow: 1;
         }
         
         .resource-description {
             color: #555;
             line-height: 1.6;
-            margin: 10px 0;
+            margin-top: 10px;
         }
         
         .resource-link {
             display: inline-block;
-            padding: 8px 16px;
+            padding: 10px 20px;
             background: var(--secondary-color);
             color: white;
             text-decoration: none;
             border-radius: 5px;
-            transition: var(--transition);
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            font-size: 0.9em;
         }
         
         .resource-link:hover {
-            background: var(--main-color);
+            background: #3d8bd6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .resource-footer {
+            padding: 15px 20px;
+            background: rgba(0,0,0,0.03);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85em;
+            color: #777;
         }
         
         /* 浓度测试 */
         .quiz-section {
             max-width: 800px;
-            margin: 0 auto;
+            margin: auto;
         }
         
-        .quiz-section .question {
-            background: rgba(255,255,255,0.8);
-            padding: 1.2rem;
-            border-radius: 12px;
-            margin-bottom: 1.2rem;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+        .question {
+            margin-bottom: 30px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 20px;
         }
         
-        .quiz-section h3 {
-            font-size: 1.1rem;
-            margin-bottom: 0.8rem;
-        }
-        
-        .quiz-section .options {
+        .options {
+            margin-top: 10px;
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 10px;
-            margin-top: 10px;
+            gap: 12px;
         }
         
-        .quiz-section .option {
+        .option {
             background: white;
-            padding: 10px 12px;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            padding: 12px 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.05);
             cursor: pointer;
             position: relative;
-            border: 1px solid #ddd;
         }
         
-        .quiz-section .option:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        .option:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: var(--accent-color);
         }
         
-        .quiz-section .option.selected {
-            background-color: rgba(106, 107, 255, 0.1);
-            border-color: var(--secondary-color);
+        .option.selected {
+            background-color: rgba(255, 213, 107, 0.2);
+            border-color: var(--accent-color);
         }
         
-        .quiz-section .option input[type="radio"] {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            cursor: pointer;
+        .option input[type="radio"] {
+            margin-right: 10px;
         }
         
-        .quiz-btn {
-            display: block;
-            margin: 1.5rem auto;
-            padding: 10px 25px;
-            background: var(--accent-color);
-            color: var(--dark-color);
-            font-weight: 600;
+        button {
+            padding: 10px 20px;
+            background-color: var(--main-color);
+            color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 1.1em;
             transition: var(--transition);
         }
         
-        .quiz-btn:hover {
-            background: var(--main-color);
-            color: white;
+        button:hover {
+            background-color: #e55a5a;
+            transform: translateY(-2px);
         }
         
         #result {
-            background: rgba(255,255,255,0.9);
-            padding: 1.2rem;
-            border-radius: 12px;
-            margin-top: 1.5rem;
-            text-align: center;
+            margin-top: 30px;
+            font-size: 1.2em;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
         
-        /* 访问计数器 */
+        /* 访问量计数器样式 */
         .visit-counter {
             position: fixed;
-            bottom: 15px;
-            right: 15px;
+            bottom: 20px;
+            right: 20px;
             z-index: 1000;
             opacity: 0.8;
+            transition: opacity 0.3s;
             border-radius: 5px;
             overflow: hidden;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        .visit-counter:hover {
+            opacity: 1;
         }
         
         .counter-label {
@@ -373,20 +387,6 @@
             font-size: 0.7em;
         }
         
-        /* 页脚 */
-        .footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: var(--dark-color);
-            color: white;
-            padding: 10px;
-            text-align: center;
-            font-size: 0.85rem;
-            z-index: 90;
-        }
-        
         /* 响应式设计 */
         @media (max-width: 768px) {
             .header {
@@ -395,29 +395,42 @@
             }
             
             .header-logo {
-                margin: 10px 0;
+                height: 40px;
+                margin: 15px 0;
             }
             
             .nav-menu {
+                flex-wrap: wrap;
                 justify-content: center;
                 gap: 0.8rem;
             }
             
             .nav-item {
-                padding: 6px 12px;
-                font-size: 0.85rem;
+                padding: 8px 15px;
+                font-size: 0.9em;
             }
             
             .section {
                 padding: 1.2rem;
             }
             
-            .section-title {
-                font-size: 1.6rem;
+            .activity-card {
+                flex-direction: column;
+            }
+            
+            .activity-image {
+                width: 100%;
+                height: 180px;
+                border-right: none;
+                border-bottom: 3px solid #ff6b6b;
             }
             
             .activities-container,
             .resources-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .quiz-section .options {
                 grid-template-columns: 1fr;
             }
         }
@@ -435,8 +448,8 @@
             <div class="nav-item" onclick="showSection('intro')">社团介绍</div>
             <div class="nav-item" onclick="showSection('activity')">最新活动</div>
             <div class="nav-item" onclick="showSection('test')">浓度测试</div>
-             <div class="nav-item" onclick="showSection('resources')">资源分享</div>
-            <div class="nav-item" onclick="showSection('about')">关于一中</div>
+            <div class="nav-item" onclick="showSection('resources')">资源分享</div>
+            <div class="nav-item" onclick="showSection('about')">关于长汀一中</div>
         </nav>
     </header>
 
@@ -446,17 +459,19 @@
             <h2 class="section-title">社团介绍</h2>
             <div class="section-content">
                 <h3>「长汀一中动漫社」—— 绘梦青春 · 共筑动漫文化桥梁</h3>
-                <p>活力社团 · 创意无限 · 梦想起航</p>
+                <p><strong>活力社团 · 创意无限 · 梦想起航</strong></p>
+                
                 <p>(长汀县第一中学 官方认证社团)</p>
 
                 <h3>社团定位</h3>
                 <p>以动漫为舟，载文化远航——动漫是深受当代年轻人所喜爱的一种文化表达方式和情感体验媒介。我们致力于为所有热爱动漫的长汀一中学子提供一个丰富课余生活、扩展文化视野的平台。</p>
 
                 <h3>社团特色活动亮点</h3>
+
                 <h4>手账本接力</h4>
-                <p>• 文化传递：创作融合国风元素与校园生活的主题手账</p>
-                <p>• 青春存档：记录校园记忆（毕业季专题/节气文化/校园漫影）</p>
-                <p>• 成果展示：精选手账作品在B站专栏/官网永久展览</p>
+                <p>• <strong>文化传递</strong>：创作融合国风元素与校园生活的主题手账，搭建自我展示平台</p>
+                <p>• <strong>青春存档</strong>：记录校园记忆（毕业季专题/节气文化/校园漫影），传递温暖正能量</p>
+                <p>• <strong>成果展示</strong>：精选手账作品在B站专栏/官网永久展览</p>
 
                 <h4>社员原创作品</h4>
                 <p>• 发布自制动画短片、插画、配音作品</p>
@@ -468,9 +483,9 @@
                 <p>• 所有活动由校团委及社团干部指导</p>
                 <p>• 创作内容经社团干部审核</p>
                 <p>考上长汀一中，加入长汀一中动漫社，你将获得：</p>
-                <p>• 同好讨论：板绘/编剧/视频制作交流</p>
-                <p>• 创意孵化：优秀作品展示</p>
-                <p>• 自我成长：参与活动，获得管理组织经验</p>
+                <p>• <strong>同好讨论</strong>：板绘/编剧/视频制作交流</p>
+                <p>• <strong>创意孵化</strong>：优秀作品展示</p>
+                <p>• <strong>自我成长</strong>：参与活动，获得管理组织经验</p>
 
                 <h3>联络通道</h3>
                 <p>▸ 网站制作QQ：2789290042</p>
@@ -495,10 +510,10 @@
                 <p>学校培养了初、高中毕业生共六万余人，他们遍布五洲四海，立勋军政学商。著名校友有杨成武上将、刘亚楼上将等六位共和国将军，张存浩（2013年度国家最高科学技术奖获得者）、王业键两院士等大批科技精英。</p>
                 
                 <h3>办学思想</h3>
-                <p>校训：厚德 重思 至善 日新</p> 
-                <p>校风：求真 务实 践行 创新</p> 
-                <p>学风：勤学 巧思 善疑 贯通</p>
-                <p>教风：民主 科学 严谨 鲜活</p> 
+                <p><strong>校训</strong>：厚德 重思 至善 日新</p> 
+                <p><strong>校风</strong>：求真 务实 践行 创新</p> 
+                <p><strong>学风</strong>：勤学 巧思 善疑 贯通</p>
+                <p><strong>教风</strong>：民主 科学 严谨 鲜活</p> 
             </div>
         </section>
         
@@ -507,35 +522,37 @@
             <h2 class="section-title">最新活动</h2>
             <div class="activities-container">
                 <!-- 活动卡片 1 -->
-                <a href="https://www.bilibili.com/video/BV1RdFYeCEHM/" class="activity-card" target="_blank">
-                    <img src="assets/activities/picture1.jpg" class="activity-image" alt="新春祭宅舞活动">
-                    <div class="activity-content">
-                        <h3 class="activity-title">新春祭宅舞活动</h3>
-                        <div class="activity-meta">
-                            <span class="activity-date">📅 2025-1-28</span>
-                            <span class="activity-location">📍 长汀一中老校区门口</span>
+                <a href="https://www.bilibili.com/video/BV1RdFYeCEHM/" class="activity-link" target="_blank">
+                    <div class="activity-card">
+                        <img src="assets/activities/picture1.jpg" class="activity-image" alt="新春祭宅舞活动">
+                        <div class="activity-content">
+                            <h3 class="activity-title">新春祭宅舞活动</h3>
+                            <div class="activity-meta">
+                                <span class="activity-date">📅 2025-1-28</span>
+                                <span class="activity-location">📍 长汀一中老校区门口</span>
+                            </div>
+                            <p class="activity-description">动漫《凉宫春日的忧郁》ed《晴天好心情》宅舞活动</p>
                         </div>
-                        <p class="activity-description">动漫《凉宫春日的忧郁》ed《晴天好心情》宅舞活动</p>
-                        <div class="activity-link-btn">活动详情</div>
                     </div>
                 </a>
                 
                 <!-- 活动卡片 2 -->
-                <a href="https://www.bilibili.com/video/BV1QePCeVErQ/" class="activity-card" target="_blank">
-                    <img src="assets/activities/picture2.jpg" class="activity-image" alt="绘画组作品展">
-                    <div class="activity-content">
-                        <h3 class="activity-title">绘画组作品展</h3>
-                        <div class="activity-meta">
-                            <span class="activity-date">📅 2025-2-5</span>
-                            <span class="activity-location">📍 线上活动</span>
+                <a href="https://www.bilibili.com/video/BV1QePCeVErQ/" class="activity-link" target="_blank">
+                    <div class="activity-card">
+                        <img src="assets/activities/picture2.jpg" class="activity-image" alt="绘画组作品展">
+                        <div class="activity-content">
+                            <h3 class="activity-title">绘画组作品展</h3>
+                            <div class="activity-meta">
+                                <span class="activity-date">📅 2025-2-5</span>
+                                <span class="activity-location">📍 线上活动</span>
+                            </div>
+                            <p class="activity-description">长汀一中动漫社-绘画组作品欣赏</p>
                         </div>
-                        <p class="activity-description">长汀一中动漫社-绘画组作品欣赏</p>
-                        <div class="activity-link-btn">查看作品</div>
                     </div>
                 </a>
                 
                 <!-- 活动卡片 3 -->
-                <a href="#" class="activity-card">
+                <div class="activity-card">
                     <img src="assets/activities/picture3.jpg" class="activity-image" alt="动漫社手账本接力">
                     <div class="activity-content">
                         <h3 class="activity-title">动漫社手账本接力</h3>
@@ -544,35 +561,36 @@
                             <span class="activity-location">📍 长汀一中新校区</span>
                         </div>
                         <p class="activity-description">社员可以在手账本上畅所欲言，展示自己</p>
-                        <div class="activity-link-btn">参与活动</div>
                     </div>
-                </a>
+                </div>
                 
                 <!-- 活动卡片 4 -->
-                <a href="https://chouka.netlify.app/" class="activity-card" target="_blank">
-                    <img src="assets/activities/picture4.jpg" class="activity-image" alt="动漫节活动">
-                    <div class="activity-content">
-                        <h3 class="activity-title">长汀一中动漫社动漫节</h3>
-                        <div class="activity-meta">
-                            <span class="activity-date">📅 2025-7-17</span>
-                            <span class="activity-location">📍 三元阁</span>
+                <a href="https://chouka.netlify.app/" class="activity-link" target="_blank">
+                    <div class="activity-card">
+                        <img src="assets/activities/picture4.jpg" class="activity-image" alt="动漫节活动">
+                        <div class="activity-content">
+                            <h3 class="activity-title">长汀一中动漫社动漫节</h3>
+                            <div class="activity-meta">
+                                <span class="activity-date">📅 2025-7-17</span>
+                                <span class="activity-location">📍 三元阁</span>
+                            </div>
+                            <p class="activity-description">社团介绍，cos游街，以物换物，抽奖活动等</p>
                         </div>
-                        <p class="activity-description">社团介绍，cos游街，以物换物，抽奖活动等</p>
-                        <div class="activity-link-btn">活动详情</div>
                     </div>
                 </a>
                 
                 <!-- 活动卡片 5 -->
-                <a href="https://zhinan.netlify.app/" class="activity-card" target="_blank">
-                    <img src="assets/activities/picture5.jpg" class="activity-image" alt="动漫节指南">
-                    <div class="activity-content">
-                        <h3 class="activity-title">长汀一中动漫节活动指南</h3>
-                        <div class="activity-meta">
-                            <span class="activity-date">📅 2025-7-17</span>
-                            <span class="activity-location">📍 三元阁</span>
+                <a href="https://zhinan.netlify.app/" class="activity-link" target="_blank">
+                    <div class="activity-card">
+                        <img src="assets/activities/picture5.jpg" class="activity-image" alt="动漫节指南">
+                        <div class="activity-content">
+                            <h3 class="activity-title">长汀一中动漫节活动指南</h3>
+                            <div class="activity-meta">
+                                <span class="activity-date">📅 2025-7-17</span>
+                                <span class="activity-location">📍 三元阁</span>
+                            </div>
+                            <p class="activity-description">活动日程安排，注意事项等</p>
                         </div>
-                        <p class="activity-description">活动日程安排，注意事项等</p>
-                        <div class="activity-link-btn">查看指南</div>
                     </div>
                 </a>
             </div>
@@ -695,14 +713,14 @@
                 </div>
             </div>
         </section>
-
+        
         <!-- 浓度测试 -->
         <section id="test" class="section quiz-section" style="display:none;">
             <h2 class="section-title">二次元浓度检测器</h2>
             <p>测试题目不一定全面，主要用于娱乐，请不要过于认真！</p>
             
             <div id="quiz"></div>
-            <button class="quiz-btn" onclick="calculateScore()">查看浓度</button>
+            <button onclick="calculateScore()">查看浓度</button>
             <div id="result"></div>
         </section>
     </div>
@@ -723,12 +741,6 @@
                 sec.style.display = 'none';
             });
             document.getElementById(sectionId).style.display = 'block';
-            
-            // 滚动到顶部
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
         }
 
         // 题库加载
