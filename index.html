@@ -140,6 +140,7 @@
             border-radius: 10px;
             background: rgba(255,107,107,0.8);
             color: white;
+            transition: all 极客
             transition: all 0.3s ease;
             white-space: nowrap;
         }
@@ -290,7 +291,6 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             height: 100%;
-            display:极客
             display: flex;
             flex-direction: column;
             border-top: 4px solid var(--secondary-color);
@@ -329,7 +329,6 @@
         .resource-description {
             color: #555;
             line-height: 1.6;
-            margin-top: 10极客
             margin-top: 10px;
         }
         
@@ -506,6 +505,7 @@
             }
             
             .quiz-section .options {
+                grid-template-columns: 1极客
                 grid-template-columns: 1fr;
             }
         }
@@ -559,7 +559,6 @@
                 <i class="fas fa-random"></i>
             </button>
             <button class="live2d-btn" title="重置位置" id="reset-position">
-                <i class="fas fa-sync"></极客
                 <i class="fas fa-sync"></i>
             </button>
             <button class="live2d-btn" title="隐藏/显示" id="toggle-model">
@@ -631,6 +630,7 @@
 
           <p>动漫社同好QQ群：858655372</p>
               
+          <p>▸ 关注B站：长汀一中动漫极客
           <p>▸ 关注B站：长汀一中动漫社</p>
 
           <p>▸ 官网报名入口：https://ctyz-acgn.netlify.app/</p>
@@ -715,7 +715,6 @@
                             <div class="activity-meta">
                                 <span class="activity-date">📅 2025-7-17</span>
                                 <span class="activity-location">📍 三元阁</span>
-                            </极客
                             </div>
                             <p class="activity-description">社团介绍，cos游街，以物换物，抽奖活动等</p>
                         </div>
@@ -1101,7 +1100,6 @@
         
         // 切换拖动模式
         function toggleDragMode() {
-            isDraggable = !is极客
             isDraggable = !isDraggable;
             const button = document.getElementById('drag-toggle');
             button.innerHTML = isDraggable ? '<i class="fas fa-lock"></i>' : '<i class="fas fa-arrows-alt"></i>';
@@ -1115,6 +1113,7 @@
             container.style.display = isVisible ? 'none' : 'block';
             
             const button = document.getElementById('toggle-model');
+            button.innerHTML = isVisible ? '<i class="fas fa-eye-slash"></i>' : '<极客
             button.innerHTML = isVisible ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
             button.title = isVisible ? '显示模型' : '隐藏模型';
         }
