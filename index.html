@@ -8,6 +8,11 @@
     <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- 添加PixiJS和Live2D库 -->
+    <script src="https://cdn.jsdelivr.net/npm/pixi.js@5.3.0/dist/pixi.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pixi-live2d-display@latest/dist/cubism4.min.js"></script>
+    
     <style>
         :root {
             --main-color: #ff6b6b;
@@ -40,6 +45,62 @@
             flex-direction: column;
             min-height: 100vh;
             position: relative;
+        }
+        
+        /* 添加Live2D容器样式 */
+        #live2d-container {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 280px;
+            height: 350px;
+            z-index: 999;
+            pointer-events: none;
+        }
+        
+        #live2d-canvas {
+            transform: scale(0.85);
+            transform-origin: left bottom;
+        }
+        
+        .live2d-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 15px;
+            padding: 10px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .live2d-btn {
+            background: var(--main-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .live2d-btn:hover {
+            background: var(--accent-color);
+            transform: scale(1.1);
+        }
+        
+        /* 移动设备隐藏Live2D */
+        @media (max-width: 768px) {
+            #live2d-container {
+                display: none;
+            }
         }
         
         /* 头部导航 */
@@ -92,7 +153,7 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 15px;
+            padding: 0 15px 80px 15px;
             flex: 1; /* 确保内容区域占据剩余空间 */
         }
         
@@ -103,6 +164,7 @@
             margin-bottom: 1.5rem;
             padding: 1.5rem;
             transition: var(--transition);
+            backdrop-filter: blur(5px);
         }
         
         .section:hover {
@@ -483,6 +545,25 @@
     </style>
 </head>
 <body>
+    <!-- Live2D模型容器 -->
+    <div id="live2d-container">
+        <canvas id="live2d-canvas"></canvas>
+        <div class="live2d-controls">
+            <button class="live2d-btn" title="拖动模型" id="drag-toggle">
+                <i class="fas fa-arrows-alt"></i>
+            </button>
+            <button class="live2d-btn" title="切换模型" id="change-model">
+                <i class="fas fa-random"></i>
+            </button>
+            <button class="live2d-btn" title="重置位置" id="reset-position">
+                <i class="fas fa-sync"></i>
+            </button>
+            <button class="live2d-btn" title="隐藏/显示" id="toggle-model">
+                <i class="fas fa-eye"></i>
+            </button>
+        </div>
+    </div>
+    
     <!-- 访问量计数器 -->
     <div class="visit-counter">
         <img src="https://w.saobby.com/w/9fosk992" alt="访问量计数器">
@@ -493,6 +574,7 @@
         <nav class="nav-menu">
             <div class="nav-item" onclick="showSection('intro')">社团介绍</div>
             <div class="nav-item" onclick="showSection('activity')">最新活动</div>
+            <极客
             <div class="nav-item" onclick="showSection('test')">浓度测试</div>
             <div class="nav-item" onclick="showSection('resources')">资源分享</div>
             <div class="nav-item" onclick="showSection('about')">关于长汀一中</div>
@@ -531,7 +613,7 @@
           <p>传播观	新媒体创意运营	青年网络文明公约践行者</p>
                 
                 <h3>📣 致家长的一封信</h3>
-                <p>我们理解您的关切，因此：</p>
+                <p>我们理解您的关切，因此：</极客
                 <p>• 所有活动由校团委及社团干部指导</p>
                 <p>• 创作内容经社团干部审核</p>
                 <p>考上长汀一中，加入长汀一中动漫社，你将获得：</p>
@@ -693,7 +775,7 @@
                     </div>
                     <div class="resource-footer">
                         <span><i class="fas fa-tag"></i> 看番 · 弹幕</span>
-                        <span>https://www.tucao.my/</span>
+                        <span>https://www.tucao.my/</极客
                     </div>
                 </div>
                 
@@ -709,7 +791,6 @@
                         <p class="resource-description">最全面的ACGN百科知识库，涵盖动漫、游戏及相关文化内容。</p>
                         <a href="https://mzh.moegirl.org.cn/" class="resource-link" target="_blank">访问网站</a>
                     </div>
-                    <极客
                     <div class="resource-footer">
                         <span><i class="fas fa-tag"></i> 百科 · ACGN</span>
                         <span>https://mzh.moegirl.org.cn/</span>
@@ -737,7 +818,6 @@
                 <!-- 蔚蓝档案图标生成器 卡片 -->
                 <div class="resource-card">
                     <div class="resource-header">
-                        <div class="resource极客
                         <div class="resource-icon">
                             <i class="fas fa-paint-brush"></i>
                         </div>
@@ -799,6 +879,17 @@
         // 全局变量
         let allQuestions = [];
         let selectedQuestions = [];
+        
+        // Live2D相关变量
+        let live2dApp = null;
+        let live2dModel = null;
+        let isDraggable = false;
+        let currentModelIndex = 0;
+        
+        // 模型路径 - 需要替换为您的实际路径
+        const modelPaths = [
+            'assets/live2d/Roxy/Roxy_V1.model3.json'
+        ];
 
         // 栏目切换
         function showSection(sectionId) {
@@ -906,11 +997,124 @@
             
             document.getElementById('result').innerHTML = resultText;
         }
+        
+        // 初始化Live2D
+        async function initLive2D() {
+            try {
+                // 创建Pixi应用
+                live2dApp = new PIXI.Application({
+                    view: document.getElementById('live2d-canvas'),
+                    backgroundAlpha: 0,
+                    width: 280,
+                    height: 350
+                });
+                
+                // 加载初始模型
+                await loadNextModel();
+            } catch (error) {
+                console.error('Live2D初始化失败:', error);
+            }
+        }
+        
+        // 加载模型
+        async function loadNextModel() {
+            if (live2dModel) {
+                live2dModel.destroy();
+            }
+            
+            try {
+                // 加载模型
+                live2dModel = await PIXI.live2d.Live2DModel.from(modelPaths[currentModelIndex]);
+                live2dModel.anchor.set(0.5, 0.5);
+                live2dModel.position.set(140, 175);
+                live2dApp.stage.addChild(live2dModel);
+                
+                // 设置模型尺寸
+                live2dModel.scale.set(0.18);
+                
+                // 添加交互
+                live2dModel.interactive = true;
+                live2dModel.on('pointertap', () => {
+                    live2dModel.motion('Tap');
+                });
+                
+                // 添加拖动功能
+                setupDragBehavior();
+                
+                // 下一个模型索引
+                currentModelIndex = (currentModelIndex + 1) % modelPaths.length;
+            } catch (error) {
+                console.error('Live2D模型加载失败:', error);
+            }
+        }
+        
+        // 设置模型的拖动行为
+        function setupDragBehavior() {
+            let isDragging = false;
+            let startPosition = { x: 0, y: 0 };
+            let startModelPosition = { x: 0, y: 0 };
+            
+            live2dModel.on('pointerdown', (event) => {
+                isDragging = isDraggable;
+                startPosition = { x: event.data.global.x, y: event.data.global.y };
+                startModelPosition = { x: live2dModel.position.x, y: live2dModel.position.y };
+            });
+            
+            live2dApp.stage.on('pointermove', (event) => {
+                if (isDragging) {
+                    const dx = event.data.global.x - startPosition.x;
+                    const dy = event.data.global.y - startPosition.y;
+                    live2dModel.position.x = startModelPosition.x + dx;
+                    live2dModel.position.y = startModelPosition.y + dy;
+                }
+            });
+            
+            live2dApp.stage.on('pointerup', () => {
+                isDragging = false;
+            });
+            
+            live2dApp.stage.on('pointerupoutside', () => {
+                isDragging = false;
+            });
+        }
+        
+        // 切换拖动模式
+        function toggleDragMode() {
+            isDraggable = !isDraggable;
+            const button = document.getElementById('drag-toggle');
+            button.innerHTML = isDraggable ? '<i class="fas fa-lock"></i>' : '<i class="fas fa-arrows-alt"></i>';
+            button.title = isDraggable ? '锁定位置' : '拖动模型';
+        }
+        
+        // 切换模型显示
+        function toggleModelVisibility() {
+            const container = document.getElementById('live2d-container');
+            const isVisible = container.style.display !== 'none';
+            container.style.display = isVisible ? 'none' : 'block';
+            
+            const button = document.getElementById('toggle-model');
+            button.innerHTML = isVisible ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
+            button.title = isVisible ? '显示模型' : '隐藏模型';
+        }
+        
+        // 重置模型位置
+        function resetModelPosition() {
+            if (live2dModel) {
+                live2dModel.position.set(140, 175);
+            }
+        }
 
         // 初始化
         document.addEventListener('DOMContentLoaded', () => {
             showSection('intro');
             initQuiz();
+            initLive2D();
+            
+            // 绑定Live2D控制按钮
+            document.getElementById('drag-toggle').addEventListener('click', toggleDragMode);
+            document.getElementById('change-model').addEventListener('click', loadNextModel);
+            document.getElementById('reset-position').addEventListener('click', resetModelPosition);
+            document.getElementById('toggle-model').addEventListener('click', toggleModelVisibility);
         });
     </script>
 </body>
