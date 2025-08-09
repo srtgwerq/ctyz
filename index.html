@@ -159,6 +159,7 @@
             overflow: hidden;
             display: flex;
             transition: transform 0.3s;
+            flex-direction: column;
         }
         
         .activity-card:hover { 
@@ -167,10 +168,10 @@
         }
         
         .activity-image {
-            width: 300px;
-            height: 200px;
+            width: 100%;
+            height: 180px;
             object-fit: cover;
-            border-right: 3px solid #ff6b6b;
+            border-bottom: 3px solid #ff6b6b;
         }
         
         .activity-content {
@@ -388,6 +389,19 @@
         }
         
         /* 响应式设计 */
+        @media (min-width: 769px) {
+            .activity-card {
+                flex-direction: row;
+            }
+            
+            .activity-image {
+                width: 300px;
+                height: 200px;
+                border-right: 3px solid #ff6b6b;
+                border-bottom: none;
+            }
+        }
+        
         @media (max-width: 768px) {
             .header {
                 flex-direction: column;
@@ -414,17 +428,6 @@
                 padding: 1.2rem;
             }
             
-            .activity-card {
-                flex-direction: column;
-            }
-            
-            .activity-image {
-                width: 100%;
-                height: 180px;
-                border-right: none;
-                border-bottom: 3px solid #ff6b6b;
-            }
-            
             .activities-container,
             .resources-grid {
                 grid-template-columns: 1fr;
@@ -433,6 +436,41 @@
             .quiz-section .options {
                 grid-template-columns: 1fr;
             }
+        }
+        
+        /* 简化后的页脚样式 */
+        .footer {
+            background: rgba(44, 44, 84, 0.1);
+            color: #333;
+            padding: 15px 0;
+            text-align: center;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 100;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 10px 0;
+        }
+        
+        .footer-link {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: var(--main-color);
+            text-decoration: underline;
+        }
+        
+        .footer-copyright {
+            margin-top: 5px;
+            color: #666;
         }
     </style>
 </head>
@@ -486,14 +524,19 @@
                 <p>• <strong>同好讨论</strong>：板绘/编剧/视频制作交流</p>
                 <p>• <strong>创意孵化</strong>：优秀作品展示</p>
                 <p>• <strong>自我成长</strong>：参与活动，获得管理组织经验</p>
+                  <h3>联结通道</h3>
+        
+          <p>▸网站制作QQ：2789290042</p>
 
-                <h3>联络通道</h3>
-                <p>▸ 网站制作QQ：2789290042</p>
-                <p>▸ 社长QQ：2704168175</p>
-                <p>▸ 动漫社同好QQ群：858655372</p>
-                <p>▸ 关注B站：长汀一中动漫社</p>
-                <p>▸ 官网报名入口：https://ctyz-acgn.netlify.app/</p>
-                <p>指导老师：严老师</p>
+          <p>▸社长QQ：2704168175</p>
+
+          <p>动漫社同好QQ群：858655372</p>
+              
+          <p>▸ 关注B站：长汀一中动漫社</p>
+
+          <p>▸ 官网报名入口：https://ctyz-acgn.netlify.app/</p>
+
+          <p>指导老师：严老师 </p>
             </div>
         </section>
         
@@ -725,10 +768,16 @@
         </section>
     </div>
     
-    <!-- 页脚 -->
-    <div class="footer">
-        <p>© 2025 长汀一中动漫社·幻想次元部 | 官方QQ群: 858655372 | <a href="https://ctyz-acgn.netlify.app/" target="_blank">官网</a></p>
-    </div>
+    <!-- 简化后的页脚 -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="https://space.bilibili.com/45868919?spm_id_from=333.337.0.0" class="footer-link" target="_blank">B站主页</a>
+            <a href="https://ctyz-acgn.netlify.app/" class="footer-link" target="_blank">社团官网</a>
+        </div>
+        <div class="footer-copyright">
+            © 2025 长汀一中动漫社·幻想次元部
+        </div>
+    </footer>
     
     <script>
         // 全局变量
