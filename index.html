@@ -320,8 +320,9 @@
         }
         
         .monster-label {
-            top: 20px;
-            right: 110px;
+    top: calc(100% + 8px); 
+    right: 100px;
+    text-align: right;
         }
         
         .quest-box {
@@ -988,13 +989,12 @@
             </div>
             <div class="health-label hero-label">赤色杀人魔: <span id="hero-hp">100</span></div>
     
-             <!-- 敌人血条 - 修改此处 -->
-            <div class="health-bar monster-health">
-                   <div class="health-fill" id="monster-hp-bar"></div>
-             </div>
-             <!-- 血条下方显示boss名称 -->
-           <div class="health-label monster-label"><span id="monster-name">敌人</span>: <span id="monster-hp">100</span></div>
-    
+           <!-- 修改后的敌方血条部分 -->
+         <div class="health-bar monster-health">
+            <div class="health-fill" id="monster-hp-bar"></div>
+       </div>
+         <!-- 血条下方显示boss名称 -->
+          <div class="health-label monster-label"><span id="monster-name">敌人</span>: <span id="monster-hp">100</span></div>
             <!-- 勇者形象 -->
               <div class="character" id="hero-character"></div>
     
@@ -1232,7 +1232,7 @@
                 optionsContainer.appendChild(optionElement);
             });
             
-            document.getElementById('monster-character').textContent = stages[currentStage-1].name;
+           document.getElementById('monster-name').textContent = stages[currentStage-1].name;
             document.getElementById('quest-title').textContent = `挑战${stages[currentStage-1].name}`;
             document.getElementById('quest-description').textContent = 
                 `第${currentStage}关：${stages[currentStage-1].name}（血量：${monsterHP}）`;
@@ -1379,7 +1379,3 @@
     </script>
 </body>
 </html>
-
-
-
-
