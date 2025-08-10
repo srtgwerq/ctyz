@@ -974,32 +974,34 @@
             <p>扮演一位勇敢的动漫知识勇者，踏上征服ACGN魔王的冒险之旅！每答对一道题可攻击魔王，答错会被魔王攻击。</p>
             
             <div class="rpg-game">
-                <!-- 游戏场景 -->
-                <div class="game-scene">
-                    <!-- 关卡指示器 -->
-                    <div class="stage-indicator">关卡: <span id="stage-display">1</span>/5</div>
-                    
-                    <!-- 攻击力信息 -->
-                    <div class="attack-info">攻击力: <span id="attack-power">15-30</span></div>
-                    
-                    <!-- 角色血条 -->
-                    <div class="health-bar hero-health">
-                        <div class="health-fill" id="hero-hp-bar"></div>
-                    </div>
-                    <div class="health-label hero-label">赤色杀人魔: <span id="hero-hp">100</span></div>
-                    
-                    <!-- 敌人血条 -->
-                    <div class="health-bar monster-health">
-                        <div class="health-fill" id="monster-hp-bar"></div>
-                    </div>
-                    <div class="health-label monster-label">敌人: <span id="monster-hp">100</span></div>
-                    
-                    <!-- 勇者形象 -->
-                    <div class="character" id="hero-character"></div>
-                    
-                    <!-- 敌人形象 -->
-                    <div class="monster" id="monster-character"></div>
-                </div>
+              <!-- 游戏场景部分 -->
+       <div class="game-scene">
+             <!-- 关卡指示器 -->
+           <div class="stage-indicator">关卡: <span id="stage-display">1</span>/5</div>
+    
+              <!-- 攻击力信息 -->
+              <div class="attack-info">攻击力: <span id="attack-power">15-30</span></div>
+    
+             <!-- 角色血条 -->
+              <div class="health-bar hero-health">
+           <div class="health-fill" id="hero-hp-bar"></div>
+            </div>
+            <div class="health-label hero-label">赤色杀人魔: <span id="hero-hp">100</span></div>
+    
+             <!-- 敌人血条 - 修改此处 -->
+            <div class="health-bar monster-health">
+                   <div class="health-fill" id="monster-hp-bar"></div>
+             </div>
+             <!-- 血条下方显示boss名称 -->
+           <div class="health-label monster-label"><span id="monster-name">敌人</span>: <span id="monster-hp">100</span></div>
+    
+            <!-- 勇者形象 -->
+              <div class="character" id="hero-character"></div>
+    
+               <!-- 敌人形象 - 不再显示名称 -->
+          <div class="monster" id="monster-character"></div>
+             </div>
+
                 
                 <!-- 游戏状态/对话 -->
                 <div class="quest-box">
@@ -1377,6 +1379,7 @@
     </script>
 </body>
 </html>
+
 
 
 
