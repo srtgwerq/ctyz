@@ -48,6 +48,7 @@
             position: fixed;
             top: 0;
             left: 0;
+            width: 极客
             width: 100%;
             height: 100%;
             z-index: -1;
@@ -210,7 +211,6 @@
         }
         
         .activity-meta {
-            display:极客
             display: flex;
             margin-bottom: 1rem;
             font-size: 0.95rem;
@@ -248,6 +248,7 @@
             margin-bottom: 1.5rem;
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+            border: 3极客
             border: 3px solid #d4af37;
         }
         
@@ -278,6 +279,7 @@
         .health-bar {
             position: absolute;
             width: 200px;
+            height: 20极客
             height: 20px;
             background: #555;
             border-radius: 10px;
@@ -610,12 +612,20 @@
                 right: 20px;
             }
             
+极客
+            .monster {
+                width: 80px;
+                height: 100px;
+                right: 20px;
+            }
+            
             .health-bar {
                 width: 150px;
                 height: 16px;
             }
             
             .hero-health {
+                left: 20极客
                 left: 20px;
             }
             
@@ -720,6 +730,7 @@
                 
                 <h3>📣 致家长的一封信</h3>
                 <p>我们理解您的关切，因此：</p>
+                <p>• 所有活动由校团委及社团干部指导</极客
                 <p>• 所有活动由校团委及社团干部指导</p>
                 <p>• 创作内容经社团干部审核</p>
                 <p>考上长汀一中，加入长汀一中动漫社，你将获得：</p>
@@ -732,6 +743,7 @@
                 <p>▸网站制作QQ：2789290042</p>
                 <p>▸社长QQ：2704168175</p>
                 <p>▸动漫社同好QQ群：858655372</p>
+                <p>▸ 关注B站：长汀一中动漫极客
                 <p>▸ 关注B站：长汀一中动漫社</p>
                 <p>▸ 官网报名入口：https://ctyz-acgn.netlify.app/</p>
                 <p>指导老师：严老师 </p>
@@ -774,6 +786,7 @@
                             </div>
                             <p class="activity-description">动漫《凉宫春日的忧郁》ed《晴天好心情》宅舞活动</p>
                         </div>
+                    </极客
                     </div>
                 </a>
                 
@@ -889,12 +902,6 @@
                                 <i class="fas fa-book-open"></i>
                             </div>
                             <h3 class="resource-title">萌娘百科</h3>
-                        </极客
-                        <div class="resource-front">
-                            <div class="resource-icon">
-                                <i class="fas fa-book-open"></i>
-                            </div>
-                            <h3 class="resource-title">萌娘百科</h3>
                         </div>
                         <div class="resource-back">
                             <h3 class="resource-title">萌娘百科</h3>
@@ -917,7 +924,6 @@
                         <div class="resource-back">
                             <h3 class="resource-title">TouchGal</h3>
                             <p class="resource-description">专注于Galgame资源分享，收录各类经典和最新视觉小说游戏。</p>
-                            <p>网址：https://www.touchgal.us/</极客
                             <p>网址：https://www.touchgal.us/</p>
                             <a href="https://www.touchgal.us/" class="resource-link" target="_blank">访问网站</a>
                         </div>
@@ -1073,7 +1079,7 @@
             }
         ];
         
-        // 本地题库加载函数
+        // 加载本地题库
         async function loadQuestions() {
             try {
                 const response = await fetch('q.txt');
@@ -1084,35 +1090,35 @@
                     .map(block => block.trim())
                     .filter(block => block);
                 
-                // 将问题分配到五个关卡
-                const questionsPerStage = Math.floor(questionBlocks.length / 5);
-                
-                for (let i = 0; i < 5; i++) {
-                    const start = i * questionsPerStage;
-                    const end = (i === 4) ? questionBlocks.length : (i + 1) * questionsPerStage;
+                // 解析每个问题块
+                const parsedQuestions = questionBlocks.map(block => {
+                    const lines = block.split('\n')
+                        .map(line => line.trim())
+                        .filter(line => line);
                     
-                    stages[i].questions = questionBlocks.slice(start, end)
-                        .map(block => {
-                            const lines = block.split('\n')
-                                .map(line => line.trim())
-                                .filter(line => line);
-                            
-                            if (lines.length < 3) return null;
-                            
-                            return {
-                                question: lines[0].replace(/^Q:\s*/, ''),
-                                options: lines[1].replace(/^A:\s*/, '').split(/\s*,\s*/),
-                                correct: parseInt(lines[2].replace(/^C:\s*/, ''), 10)
-                            };
-                        })
-                        .filter(Boolean);
-                }
+                    if (lines.length < 3) return null;
+                    
+                    return {
+                        question: lines[0].replace(/^Q:\s*/, ''),
+                        options: lines[1].replace(/^A:\s*/, '').split(/\s*,\s*/),
+                        correct: parseInt(lines[2].replace(/^C:\s*/, ''), 10)
+                    };
+                }).filter(Boolean);
                 
-                return true;
+                return parsedQuestions;
             } catch (error) {
                 console.error('题库加载失败:', error);
-                return false;
+                return [];
             }
+        }
+
+        // Fisher-Yates洗牌算法
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
         }
 
         // 栏目切换
@@ -1155,12 +1161,15 @@
             resetGame();
             
             // 加载题库
-            const success = await loadQuestions();
-            if (!success) {
+            allQuestions = await loadQuestions();
+            if (allQuestions.length === 0) {
                 document.getElementById('quest-description').textContent = 
                     "题库加载失败，请检查q.txt文件是否存在并格式正确！";
                 return;
             }
+            
+            // 随机分配题目到关卡
+            distributeQuestions();
             
             document.getElementById('start-btn').style.display = 'none';
             document.getElementById('attack-btn').style.display = 'block';
@@ -1171,6 +1180,26 @@
                 `url('${stages[currentStage-1].image}')`;
             
             showQuestion();
+        }
+        
+        // 随机分配题目到关卡
+        function distributeQuestions() {
+            // 复制题库
+            const shuffledQuestions = [...allQuestions];
+            
+            // 随机打乱题目
+            shuffleArray(shuffledQuestions);
+            
+            // 将问题分配到五个关卡
+            const questionsPerStage = Math.floor(shuffledQuestions.length / 5);
+            
+            for (let i = 0; i < 5; i++) {
+                const start = i * questionsPerStage;
+                const end = (i === 4) ? shuffledQuestions.length : (i + 1) * questionsPerStage;
+                
+                // 每个关卡的题目再次随机打乱
+                stages[i].questions = shuffleArray(shuffledQuestions.slice(start, end));
+            }
         }
         
         // 显示当前问题
@@ -1201,6 +1230,7 @@
                 optionsContainer.appendChild(optionElement);
             });
             
+            document.getElementById('monster-character').textContent = stages[currentStage-1].name;
             document.getElementById('quest-title').textContent = `挑战${stages[currentStage-1].name}`;
             document.getElementById('quest-description').textContent = 
                 `第${currentStage}关：${stages[currentStage-1].name}（血量：${monsterHP}）`;
