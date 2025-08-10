@@ -1048,30 +1048,31 @@
         // 五个关卡配置（四天王+魔王）
         const stages = [
             {
-
+                name: "蕾米莉亚",
                 hp: 100,
                 image: "images/enemies/fire_lord.png",
                 questions: []
             },
             {
-
+                name: "琪露诺",
                 hp: 120,
                 image: "images/enemies/ice_lord.png",
                 questions: []
             },
             {
-
+                name: "幽幽子",
                 hp: 140,
                 image: "images/enemies/thunder_lord.png",
                 questions: []
             },
             {
+                name: "十六夜咲夜",
                 hp: 160,
                 image: "images/enemies/earth_lord.png",
                 questions: []
             },
             {
-
+                name: "八云紫",
                 hp: 200,
                 image: "images/enemies/demon_king.png",
                 questions: []
@@ -1360,7 +1361,7 @@
             if (isVictory) {
                 document.getElementById('quest-title').textContent = "胜利！你击败了魔王库洛姆！";
                 document.getElementById('quest-description').innerHTML = 
-                    `恭喜你成功通关！你的ACGN知识评分：${Math.round((correctAnswers * 100) / allQuestions.length)}%`;
+                    `恭喜你成功通关！`;
             } else {
                 document.getElementById('quest-title').textContent = `游戏结束！被${stages[currentStage-1].name}击败`;
                 document.getElementById('quest-description').innerHTML = 
@@ -1376,4 +1377,5 @@
     </script>
 </body>
 </html>
+
 
