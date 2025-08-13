@@ -696,97 +696,6 @@
             background: var(--main-color);
             border-radius: 2px;
         }
-        
-        /* 评论框样式 */
-        #cusdis_thread {
-            background: #fff;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            margin-top: 20px;
-        }
-        
-        .cusdis-comment-box {
-            margin-bottom: 20px;
-        }
-        
-        .cusdis-input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-family: 'Noto Sans SC', sans-serif;
-            font-size: 1rem;
-        }
-        
-        .cusdis-textarea {
-            width: 100%;
-            height: 120px;
-            padding: 12px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-family: 'Noto Sans SC', sans-serif;
-            font-size: 1rem;
-            resize: vertical;
-        }
-        
-        .cusdis-submit-button {
-            background: var(--main-color);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
-        
-        .cusdis-submit-button:hover {
-            background: #e55a5a;
-        }
-        
-        .cusdis-comments-list {
-            margin-top: 20px;
-        }
-        
-        .cusdis-comment {
-            background: #f9f9f9;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-left: 3px solid var(--secondary-color);
-        }
-        
-        .cusdis-comment-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        
-        .cusdis-comment-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-        
-        .cusdis-comment-author {
-            font-weight: bold;
-            color: var(--dark-color);
-        }
-        
-        .cusdis-comment-time {
-            font-size: 0.85rem;
-            color: #777;
-            margin-left: 10px;
-        }
-        
-        .cusdis-comment-content {
-            line-height: 1.6;
-            color: #444;
-        }
     </style>
 </head>
 <body>
@@ -827,7 +736,7 @@
                 <h4>手账本接力</h4>
                 <p>• <strong>文化传递</strong>：创作融合国风元素与校园生活的主题手账，搭建自我展示平台</p>
                 <p>• <strong>青春存档</极>：记录校园记忆（毕业季专题/节气文化/校园漫影），传递温暖正能量</p>
-                <p>• <strong>成果展示</strong>：精选手账作品在B站专栏/官网永久展览</p>
+                <p>• <极>成果展示</strong>：精选手账作品在B站专栏/官网永久展览</p>
 
                 <h4>社员原创作品</h4>
                 <p>• 发布自制动画短片、插画、配音作品</p>
@@ -837,7 +746,7 @@
                 <h3>📣 致家长的一封信</h3>
                 <p>我们理解您的关切，因此：</p>
                 <p>• 所有活动由校团委及社团干部指导</p>
-               极>• 创作内容经社团干部审核</p>
+                <p>• 创作内容经社团干部审核</p>
                 <p>考上长汀一中，加入长汀一中动漫社，你将获得：</p>
                 <p>• <strong>同好讨论</strong>：板绘/编剧/视频制作交流</p>
                 <p>• <strong>创意孵化</strong>：优秀作品展示</p>
@@ -853,10 +762,10 @@
                 <p>指导老师：严老师 </p>
             </div>
             
-            <!-- 评论区域 -->
+            <!-- CommentBox.io 评论区域 -->
             <div class="comments-section">
                 <h3 class="comments-title">评论交流</h3>
-                <div class="cusdis-container" id="cusdis-container-intro"></div>
+                <div class="commentbox" id="commentbox-intro"></div>
             </div>
         </section>
         
@@ -879,10 +788,10 @@
                 <p><strong>教风</strong>：民主 科学 严谨 鲜活</p> 
             </div>
             
-            <!-- 评论区域 -->
+            <!-- CommentBox.io 评论区域 -->
             <div class="comments-section">
                 <h3 class="comments-title">评论交流</h3>
-                <div class="cusdis-container" id="cusdis-container-about"></div>
+                <div class="commentbox" id="commentbox-about"></div>
             </div>
         </section>
         
@@ -936,7 +845,7 @@
                 <!-- 活动卡片 4 -->
                 <a href="https://chouka.netlify.app/" class="activity-link" target="_blank">
                     <div class="activity-card">
-                        <img src="assets/activities/picture4.jpg" class="activity-image" alt="动漫节活动">
+                        <img src="assets/activities/picture4.jpg" class="activity极mage" alt="动漫节活动">
                         <div class="activity-content">
                             <h3 class="activity-title">长汀一中动漫社动漫节</h3>
                             <div class="activity-meta">
@@ -964,10 +873,10 @@
                 </a>
             </div>
             
-            <!-- 评论区域 -->
+            <!-- CommentBox.io 评论区域 -->
             <div class="comments-section">
                 <h3 class="comments-title">评论交流</h3>
-                <div class="cusdis-container" id="cusdis-container-activity"></div>
+                <div class="commentbox" id="commentbox-activity"></div>
             </div>
         </section>
         
@@ -1088,10 +997,10 @@
                 </div>
             </div>
             
-            <!-- 评论区域 -->
+            <!-- CommentBox.io 评论区域 -->
             <div class="comments-section">
                 <h3 class="comments-title">评论交流</h3>
-                <div class="cusdis-container" id="cusdis-container-resources"></div>
+                <div class="commentbox" id="commentbox-resources"></div>
             </div>
         </section>
         
@@ -1150,10 +1059,10 @@
                 </div>
             </div>
             
-            <!-- 评论区域 -->
+            <!-- CommentBox.io 评论区域 -->
             <div class="comments-section">
                 <h3 class="comments-title">评论交流</h3>
-                <div class="cusdis-container" id="cusdis-container-rpg"></div>
+                <div class="commentbox" id="commentbox-rpg"></div>
             </div>
         </section>
     </div>
@@ -1169,7 +1078,20 @@
         </div>
     </footer>
     
+    <!-- CommentBox.io 脚本 -->
+    <script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script>
     <script>
+        // 初始化CommentBox.io
+        commentBox('5718864172154880', {
+            className: 'commentbox',
+            defaultBoxId: 'commentbox',
+            createBoxUrl: function(boxId, pageLocation) {
+                pageLocation.search = '';
+                pageLocation.hash = boxId;
+                return pageLocation.href;
+            }
+        });
+        
         // 全局变量
         let heroHP = 100;
         let monsterHP = 100;
@@ -1285,48 +1207,6 @@
             }
             return array;
         }
-
-        // 动态初始化Cusdis评论
-        function initCusdis(sectionId) {
-            const containerId = `cusdis-container-${sectionId}`;
-            const container = document.getElementById(containerId);
-            
-            if (!container) return;
-            
-            // 清除容器内容
-            container.innerHTML = '';
-            
-            // 创建Cusdis元素
-            const cusdisDiv = document.createElement('div');
-            cusdisDiv.id = `cusdis_thread_${sectionId}`;
-            cusdisDiv.setAttribute('data-host', 'https://cusdis.com');
-            cusdisDiv.setAttribute('data-app-id', '1792334e-8b6e-4709-b502-8a804fa417ff');
-            cusdisDiv.setAttribute('data-page-id', sectionId);
-            cusdisDiv.setAttribute('data-page-url', `https://ctyz-acgn.netlify.app/#${sectionId}`);
-            cusdisDiv.setAttribute('data-page-title', `长汀一中动漫社-${getSectionTitle(sectionId)}`);
-            cusdisDiv.setAttribute('data-theme', 'light');
-            cusdisDiv.setAttribute('data-lang', 'zh');
-            cusdisDiv.setAttribute('data-show-login', 'false');
-            
-            container.appendChild(cusdisDiv);
-            
-            // 初始化Cusdis
-            if (window.Cusdis) {
-                window.Cusdis.init();
-            }
-        }
-
-        // 获取区域标题
-        function getSectionTitle(sectionId) {
-            const titles = {
-                intro: '社团介绍',
-                activity: '最新活动',
-                rpg: '答题游戏',
-                resources: '资源分享',
-                about: '学校介绍'
-            };
-            return titles[sectionId] || sectionId;
-        }
         
         // 栏目切换
         function showSection(sectionId) {
@@ -1334,9 +1214,6 @@
                 sec.style.display = 'none';
             });
             document.getElementById(sectionId).style.display = 'block';
-            
-            // 初始化Cusdis评论
-            initCusdis(section极);
         }
 
         // 游戏初始状态
@@ -1383,7 +1260,7 @@
             
             document.getElementById('start-btn').style.display = 'none';
             document.getElementById('attack-btn').style.display = 'block';
-            document.getElementById('question-area').style.display = 'block';
+            document.getElementById('question-area').极yle.display = 'block';
             
             // 设置敌人图片
             document.getElementById('monster-character').style.backgroundImage = 
@@ -1585,8 +1462,5 @@
             showSection('intro');
         });
     </script>
-    
-    <!-- 引入Cusdis脚本 -->
-    <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
 </body>
 </html>
