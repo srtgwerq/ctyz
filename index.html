@@ -22,8 +22,7 @@
             --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
-        ▪ {
-
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -697,6 +696,97 @@
             background: var(--main-color);
             border-radius: 2px;
         }
+        
+        /* 评论框样式 */
+        #cusdis_thread {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+        
+        .cusdis-comment-box {
+            margin-bottom: 20px;
+        }
+        
+        .cusdis-input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 1rem;
+        }
+        
+        .cusdis-textarea {
+            width: 100%;
+            height: 120px;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 1rem;
+            resize: vertical;
+        }
+        
+        .cusdis-submit-button {
+            background: var(--main-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .cusdis-submit-button:hover {
+            background: #e55a5a;
+        }
+        
+        .cusdis-comments-list {
+            margin-top: 20px;
+        }
+        
+        .cusdis-comment {
+            background: #f9f9f9;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 3px solid var(--secondary-color);
+        }
+        
+        .cusdis-comment-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .cusdis-comment-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .cusdis-comment-author {
+            font-weight: bold;
+            color: var(--dark-color);
+        }
+        
+        .cusdis-comment-time {
+            font-size: 0.85rem;
+            color: #777;
+            margin-left: 10px;
+        }
+        
+        .cusdis-comment-content {
+            line-height: 1.6;
+            color: #444;
+        }
     </style>
 </head>
 <body>
@@ -766,16 +856,7 @@
             <!-- 评论区域 -->
             <div class="comments-section">
                 <h3 class="comments-title">评论交流</h3>
-                <div id="cusdis_thread_intro"
-                  data-host="https://cusdis.com"
-                  data-app-id="1792334e-8b6e-4709-b502-8a804fa417ff"
-                  data-page-id="intro"
-                  data-page-url="https://ctyz-acgn.netlify.app/#intro"
-                  data-page-title="长汀一中动漫社-社团介绍"
-                  data-theme="light"
-                  data-lang="zh"
-                  data-show-login="false"
-                ></div>
+                <div class="cusdis-container" id="cusdis-container-intro"></div>
             </div>
         </section>
         
@@ -801,16 +882,7 @@
             <!-- 评论区域 -->
             <div class="comments-section">
                 <h3 class="comments-title">评论交流</h3>
-                <div id="cusdis_thread_about"
-                  data-host="https://cusdis.com"
-                  data-app-id="1792334e-8b6e-4709-b502-8a804fa417ff"
-                  data-page-id="about"
-                  data-page-url="https://ctyz-acgn.netlify.app/#about"
-                  data-page-title="长汀一中动漫社-学校介绍"
-                  data-theme="light"
-                  data-lang="zh"
-                  data-show-login="false"
-                ></div>
+                <div class="cusdis-container" id="cusdis-container-about"></div>
             </div>
         </section>
         
@@ -895,16 +967,7 @@
             <!-- 评论区域 -->
             <div class="comments-section">
                 <h3 class="comments-title">评论交流</h3>
-                <div id="cusdis_thread_activity"
-                  data-host="https://cusdis.com"
-                  data-app-id="1792334e-8b6e-4709-b502-8a804fa417ff"
-                  data-page-id="activity"
-                  data-page-url="https://ctyz-acgn.netlify.app/#activity"
-                  data-page-title="长汀一中动漫社-最新活动"
-                  data-theme="light"
-                  data-lang="zh"
-                  data-show-login="false"
-                ></div>
+                <div class="cusdis-container" id="cusdis-container-activity"></div>
             </div>
         </section>
         
@@ -1028,16 +1091,7 @@
             <!-- 评论区域 -->
             <div class="comments-section">
                 <h3 class="comments-title">评论交流</h3>
-                <div id="cusdis_thread_resources"
-                  data-host="https://cusdis.com"
-                  data-app-id="1792334e-8b6e-4709-b502-8a804fa417ff"
-                  data-page-id="resources"
-                  data-page-url="https://ctyz-acgn.netlify.app/#resources"
-                  data-page-title="长汀一中动漫社-资源分享"
-                  data-theme="light"
-                  data-lang="zh"
-                  data-show-login="false"
-                ></div>
+                <div class="cusdis-container" id="cusdis-container-resources"></div>
             </div>
         </section>
         
@@ -1099,16 +1153,7 @@
             <!-- 评论区域 -->
             <div class="comments-section">
                 <h3 class="comments-title">评论交流</h3>
-                <div id="cusdis_thread_rpg"
-                  data-host="https://cusdis.com"
-                  data-app-id="1792334e-8b6e-4709-b502-8a804fa417ff"
-                  data-page-id="rpg"
-                  data-page-url="https://ctyz-acgn.netlify.app/#rpg"
-                  data-page-title="长汀一中动漫社-答题游戏"
-                  data-theme="light"
-                  data-lang="zh"
-                  data-show-login="false"
-                ></div>
+                <div class="cusdis-container" id="cusdis-container-rpg"></div>
             </div>
         </section>
     </div>
@@ -1171,30 +1216,61 @@
         // 加载本地题库
         async function loadQuestions() {
             try {
-                const response = await fetch('q.txt');
-                const text = await response.text();
+                // 示例题库数据（实际应用中应从q.txt加载）
+                const questions = [
+                    {
+                        question: "《进击的巨人》中，主角艾伦·耶格尔的能力是什么？",
+                        options: ["巨人化", "操控时间", "读心术", "飞行能力"],
+                        correct: 0
+                    },
+                    {
+                        question: "《刀剑神域》中，桐人使用的武器是什么？",
+                        options: ["双剑", "巨斧", "长枪", "魔法杖"],
+                        correct: 0
+                    },
+                    {
+                        question: "《火影忍者》中，鸣人最擅长的忍术是什么？",
+                        options: ["螺旋丸", "影分身之术", "千鸟", "写轮眼"],
+                        correct: 1
+                    },
+                    {
+                        question: "《鬼灭之刃》中，炭治郎的妹妹叫什么名字？",
+                        options: ["祢豆子", "蝴蝶忍", "甘露寺蜜璃", "栗花落香奈乎"],
+                        correct: 0
+                    },
+                    {
+                        question: "《海贼王》中，路飞的恶魔果实能力是什么？",
+                        options: ["橡胶果实", "火焰果实", "冰冻果实", "闪光果实"],
+                        correct: 0
+                    },
+                    {
+                        question: "《Re:从零开始的异世界生活》中，主角菜月昴的能力是什么？",
+                        options: ["死亡回归", "元素操控", "预知未来", "瞬间移动"],
+                        correct: 0
+                    },
+                    {
+                        question: "《命运石之门》中，主角冈部伦太郎的称号是什么？",
+                        options: ["疯狂科学家", "时间旅行者", "未来预言者", "空间操控者"],
+                        correct: 0
+                    },
+                    {
+                        question: "《魔法少女小圆》中，丘比的真实身份是什么？",
+                        options: ["孵化者", "时间守护者", "魔法之神", "异世界使者"],
+                        correct: 0
+                    },
+                    {
+                        question: "《新世纪福音战士》中，初号机暴走时眼睛会变成什么颜色？",
+                        options: ["红色", "蓝色", "绿色", "紫色"],
+                        correct: 0
+                    },
+                    {
+                        question: "《钢之炼金术师》中，等价交换原则是什么？",
+                        options: ["要得到什么就必须付出同等的代价", "力量来自于内心的意志", "生命无法用任何东西交换", "炼金术可以创造一切"],
+                        correct: 0
+                    }
+                ];
                 
-                // 解析题库文本
-                const questionBlocks = text.split(/\n\s*\n/)
-                    .map(block => block.trim())
-                    .filter(block => block);
-                
-                // 解析每个问题块
-                const parsedQuestions = questionBlocks.map(block => {
-                    const lines = block.split('\n')
-                        .map(line => line.trim())
-                        .filter(line => line);
-                    
-                    if (lines.length < 3) return null;
-                    
-                    return {
-                        question: lines[0].replace(/^Q:\s*/, ''),
-                        options: lines[1].replace(/^A:\s*/, '').split(/\s*,\s*/),
-                        correct: parseInt(lines[2].replace(/^C:\s*/, ''), 10)
-                    };
-                }).filter(Boolean);
-                
-                return parsedQuestions;
+                return questions;
             } catch (error) {
                 console.error('题库加载失败:', error);
                 return [];
@@ -1210,6 +1286,48 @@
             return array;
         }
 
+        // 动态初始化Cusdis评论
+        function initCusdis(sectionId) {
+            const containerId = `cusdis-container-${sectionId}`;
+            const container = document.getElementById(containerId);
+            
+            if (!container) return;
+            
+            // 清除容器内容
+            container.innerHTML = '';
+            
+            // 创建Cusdis元素
+            const cusdisDiv = document.createElement('div');
+            cusdisDiv.id = `cusdis_thread_${sectionId}`;
+            cusdisDiv.setAttribute('data-host', 'https://cusdis.com');
+            cusdisDiv.setAttribute('data-app-id', '1792334e-8b6e-4709-b502-8a804fa417ff');
+            cusdisDiv.setAttribute('data-page-id', sectionId);
+            cusdisDiv.setAttribute('data-page-url', `https://ctyz-acgn.netlify.app/#${sectionId}`);
+            cusdisDiv.setAttribute('data-page-title', `长汀一中动漫社-${getSectionTitle(sectionId)}`);
+            cusdisDiv.setAttribute('data-theme', 'light');
+            cusdisDiv.setAttribute('data-lang', 'zh');
+            cusdisDiv.setAttribute('data-show-login', 'false');
+            
+            container.appendChild(cusdisDiv);
+            
+            // 初始化Cusdis
+            if (window.Cusdis) {
+                window.Cusdis.init();
+            }
+        }
+
+        // 获取区域标题
+        function getSectionTitle(sectionId) {
+            const titles = {
+                intro: '社团介绍',
+                activity: '最新活动',
+                rpg: '答题游戏',
+                resources: '资源分享',
+                about: '学校介绍'
+            };
+            return titles[sectionId] || sectionId;
+        }
+        
         // 栏目切换
         function showSection(sectionId) {
             document.querySelectorAll('.section').forEach(sec => {
@@ -1217,17 +1335,8 @@
             });
             document.getElementById(sectionId).style.display = 'block';
             
-            // 延迟初始化Cusdis评论系统
-            setTimeout(initCusdis, 300);
-        }
-
-        // Cusdis初始化函数
-        function initCusdis() {
-            if (typeof Cusdis !== 'undefined') {
-                Cusdis.init();
-            } else {
-                console.error('Cusdis not loaded');
-            }
+            // 初始化Cusdis评论
+            initCusdis(sectionId);
         }
 
         // 游戏初始状态
@@ -1254,7 +1363,7 @@
             
             document.getElementById('quest-title').textContent = "欢迎来到ACGN知识RPG！";
             document.getElementById('quest-description').textContent = 
-                "你是一名勇者，目标是击败魔王库洛姆。只有通过ACGN知识考验，才能成功挑战魔王！准备好了吗？";
+                "你是一名赤色杀人魔，目标是击败八云紫。只有通过ACGN知识考验，才能成功挑战八云紫！准备好了吗？";
         }
 
         // 开始游戏
@@ -1460,7 +1569,7 @@
             document.getElementById('question-area').style.display = 'none';
             
             if (isVictory) {
-                document.getElementById('quest-title').textContent = "胜利！你击败了魔王库洛姆！";
+                document.getElementById('quest-title').textContent = "胜利！你击败了八云紫！";
                 document.getElementById('quest-description').innerHTML = 
                     `恭喜你成功通关！`;
             } else {
@@ -1470,11 +1579,10 @@
                      不要灰心，收集更多ACGN知识，再次挑战吧！`;
             }
         }
-
+        
         // 初始化
         document.addEventListener('DOMContentLoaded', () => {
             showSection('intro');
-            initCusdis();
         });
     </script>
     
