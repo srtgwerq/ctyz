@@ -346,7 +346,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: 500;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 极 2px 5px rgba(0,0,0,0.1);
         }
         
         .option:hover {
@@ -735,10 +735,10 @@
 
                 <h4>手账本接力</h4>
                 <p>• <strong>文化传递</strong>：创作融合国风元素与校园生活的主题手账，搭建自我展示平台</p>
-                <p>• <strong>青春存档</极>：记录校园记忆（毕业季专题/节气文化/校园漫影），传递温暖正能量</p>
-                <p>• <极>成果展示</strong>：精选手账作品在B站专栏/官网永久展览</p>
+                <p>• <strong>青春存档</strong>：记录校园记忆（毕业季专题/节气文化/校园漫影），传递温暖正能量</p>
+                <p>• <strong>成果展示</strong>：精选手账作品在B站专栏/官网永久展览</p>
 
-                <h4>社员原创作品</h4>
+                <h4>社员原创作品</极>
                 <p>• 发布自制动画短片、插画、配音作品</p>
                 <p>• B站账号：长汀一中动漫社</p>
                 <p>• 官网网址：https://ctyz-acgn.netlify.app/（答题游戏/活动指南/资源分享）</p>
@@ -829,7 +829,7 @@
                     </div>
                 </a>
                 
-                <!-- 活动卡片 3 -->
+                <!-- 活动卡片 3 - FIXED: 修正结束标签 -->
                 <div class="activity-card">
                     <img src="assets/activities/picture3.jpg" class="activity-image" alt="动漫社手账本接力">
                     <div class="activity-content">
@@ -839,13 +839,13 @@
                             <span class="activity-location">📍 长汀一中新校区</span>
                         </div>
                         <p class="activity-description">社员可以在手账本上畅所欲言，展示自己</p>
-                    </极>
+                    </div> <!-- 修正为正确的结束标签 -->
                 </div>
                 
-                <!-- 活动卡片 4 -->
+                <!-- 活动卡片 4 - FIXED: 修正图片class -->
                 <a href="https://chouka.netlify.app/" class="activity-link" target="_blank">
                     <div class="activity-card">
-                        <img src="assets/activities/picture4.jpg" class="activity极mage" alt="动漫节活动">
+                        <img src="assets/activities/picture4.jpg" class="activity-image" alt="动漫节活动">
                         <div class="activity-content">
                             <h3 class="activity-title">长汀一中动漫社动漫节</h3>
                             <div class="activity-meta">
@@ -954,7 +954,7 @@
                         <div class="resource-back">
                             <h3 class="resource-title">TouchGal</h3>
                             <p class="resource-description">专注于Galgame资源分享，收录各类经典和最新视觉小说游戏。</p>
-                            <p>网址：https://www.touchgal.us/</p>
+                            <p>网址：https://www.touchgal.us/</极>
                             <a href="https://www.touchgal.us/" class="resource-link" target="_blank">访问网站</a>
                         </div>
                     </div>
@@ -1004,8 +1004,8 @@
             </div>
         </section>
         
-        <!-- ACGN知识RPG -->
-        <section id="rpg" class="section">
+        <!-- ACGN知识RPG - FIXED: 添加最小高度防止评论遮挡游戏 -->
+        <section id="rpg" class="section" style="min-height: 950px;">
             <h2 class="section-title">ACGN知识RPG：解决异变</h2>
             <p>扮演一位勇敢的赤色杀人魔，八云紫发动了异变，踏上征服八云紫的冒险之旅！每答对一道题可攻击敌人，答错会被敌人攻击。</p>
             
@@ -1260,7 +1260,7 @@
             
             document.getElementById('start-btn').style.display = 'none';
             document.getElementById('attack-btn').style.display = 'block';
-            document.getElementById('question-area').极yle.display = 'block';
+            document.getElementById('question-area').style.display = 'block';
             
             // 设置敌人图片
             document.getElementById('monster-character').style.backgroundImage = 
@@ -1464,4 +1464,3 @@
     </script>
 </body>
 </html>
-
