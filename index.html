@@ -22,7 +22,8 @@
             --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
-        * {
+        ▪ {
+
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -48,7 +49,6 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 
             width: 100%;
             height: 100%;
             z-index: -1;
@@ -248,7 +248,6 @@
             margin-bottom: 1.5rem;
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.25);
-            border: 3
             border: 3px solid #d4af37;
         }
         
@@ -279,7 +278,6 @@
         .health-bar {
             position: absolute;
             width: 200px;
-            height: 20
             height: 20px;
             background: #555;
             border-radius: 10px;
@@ -612,20 +610,12 @@
                 right: 20px;
             }
             
-
-            .monster {
-                width: 80px;
-                height: 100px;
-                right: 20px;
-            }
-            
             .health-bar {
                 width: 150px;
                 height: 16px;
             }
             
             .hero-health {
-                left: 20
                 left: 20px;
             }
             
@@ -681,6 +671,32 @@
             margin-top: 5px;
             color: #666;
         }
+        
+        /* 评论区域样式 */
+        .comments-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .comments-title {
+            font-size: 1.4rem;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+            position: relative;
+            padding-bottom: 8px;
+        }
+        
+        .comments-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--main-color);
+            border-radius: 2px;
+        }
     </style>
 </head>
 <body>
@@ -730,7 +746,6 @@
                 
                 <h3>📣 致家长的一封信</h3>
                 <p>我们理解您的关切，因此：</p>
-                <p>• 所有活动由校团委及社团干部指导</极客
                 <p>• 所有活动由校团委及社团干部指导</p>
                 <p>• 创作内容经社团干部审核</p>
                 <p>考上长汀一中，加入长汀一中动漫社，你将获得：</p>
@@ -743,10 +758,24 @@
                 <p>▸网站制作QQ：2789290042</p>
                 <p>▸社长QQ：2704168175</p>
                 <p>▸动漫社同好QQ群：858655372</p>
-                <p>▸ 关注B站：长汀一中动漫</p>
                 <p>▸ 关注B站：长汀一中动漫社</p>
                 <p>▸ 官网报名入口：https://ctyz-acgn.netlify.app/</p>
                 <p>指导老师：严老师 </p>
+            </div>
+            
+            <!-- 评论区域 -->
+            <div class="comments-section">
+                <h3 class="comments-title">评论交流</h3>
+                <div id="cusdis_thread_intro"
+                  data-host="https://cusdis.com"
+                  data-app-id="1792334e-8b6e-4709-b502-8a804fa417ff"
+                  data-page-id="intro"
+                  data-page-url="https://ctyz-acgn.netlify.app/#intro"
+                  data-page-title="长汀一中动漫社-社团介绍"
+                  data-theme="light"
+                  data-lang="zh"
+                  data-show-login="false"
+                ></div>
             </div>
         </section>
         
@@ -768,6 +797,21 @@
                 <p><strong>学风</strong>：勤学 巧思 善疑 贯通</p>
                 <p><strong>教风</strong>：民主 科学 严谨 鲜活</p> 
             </div>
+            
+            <!-- 评论区域 -->
+            <div class="comments-section">
+                <h3 class="comments-title">评论交流</h3>
+                <div id="cusdis_thread_about"
+                  data-host="https://cusdis.com"
+                  data-app-id="1792334e-8b6e-4709-b502-8a804fa417ff"
+                  data-page-id="about"
+                  data-page-url="https://ctyz-acgn.netlify.app/#about"
+                  data-page-title="长汀一中动漫社-学校介绍"
+                  data-theme="light"
+                  data-lang="zh"
+                  data-show-login="false"
+                ></div>
+            </div>
         </section>
         
         <!-- 最新活动 -->
@@ -786,7 +830,6 @@
                             </div>
                             <p class="activity-description">动漫《凉宫春日的忧郁》ed《晴天好心情》宅舞活动</p>
                         </div>
-                    </极客
                     </div>
                 </a>
                 
@@ -847,6 +890,21 @@
                         </div>
                     </div>
                 </a>
+            </div>
+            
+            <!-- 评论区域 -->
+            <div class="comments-section">
+                <h3 class="comments-title">评论交流</h3>
+                <div id="cusdis_thread_activity"
+                  data-host="https://cusdis.com"
+                  data-app-id="1792334e-8b6e-4709-b502-8a804fa417ff"
+                  data-page-id="activity"
+                  data-page-url="https://ctyz-acgn.netlify.app/#activity"
+                  data-page-title="长汀一中动漫社-最新活动"
+                  data-theme="light"
+                  data-lang="zh"
+                  data-show-login="false"
+                ></div>
             </div>
         </section>
         
@@ -966,6 +1024,21 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- 评论区域 -->
+            <div class="comments-section">
+                <h3 class="comments-title">评论交流</h3>
+                <div id="cusdis_thread_resources"
+                  data-host="https://cusdis.com"
+                  data-app-id="1792334e-8b6e-4709-b502-8a804fa417ff"
+                  data-page-id="resources"
+                  data-page-url="https://ctyz-acgn.netlify.app/#resources"
+                  data-page-title="长汀一中动漫社-资源分享"
+                  data-theme="light"
+                  data-lang="zh"
+                  data-show-login="false"
+                ></div>
+            </div>
         </section>
         
         <!-- ACGN知识RPG -->
@@ -975,31 +1048,31 @@
             
             <div class="rpg-game">
               <!-- 游戏场景部分 -->
-       <div class="game-scene">
-             <!-- 关卡指示器 -->
-           <div class="stage-indicator">关卡: <span id="stage-display">1</span>/5</div>
-    
-              <!-- 攻击力信息 -->
-              <div class="attack-info">攻击力: <span id="attack-power">15-30</span></div>
-    
-             <!-- 角色血条 -->
-              <div class="health-bar hero-health">
-           <div class="health-fill" id="hero-hp-bar"></div>
-            </div>
-            <div class="health-label hero-label">赤色杀人魔: <span id="hero-hp">100</span></div>
-    
-           <!-- 修改后的敌方血条部分 -->
-         <div class="health-bar monster-health">
-            <div class="health-fill" id="monster-hp-bar"></div>
-       </div>
-         <!-- 血条下方显示boss名称 -->
-          <div class="health-label monster-label"><span id="monster-name">敌人</span>: <span id="monster-hp">100</span></div>
-            <!-- 勇者形象 -->
-              <div class="character" id="hero-character"></div>
-    
-               <!-- 敌人形象 - 不再显示名称 -->
-          <div class="monster" id="monster-character"></div>
-             </div>
+              <div class="game-scene">
+                 <!-- 关卡指示器 -->
+                 <div class="stage-indicator">关卡: <span id="stage-display">1</span>/5</div>
+        
+                  <!-- 攻击力信息 -->
+                  <div class="attack-info">攻击力: <span id="attack-power">15-30</span></div>
+        
+                 <!-- 角色血条 -->
+                  <div class="health-bar hero-health">
+               <div class="health-fill" id="hero-hp-bar"></div>
+                </div>
+                <div class="health-label hero-label">赤色杀人魔: <span id="hero-hp">100</span></div>
+        
+               <!-- 修改后的敌方血条部分 -->
+             <div class="health-bar monster-health">
+                <div class="health-fill" id="monster-hp-bar"></div>
+           </div>
+             <!-- 血条下方显示boss名称 -->
+              <div class="health-label monster-label"><span id="monster-name">敌人</span>: <span id="monster-hp">100</span></div>
+                <!-- 勇者形象 -->
+                  <div class="character" id="hero-character"></div>
+        
+                   <!-- 敌人形象 - 不再显示名称 -->
+              <div class="monster" id="monster-character"></div>
+                 </div>
 
                 
                 <!-- 游戏状态/对话 -->
@@ -1021,6 +1094,21 @@
                     <button class="rpg-button blue" id="next-btn" style="display: none;" onclick="nextQuestion()">继续挑战</button>
                     <button class="rpg-button" id="restart-btn" style="display: none;" onclick="restartGame()">重新开始</button>
                 </div>
+            </div>
+            
+            <!-- 评论区域 -->
+            <div class="comments-section">
+                <h3 class="comments-title">评论交流</h3>
+                <div id="cusdis_thread_rpg"
+                  data-host="https://cusdis.com"
+                  data-app-id="1792334e-8b6e-4709-b502-8a804fa417ff"
+                  data-page-id="rpg"
+                  data-page-url="https://ctyz-acgn.netlify.app/#rpg"
+                  data-page-title="长汀一中动漫社-答题游戏"
+                  data-theme="light"
+                  data-lang="zh"
+                  data-show-login="false"
+                ></div>
             </div>
         </section>
     </div>
@@ -1128,6 +1216,18 @@
                 sec.style.display = 'none';
             });
             document.getElementById(sectionId).style.display = 'block';
+            
+            // 延迟初始化Cusdis评论系统
+            setTimeout(initCusdis, 300);
+        }
+
+        // Cusdis初始化函数
+        function initCusdis() {
+            if (typeof Cusdis !== 'undefined') {
+                Cusdis.init();
+            } else {
+                console.error('Cusdis not loaded');
+            }
         }
 
         // 游戏初始状态
@@ -1374,9 +1474,11 @@
         // 初始化
         document.addEventListener('DOMContentLoaded', () => {
             showSection('intro');
+            initCusdis();
         });
     </script>
+    
+    <!-- 引入Cusdis脚本 -->
+    <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
 </body>
 </html>
-
-
