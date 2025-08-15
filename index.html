@@ -85,6 +85,7 @@
         .nav-menu {
             display: flex;
             gap: 1.5rem;
+            flex-wrap: wrap;
         }
         
         .nav-item {
@@ -95,6 +96,7 @@
             color: white;
             transition: all 0.3s ease;
             white-space: nowrap;
+            font-weight: 500;
         }
         
         .nav-item:hover {
@@ -183,6 +185,7 @@
             display: flex;
             transition: transform 0.3s;
             flex-direction: column;
+            height: 100%;
         }
         
         .activity-card:hover { 
@@ -346,7 +349,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: 500;
-            box-shadow: 极 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         
         .option:hover {
@@ -557,6 +560,55 @@
             transform: translateY(-2px);
         }
         
+        /* 评论区域样式 */
+        .comments-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .comments-title {
+            font-size: 1.4rem;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+            position: relative;
+            padding-bottom: 8px;
+        }
+        
+        .comments-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--main-color);
+            border-radius: 2px;
+        }
+        
+        /* Cusdis 评论框样式 */
+        #cusdis_thread {
+            margin-top: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            height: auto !important;
+            max-height: none !important;
+        }
+        
+        .cusdis-comment-box {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        .cusdis-comment-list {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
         /* 响应式设计 */
         @media (max-width: 768px) {
             .header {
@@ -670,32 +722,6 @@
             margin-top: 5px;
             color: #666;
         }
-        
-        /* 评论区域样式 */
-        .comments-section {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-        }
-        
-        .comments-title {
-            font-size: 1.4rem;
-            color: var(--dark-color);
-            margin-bottom: 1rem;
-            position: relative;
-            padding-bottom: 8px;
-        }
-        
-        .comments-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: var(--main-color);
-            border-radius: 2px;
-        }
     </style>
 </head>
 <body>
@@ -738,7 +764,7 @@
                 <p>• <strong>青春存档</strong>：记录校园记忆（毕业季专题/节气文化/校园漫影），传递温暖正能量</p>
                 <p>• <strong>成果展示</strong>：精选手账作品在B站专栏/官网永久展览</p>
 
-                <h4>社员原创作品</极>
+                <h4>社员原创作品</h4>
                 <p>• 发布自制动画短片、插画、配音作品</p>
                 <p>• B站账号：长汀一中动漫社</p>
                 <p>• 官网网址：https://ctyz-acgn.netlify.app/（答题游戏/活动指南/资源分享）</p>
@@ -750,7 +776,7 @@
                 <p>考上长汀一中，加入长汀一中动漫社，你将获得：</p>
                 <p>• <strong>同好讨论</strong>：板绘/编剧/视频制作交流</p>
                 <p>• <strong>创意孵化</strong>：优秀作品展示</p>
-                <p>• <strong>自我成长</strong>：参与活动，获得管理组织经验</p>
+                <p>• <极>自我成长</strong>：参与活动，获得管理组织经验</p>
                 
                 <h3> 联结通道</h3>
         
@@ -762,10 +788,16 @@
                 <p>指导老师：严老师 </p>
             </div>
             
-            <!-- CommentBox.io 评论区域 -->
+            <!-- Cusdis 评论区域 -->
             <div class="comments-section">
                 <h3 class="comments-title">评论交流</h3>
-                <div class="commentbox" id="commentbox-intro"></div>
+                <div id="cusdis_thread"
+                  data-host="https://cusdis.com"
+                  data-app-id="1792334e-8b6e-4709-b502-8a804fa417ff"
+                  data-page-id="intro"
+                  data-page-url="{{ PAGE_URL }}"
+                  data-page-title="社团介绍"
+                ></div>
             </div>
         </section>
         
@@ -786,12 +818,6 @@
                 <p><strong>校风</strong>：求真 务实 践行 创新</p> 
                 <p><strong>学风</strong>：勤学 巧思 善疑 贯通</p>
                 <p><strong>教风</strong>：民主 科学 严谨 鲜活</p> 
-            </div>
-            
-            <!-- CommentBox.io 评论区域 -->
-            <div class="comments-section">
-                <h3 class="comments-title">评论交流</h3>
-                <div class="commentbox" id="commentbox-about"></div>
             </div>
         </section>
         
@@ -829,7 +855,7 @@
                     </div>
                 </a>
                 
-                <!-- 活动卡片 3 - FIXED: 修正结束标签 -->
+                <!-- 活动卡片 3 -->
                 <div class="activity-card">
                     <img src="assets/activities/picture3.jpg" class="activity-image" alt="动漫社手账本接力">
                     <div class="activity-content">
@@ -839,10 +865,10 @@
                             <span class="activity-location">📍 长汀一中新校区</span>
                         </div>
                         <p class="activity-description">社员可以在手账本上畅所欲言，展示自己</p>
-                    </div> <!-- 修正为正确的结束标签 -->
+                    </div>
                 </div>
                 
-                <!-- 活动卡片 4 - FIXED: 修正图片class -->
+                <!-- 活动卡片 4 -->
                 <a href="https://chouka.netlify.app/" class="activity-link" target="_blank">
                     <div class="activity-card">
                         <img src="assets/activities/picture4.jpg" class="activity-image" alt="动漫节活动">
@@ -871,12 +897,6 @@
                         </div>
                     </div>
                 </a>
-            </div>
-            
-            <!-- CommentBox.io 评论区域 -->
-            <div class="comments-section">
-                <h3 class="comments-title">评论交流</h3>
-                <div class="commentbox" id="commentbox-activity"></div>
             </div>
         </section>
         
@@ -954,7 +974,7 @@
                         <div class="resource-back">
                             <h3 class="resource-title">TouchGal</h3>
                             <p class="resource-description">专注于Galgame资源分享，收录各类经典和最新视觉小说游戏。</p>
-                            <p>网址：https://www.touchgal.us/</极>
+                            <p>网址：https://www.touchgal.us/</p>
                             <a href="https://www.touchgal.us/" class="resource-link" target="_blank">访问网站</a>
                         </div>
                     </div>
@@ -996,15 +1016,9 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- CommentBox.io 评论区域 -->
-            <div class="comments-section">
-                <h3 class="comments-title">评论交流</h3>
-                <div class="commentbox" id="commentbox-resources"></div>
-            </div>
         </section>
         
-        <!-- ACGN知识RPG - FIXED: 添加最小高度防止评论遮挡游戏 -->
+        <!-- ACGN知识RPG -->
         <section id="rpg" class="section" style="min-height: 950px;">
             <h2 class="section-title">ACGN知识RPG：解决异变</h2>
             <p>扮演一位勇敢的赤色杀人魔，八云紫发动了异变，踏上征服八云紫的冒险之旅！每答对一道题可攻击敌人，答错会被敌人攻击。</p>
@@ -1058,12 +1072,6 @@
                     <button class="rpg-button" id="restart-btn" style="display: none;" onclick="restartGame()">重新开始</button>
                 </div>
             </div>
-            
-            <!-- CommentBox.io 评论区域 -->
-            <div class="comments-section">
-                <h3 class="comments-title">评论交流</h3>
-                <div class="commentbox" id="commentbox-rpg"></div>
-            </div>
         </section>
     </div>
     
@@ -1079,20 +1087,10 @@
         </div>
     </footer>
     
-    <!-- CommentBox.io 脚本 -->
-    <script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script>
+    <!-- Cusdis 脚本 -->
+    <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+    
     <script>
-        // 初始化CommentBox.io
-        commentBox('5718864172154880-proj', {
-            className: 'commentbox',
-            defaultBoxId: 'commentbox',
-            createBoxUrl: function(boxId, pageLocation) {
-                pageLocation.search = '';
-                pageLocation.hash = boxId;
-                return pageLocation.href;
-            }
-        });
-        
         // 全局变量
         let heroHP = 100;
         let monsterHP = 100;
@@ -1372,7 +1370,7 @@
                     // 加载新敌人
                     monsterHP = stages[currentStage-1].hp;
                     document.getElementById('monster-hp').textContent = monsterHP;
-                    document.getElementById('monster-hp-bar').style.width = '100%';
+                    document.getElementById('monster-h极-bar').style.width = '100%';
                     
                     // 更新敌人图片
                     document.getElementById('monster-character').style.backgroundImage = 
@@ -1465,4 +1463,3 @@
     </script>
 </body>
 </html>
-
