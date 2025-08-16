@@ -12,8 +12,240 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-    <script src="https://unpkg.com/valine@1.5.1/dist/Valine.min.js"></script>
+    <!-- 替换为Twikoo的CSS -->
     <style>
+      /* 添加Twikoo评论区图片优化代码 */
+      /* ========================twikoo美化====================== */
+      /* 隐藏评论者头像 */
+      #twikoo .tk-comments .tk-submit .tk-avatar.tk-has-avatar {
+        display: none;
+      }
+
+      /* 下面表情和按钮那一栏的设置 */
+      #twikoo .tk-comments .tk-submit .tk-row.actions {
+        margin-bottom: 0;
+        margin-left: 0;
+      }
+
+      /* 个人信息和文本输入之间的空位置 */
+      .tk-main .tk-submit .tk-col .tk-meta-input,
+      #twikoo .tk-comments .tk-submit .tk-col .tk-meta-input {
+        margin-bottom: 16px;
+      }
+
+      /* 直接固定高度，解决提交按钮有时高度不起作用的问题 */
+      .tk-row.actions button.el-button {
+        height: 32px;
+      }
+
+      /* 解决图片大小超出范围问题 */
+      .tk-main .tk-content img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      /* 输入框动态背景过渡效果 */
+      .twikoo .el-input__inner,
+      .twikoo .el-textarea__inner {
+        transition: background-position-y 0.3s ease-in-out !important;
+        background-repeat: no-repeat;
+      }
+
+      /* 焦点状态背景位移 */
+      .twikoo .el-input__inner:focus,
+      .twikoo .el-textarea__inner:focus {
+        background-position-y: 100% !important; /* 更灵活的百分比定位 */
+      }
+
+      /* 文本域背景适配 */
+      .tk-input .el-textarea__inner {
+        background-size: contain;
+        background-position: right bottom; /* 建议添加定位 */
+      }
+
+      /* 圆角设置 */
+      .tk-meta-input input {
+        border-top-right-radius: 12px;
+        border-bottom-right-radius: 12px;
+      }
+
+      .tk-meta-input div {
+        border-top-left-radius: 12px;
+        border-bottom-left-radius: 12px;
+      }
+
+      /* 输入框样式 */
+      .tk-input.el-textarea textarea {
+        border-radius: 12px;
+        min-height: 150px !important;
+        height: auto;
+      }
+
+      /* 宽度太窄的时候去掉预览按钮 */
+      @media screen and (max-width: 420px) {
+        .tk-main
+          .tk-submit
+          .tk-row.actions
+          button.el-button.tk-preview.el-button--default.el-button--small {
+          display: none;
+        }
+      }
+
+      :root {
+        --liushen-radius: 12px;
+        --liushen-card-border-width: 1px;
+      }
+
+      /* 浅色模式颜色 */
+      [data-theme="light"] {
+        --liushen-border-color: #e3e8f7;
+        --liushen-card-bg: #fff;
+        --liushen-card-border: #e3e8f7;
+        --style-border-always: 1px solid var(--liushen-card-border);
+        --liushen-blue: #425aef;
+      }
+
+      /* 深色模式颜色 */
+      [data-theme="dark"] {
+        --liushen-border-color: #42444a;
+        --liushen-card-bg: #2c2c2c;
+        --liushen-card-border: #42444a;
+        --style-border-always: 1px solid var(--liushen-card-border);
+        --liushen-blue: #0084ff;
+      }
+
+      /* 评论区评论大框 */
+      .twikoo .tk-comments-container > .tk-comment,
+      .twikoo .tk-comments .tk-submit {
+        /* 内边距 */
+        padding: 20px;
+        margin-top: 0px;
+        margin-bottom: 20px;
+        /* 圆角 */
+        border-radius: var(--liushen-radius);
+        /* 背景颜色 */
+        background: var(--liushen-card-bg);
+        /* 变动动画时长 */
+        transition: 0.3s;
+      }
+
+      /* 浅色模式评论区评论大框 */
+      [data-theme="light"] .twikoo .tk-comments-container > .tk-comment,
+      .twikoo .tk-comments .tk-submit {
+        /* 阴影 */
+        box-shadow: var(--card-box-shadow);
+      }
+
+      /* 浅色模式评论区评论大框阴影悬浮加深 */
+      [data-theme="light"] .twikoo .tk-comments-container > .tk-comment:hover,
+      .twikoo .tk-comments .tk-submit:hover {
+        /* 阴影（浅色模式突出层次感） */
+        box-shadow: var(--card-hover-box-shadow);
+      }
+
+      /* 黑暗模式评论区评论大框 */
+      [data-theme="dark"] .twikoo .tk-comments-container > .tk-comment,
+      .twikoo .tk-comments .tk-submit {
+        /* 边框样式 */
+        border-style: solid;
+        /* 边框宽度 */
+        border-width: var(--liushen-card-border-width);
+        /* 边框颜色 */
+        border-color: var(--liushen-card-border);
+      }
+
+      /* 设备信息 */
+      .twikoo .tk-extra {
+        /* 圆角 */
+        border-radius: var(--liushen-radius);
+        /* 背景颜色 */
+        background: var(--liushen-card-bg);
+        /* 内边距 */
+        padding: 0.4rem;
+        /* 底边距 */
+        margin-bottom: 1rem;
+        /* 变动动画时长 */
+        transition: 0.3s;
+      }
+
+      /* 浅色模式设备信息 */
+      [data-theme="light"] .twikoo .tk-extra {
+        /* 阴影 */
+        box-shadow: var(--card-box-shadow);
+      }
+
+      /* 浅色模式设备信息阴影悬浮加深 */
+      [data-theme="light"] .twikoo .tk-extra:hover {
+        /* 阴影 */
+        box-shadow: var(--card-hover-box-shadow);
+      }
+
+      /* 黑暗模式设备信息 */
+      [data-theme="dark"] .twikoo .tk-extra {
+        /* 边框样式 */
+        border-style: solid;
+        /* 边框宽度 */
+        border-width: var(--liushen-card-border-width);
+        /* 边框颜色 */
+        border-color: var(--liushen-card-border);
+      }
+
+      /* 加载更多按钮 */
+      .twikoo .tk-expand {
+        /* 圆角 */
+        border-radius: var(--liushen-radius);
+      }
+
+      /* 浅色模式加载更多按钮 */
+      [data-theme="light"] .twikoo .tk-expand {
+        /* 阴影 */
+        box-shadow: var(--card-box-shadow);
+      }
+
+      /* 浅色模式加载更多按钮（鼠标悬浮时） */
+      [data-theme="light"] .twikoo .tk-expand:hover {
+        /* 阴影 */
+        box-shadow: var(--card-hover-box-shadow);
+        /* 背景颜色 */
+        background-color: var(--btn-bg);
+      }
+
+      /* 黑暗模式加载更多按钮（鼠标悬浮时） */
+      [data-theme="dark"] .twikoo .tk-expand:hover {
+        /* 背景颜色 */
+        background-color: var(--liushen-blue);
+      }
+
+      /* 黑暗模式加载更多按钮 */
+      [data-theme="dark"] .twikoo .tk-expand {
+        /* 边框样式 */
+        border-style: solid;
+        /* 边框宽度 */
+        border-width: var(--liushen-card-border-width);
+        /* 边框颜色 */
+        border-color: var(--liushen-card-border);
+      }
+
+      /* 分类卡片移动端个人信息卡片只显示两个 */
+      @media screen and (max-width: 570px) {
+        .tk-main .tk-extras {
+          display: none;
+        }
+      }
+
+      /* 评论区按钮样式 */
+      .tk-row.actions button.el-button {
+        border-radius: 12px !important;
+      }
+
+      /* 由于twikoo内部函数不宜修改，为了合适，去掉弹窗中的刷新按钮，该部分不需要，这是为了适配右键回复弹窗的内容的
+      #popup #twikoo .tk-comments .tk-comments-container .tk-comments-title > span:nth-child(2) > span:nth-child(1) {
+          display: none;
+      } */
+
+      /* ========================twikoo美化====================== */
+
+      /* 原有样式保持不变 */
       :root {
         --main-color: #ff6b6b;
         --secondary-color: #6a6bff;
@@ -590,110 +822,8 @@
         backdrop-filter: blur(8px);
       }
 
-      #vcomments {
+      #twikoo {
         margin-top: 1.5rem;
-      }
-
-      .vpanel {
-        background: rgba(255, 255, 255, 0.8);
-        padding: 1.5rem;
-        border-radius: 12px;
-        margin-bottom: 1rem;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
-      }
-
-      .vheader {
-        display: flex;
-        align-items: center;
-        margin-bottom: 1rem;
-      }
-
-      .vheader img {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        object-fit: cover;
-        margin-right: 1rem;
-      }
-
-      .vnick {
-        font-weight: 600;
-        color: var(--secondary-color);
-      }
-
-      .vtime {
-        font-size: 0.85rem;
-        color: #666;
-        margin-left: 1rem;
-      }
-
-      .vcontent {
-        line-height: 1.6;
-        color: #444;
-      }
-
-      .reply-btn {
-        color: var(--secondary-color);
-        cursor: pointer;
-        font-size: 0.9rem;
-        margin-top: 0.8rem;
-        display: inline-block;
-      }
-
-      .reply-btn:hover {
-        text-decoration: underline;
-      }
-
-      .vempty {
-        text-align: center;
-        padding: 2rem;
-        color: #666;
-      }
-
-      .loading-comments {
-        text-align: center;
-        padding: 2rem;
-        color: #666;
-        font-size: 1.1rem;
-      }
-
-      /* 评论状态提示 */
-      .comment-status {
-        margin: 1rem 0;
-        padding: 10px;
-        border-radius: 8px;
-        text-align: center;
-        font-weight: 500;
-      }
-
-      .comment-posting {
-        background-color: #e3f2fd;
-        color: #1976d2;
-      }
-
-      .comment-success {
-        background-color: #e8f5e9;
-        color: #2e7d32;
-      }
-
-      .comment-error {
-        background-color: #ffebee;
-        color: #c62828;
-      }
-
-      .retry-button {
-        margin-top: 1rem;
-        padding: 8px 16px;
-        background: var(--main-color);
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
-
-      .retry-button:hover {
-        background: #e55a5a;
       }
 
       /* 响应式设计 */
@@ -890,149 +1020,6 @@
         </div>
       </section>
 
-      <!-- ACGN知识RPG -->
-      <section id="rpg" class="section">
-        <h2 class="section-title">ACGN知识RPG：解决异变</h2>
-        <p>
-          扮演一位勇敢的赤色杀人魔，八云紫发动了异变，踏上征服八云紫的冒险之旅！每答对一道题可攻击敌人，答错会被敌人攻击。
-        </p>
-
-        <div class="rpg-game">
-          <!-- 游戏场景部分 -->
-          <div class="game-scene">
-            <!-- 关卡指示器 -->
-            <div class="stage-indicator">
-              关卡: <span id="stage-display">1</span>/5
-            </div>
-
-            <!-- 攻击力信息 -->
-            <div class="attack-info">
-              攻击力: <span id="attack-power">15-30</span>
-            </div>
-
-            <!-- 角色血条 -->
-            <div class="health-bar hero-health">
-              <div class="health-fill" id="hero-hp-bar"></div>
-            </div>
-            <div class="health-label hero-label">
-              赤色杀人魔: <span id="hero-hp">100</span>
-            </div>
-
-            <!-- 修改后的敌方血条部分 -->
-            <div class="health-bar monster-health">
-              <div class="health-fill" id="monster-hp-bar"></div>
-            </div>
-            <!-- 血条下方显示boss名称 -->
-            <div class="health-label monster-label">
-              <span id="monster-name">敌人</span>:
-              <span id="monster-hp">100</span>
-            </div>
-            <!-- 勇者形象 -->
-            <div class="character" id="hero-character"></div>
-
-            <!-- 敌人形象 - 不再显示名称 -->
-            <div class="monster" id="monster-character"></div>
-          </div>
-
-          <!-- 游戏状态/对话 -->
-          <div class="quest-box">
-            <h3 id="quest-title">欢迎来到ACGN知识RPG！</h3>
-            <p id="quest-description">
-              你是一名赤色杀人魔，目标是击败八云紫。只有通过ACGN知识考验，才能成功挑战八云紫！准备好了吗？
-            </p>
-          </div>
-
-          <!-- 当前问题 -->
-          <div class="quest-box" id="question-area" style="display: none">
-            <h3 id="question-text"></h3>
-            <div class="options" id="options-container"></div>
-          </div>
-
-          <!-- 游戏操作按钮 -->
-          <div class="action-buttons">
-            <button
-              class="rpg-button green"
-              id="start-btn"
-              onclick="startGame()"
-            >
-              开始冒险
-            </button>
-            <button
-              class="rpg-button"
-              id="attack-btn"
-              style="display: none"
-              onclick="answerQuestion()"
-            >
-              攻击敌人
-            </button>
-            <button
-              class="rpg-button blue"
-              id="next-btn"
-              style="display: none"
-              onclick="nextQuestion()"
-            >
-              继续挑战
-            </button>
-            <button
-              class="rpg-button"
-              id="restart-btn"
-              style="display: none"
-              onclick="restartGame()"
-            >
-              重新开始
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <!-- 评论留言部分 -->
-      <section id="comments" class="section" style="display: none">
-        <h2 class="section-title">留言评论</h2>
-        <div class="comments-section">
-          <div class="loading-comments">
-            <i class="fas fa-spinner fa-spin"></i> 正在加载评论系统...
-          </div>
-          <div class="comment-error" style="display: none">
-            <p id="error-message">评论系统加载失败，请检查网络连接或稍后再试</p>
-            <button class="retry-button" onclick="initCommentSystem()">
-              重新加载
-            </button>
-          </div>
-          <div
-            id="comment-status"
-            class="comment-status"
-            style="display: none"
-          ></div>
-          <div id="vcomments"></div>
-        </div>
-      </section>
-
-      <!-- 关于长汀一中 -->
-      <section id="about" class="section" style="display: none">
-        <h2 class="section-title">福建省长汀第一中学</h2>
-        <div class="section-content">
-          <p>
-            福建省长汀第一中学（简称长汀一中）创办于1904年，前身为建于1681年的龙山书院，历经汀郡中学堂、汀州中学校、福建省立七中、长汀第一中学等校名更迭，弦歌不断，不易校址。1956年，学校被确认为省重点中学。2005年3月，经省教育厅确认为"福建省一级达标学校"。
-          </p>
-
-          <h3>历史传承</h3>
-          <p>
-            学校办学110多年来，秉承历史文化和客家文化的优良传统，历经土地革命的洗礼、厦门大学内迁的润泽，逐渐形成了清纯厚重的文化底蕴、爱国至上的光荣传统、自强不息的奋斗精神、民主鲜活的教风学风。
-          </p>
-
-          <h3>杰出校友</h3>
-          <p>
-            学校培养了初、高中毕业生共六万余人，他们遍布五洲四海，立勋军政学商。著名校友有杨成武上将、刘亚楼上将等六位共和国将军，张存浩（2013年度国家最高科学技术奖获得者）、王业键两院士等大批科技精英。
-          </p>
-
-          <h3>办学思想</h3>
-          <p><strong>校训</strong>：厚德 重思 至善 日新</p>
-          <p><strong>校风</strong>：求真 务实 践行 创新</p>
-          <p><strong>学风</strong>：勤学 巧思 善疑 贯通</p>
-          <p><strong>教风</strong>：民主 科学 严谨 鲜活</p>
-        </div>
-      </section>
-
       <!-- 最新活动 -->
       <section id="activity" class="section" style="display: none">
         <h2 class="section-title">最新活动</h2>
@@ -1153,6 +1140,144 @@
               </div>
             </div>
           </a>
+        </div>
+      </section>
+
+      <!-- ACGN知识RPG - 移动到最新活动下方 -->
+      <section id="rpg" class="section">
+        <h2 class="section-title">ACGN知识RPG：解决异变</h2>
+        <p>
+          扮演一位勇敢的赤色杀人魔，八云紫发动了异变，踏上征服八云紫的冒险之旅！每答对一道题可攻击敌人，答错会被敌人攻击。
+        </p>
+
+        <div class="rpg-game">
+          <!-- 游戏场景部分 -->
+          <div class="game-scene">
+            <!-- 关卡指示器 -->
+            <div class="stage-indicator">
+              关卡: <span id="stage-display">1</span>/5
+            </div>
+
+            <!-- 攻击力信息 -->
+            <div class="attack-info">
+              攻击力: <span id="attack-power">15-30</span>
+            </div>
+
+            <!-- 角色血条 -->
+            <div class="health-bar hero-health">
+              <div class="health-fill" id="hero-hp-bar"></div>
+            </div>
+            <div class="health-label hero-label">
+              赤色杀人魔: <span id="hero-hp">100</span>
+            </div>
+
+            <!-- 修改后的敌方血条部分 -->
+            <div class="health-bar monster-health">
+              <div class="health-fill" id="monster-hp-bar"></div>
+            </div>
+            <!-- 血条下方显示boss名称 -->
+            <div class="health-label monster-label">
+              <span id="monster-name">敌人</span>:
+              <span id="monster-hp">100</span>
+            </div>
+            <!-- 勇者形象 -->
+            <div class="character" id="hero-character"></div>
+
+            <!-- 敌人形象 - 不再显示名称 -->
+            <div class="monster" id="monster-character"></div>
+          </div>
+
+          <!-- 游戏状态/对话 -->
+          <div class="quest-box">
+            <h3 id="quest-title">欢迎来到ACGN知识RPG！</h3>
+            <p id="quest-description">
+              你是一名赤色杀人魔，目标是击败八云紫。只有通过ACGN知识考验，才能成功挑战八云紫！准备好了吗？
+            </p>
+          </div>
+
+          <!-- 当前问题 -->
+          <div class="quest-box" id="question-area" style="display: none">
+            <h3 id="question-text"></h3>
+            <div class="options" id="options-container"></div>
+          </div>
+
+          <!-- 游戏操作按钮 -->
+          <div class="action-buttons">
+            <button
+              class="rpg-button green"
+              id="start-btn"
+              onclick="startGame()"
+            >
+              开始冒险
+            </button>
+            <button
+              class="rpg-button"
+              id="attack-btn"
+              style="display: none"
+              onclick="answerQuestion()"
+            >
+              攻击敌人
+            </button>
+            <button
+              class="rpg-button blue"
+              id="next-btn"
+              style="display: none"
+              onclick="nextQuestion()"
+            >
+              继续挑战
+            </button>
+            <button
+              class="rpg-button"
+              id="restart-btn"
+              style="display: none"
+              onclick="restartGame()"
+            >
+              重新开始
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 评论留言部分 -->
+      <section id="comments" class="section" style="display: none">
+        <h2 class="section-title">留言评论</h2>
+        <div class="comments-section">
+          <div class="loading-comments">
+            <i class="fas fa-spinner fa-spin"></i> 正在加载评论系统...
+          </div>
+          <div class="comment-error" style="display: none">
+            <p id="error-message">评论系统加载失败，请检查网络连接或稍后再试</p>
+            <button class="retry-button" onclick="initCommentSystem()">
+              重新加载
+            </button>
+          </div>
+          <div id="twikoo"></div>
+        </div>
+      </section>
+
+      <!-- 关于长汀一中 -->
+      <section id="about" class="section" style="display: none">
+        <h2 class="section-title">福建省长汀第一中学</h2>
+        <div class="section-content">
+          <p>
+            福建省长汀第一中学（简称长汀一中）创办于1904年，前身为建于1681年的龙山书院，历经汀郡中学堂、汀州中学校、福建省立七中、长汀第一中学等校名更迭，弦歌不断，不易校址。1956年，学校被确认为省重点中学。2005年3月，经省教育厅确认为"福建省一级达标学校"。
+          </p>
+
+          <h3>历史传承</h3>
+          <p>
+            学校办学110多年来，秉承历史文化和客家文化的优良传统，历经土地革命的洗礼、厦门大学内迁的润泽，逐渐形成了清纯厚重的文化底蕴、爱国至上的光荣传统、自强不息的奋斗精神、民主鲜活的教风学风。
+          </p>
+
+          <h3>杰出校友</h3>
+          <p>
+            学校培养了初、高中毕业生共六万余人，他们遍布五洲四海，立勋军政学商。著名校友有杨成武上将、刘亚楼上将等六位共和国将军，张存浩（2013年度国家最高科学技术奖获得者）、王业键两院士等大批科技精英。
+          </p>
+
+          <h3>办学思想</h3>
+          <p><strong>校训</strong>：厚德 重思 至善 日新</p>
+          <p><strong>校风</strong>：求真 务实 践行 创新</p>
+          <p><strong>学风</strong>：勤学 巧思 善疑 贯通</p>
+          <p><strong>教风</strong>：民主 科学 严谨 鲜活</p>
         </div>
       </section>
 
@@ -1335,6 +1460,9 @@
       <div class="footer-copyright">© 2025 长汀一中动漫社·幻想次元部</div>
     </footer>
 
+    <!-- 引入Twikoo JS -->
+    <script src="https://cdn.staticfile.org/twikoo/1.6.7/twikoo.all.min.js"></script>
+
     <script>
       // 全局变量
       let heroHP = 100;
@@ -1344,7 +1472,7 @@
       let currentStage = 1;
       let baseAttack = 15;
       let allQuestions = [];
-      let valineInitialized = false;
+      let twikooInitialized = false;
 
       // 五个关卡配置（四天王+魔王）
       const stages = [
@@ -1433,8 +1561,8 @@
         });
         document.getElementById(sectionId).style.display = "block";
 
-        // 当显示评论区域时初始化Valine
-        if (sectionId === "comments" && !valineInitialized) {
+        // 当显示评论区域时初始化Twikoo
+        if (sectionId === "comments" && !twikooInitialized) {
           initCommentSystem();
         }
       }
@@ -1717,89 +1845,28 @@
         }
       }
 
-      // 初始化Valine评论系统
+      // 初始化Twikoo评论系统
       function initCommentSystem() {
         try {
           // 显示加载状态
           document.querySelector(".loading-comments").style.display = "block";
           document.querySelector(".comment-error").style.display = "none";
-          document.getElementById("comment-status").style.display = "none";
 
-          // 检查LeanCloud应用ID和Key
-          const appId = "fGXlR6aDiXqblhuP1qqhRVcF-MdYXbMMI";
-          const appKey = "X7Wl9jjvjpg6fiLUVCYmAJL5";
-
-          if (!appId || !appKey || appId.length < 10 || appKey.length < 10) {
-            throw new Error("LeanCloud应用配置不正确");
-          }
-
-          // 尝试初始化Valine
-          window.valine = new Valine({
-            el: "#vcomments",
-            appId: appId,
-            appKey: appKey,
-            avatar: "retro",
-            placeholder: "发表你的想法...",
-            path: window.location.pathname,
-            recordIP: false,
+          // 初始化Twikoo
+          twikoo.init({
+            envId: "https://wohu.netlify.app/.netlify/functions/twikoo",
+            el: "#twikoo",
             lang: "zh-CN",
-            serverURLs: "https://fgxlr6ad.api.lncldglobal.com", // 替换为你的REST API地址
-            enableQQ: false, // 禁用失效的地理位置服务
-            visitor: false, // 关闭访问量统计（避免额外请求）
+            path: window.location.pathname,
+            onCommentLoaded: function () {
+              // 评论加载完成后隐藏加载提示
+              document.querySelector(".loading-comments").style.display =
+                "none";
+              twikooInitialized = true;
+            },
           });
-
-          // 添加评论提交状态提示
-          if (window.valine) {
-            // 获取Valine实例的Comment对象
-            const comment = window.valine.Comment;
-            if (comment) {
-              // 保存原submit方法
-              const originalSubmit = comment.prototype.submit;
-              // 重写submit方法
-              comment.prototype.submit = function () {
-                // 显示提交状态
-                const statusEl = document.getElementById("comment-status");
-                if (statusEl) {
-                  statusEl.style.display = "block";
-                  statusEl.className = "comment-status comment-posting";
-                  statusEl.innerHTML =
-                    '<i class="fas fa-spinner fa-spin"></i> 正在提交评论...';
-                }
-                // 调用原方法
-                return originalSubmit
-                  .apply(this, arguments)
-                  .then(() => {
-                    // 提交成功
-                    if (statusEl) {
-                      statusEl.className = "comment-status comment-success";
-                      statusEl.innerHTML =
-                        '<i class="fas fa-check-circle"></i> 评论提交成功！等待审核显示';
-                      // 5秒后清除状态
-                      setTimeout(() => {
-                        statusEl.style.display = "none";
-                      }, 5000);
-                    }
-                  })
-                  .catch((error) => {
-                    // 提交失败
-                    if (statusEl) {
-                      statusEl.className = "comment-status comment-error";
-                      statusEl.innerHTML = `<i class="fas fa-exclamation-circle"></i> 提交失败: ${
-                        error.message || "未知错误"
-                      }`;
-                    }
-                  });
-              };
-            }
-          }
-
-          // 隐藏加载状态
-          setTimeout(() => {
-            document.querySelector(".loading-comments").style.display = "none";
-            valineInitialized = true;
-          }, 1000);
         } catch (error) {
-          console.error("Valine初始化失败:", error);
+          console.error("Twikoo初始化失败:", error);
           // 显示错误信息
           document.querySelector(".loading-comments").style.display = "none";
           document.querySelector(".comment-error").style.display = "block";
