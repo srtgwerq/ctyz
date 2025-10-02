@@ -1917,6 +1917,7 @@
         
         (async () => {
           // 解决图片跨域问题
+          if (screen.width < 768) return;
           const OriginalImage = window.Image;
           window.Image = function(...args) {
             const img = new OriginalImage(...args);
@@ -1952,6 +1953,7 @@
     </script>
   </body>
 </html>
+
 
 
 
