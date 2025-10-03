@@ -1061,12 +1061,7 @@
 
           <p>▸网站制作QQ：2789290042 | 3573377380</p>
           <p>▸社长QQ：2704168175</p>
-          <p>▸动漫社同好QQ群：<a
-                         href="https://qm.qq.com/q/OjDwcJJvEG"
-                         target="_blank"
-                         class="example-link basic-link">858655372</a
-           >
-          </p>
+          <p>▸动漫社同好QQ群：858655372</p>
           <p>
             ▸ 关注B站：<a
               href="https://space.bilibili.com/45868919"
@@ -2016,40 +2011,35 @@
         ""
       );
     </script>
-<script>
-  async function loadMusic() {
-    const repoOwner = "srtgwerq";   // 你的 GitHub 用户名
-    const repoName = "ctyz";        // 你的仓库名
-    const path = "music";           // 仓库里的文件夹
-    const branch = "main";          // 分支名（如果仓库默认是 master，这里要改成 "master"）
+    <script>
+      async function loadMusic() {
+        const repoOwner = "srtgwerq"; // 你的 GitHub 用户名
+        const repoName = "ctyz"; // 你的仓库名
+        const path = "music"; // 仓库里的文件夹
+        const branch = "main"; // 分支名（如果仓库默认是 master，这里要改成 "master"）
 
-    const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}?ref=${branch}`;
-    const response = await fetch(apiUrl);
-    const files = await response.json();
+        const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}?ref=${branch}`;
+        const response = await fetch(apiUrl);
+        const files = await response.json();
 
-    const audioList = files
-      .filter(f => f.name.endsWith(".mp3"))
-      .map(f => ({
-        name: f.name.replace(".mp3", ""),  // 用文件名当歌名
-        artist: "未知",
-        url: `https://raw.githubusercontent.com/${repoOwner}/${repoName}/${branch}/${path}/${f.name}`, 
-        cover: "https://via.placeholder.com/150"  // 你可以换成固定封面图
-      }));
+        const audioList = files
+          .filter((f) => f.name.endsWith(".mp3"))
+          .map((f) => ({
+            name: f.name.replace(".mp3", ""), // 用文件名当歌名
+            artist: "未知",
+            url: `https://ctyz-acgn.netlify.app/${path}/${f.name}`,
+            cover: "https://via.placeholder.com/150", // 你可以换成固定封面图
+          }));
 
-    new APlayer({
-      container: document.getElementById("aplayer"),
-      fixed: true,
-      autoplay: false,
-      audio: audioList
-    });
-  }
-
-  loadMusic();
-</script>
+        new APlayer({
+          container: document.getElementById("aplayer"),
+          fixed: true,
+          autoplay: false,
+          audio: audioList,
+        });
       }
 
       loadMusic();
     </script>
   </body>
 </html>
-
