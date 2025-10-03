@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>长汀一中动漫社-幻想次元部 | ACGN知识RPG</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"
+    />
     <!-- 引入 APlayer 和 MetingJS JS -->
     <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
@@ -963,7 +966,13 @@
         <div class="nav-item" onclick="showSection('resources')">资源分享</div>
         <div class="nav-item" onclick="showSection('comments')">留言评论</div>
         <div class="nav-item" onclick="showSection('about')">关于长汀一中</div>
-        <div class="nav-item"><a href="https://github.com/srtgwerq/ctyz/raw/refs/heads/main/%E9%95%BF%E6%B1%80%E4%B8%80%E4%B8%AD%E5%8A%A8%E6%BC%AB%E7%A4%BE_1.0_20251002_200418_mod_sign.apk" class="styled-link">下载apk</a></div>
+        <div class="nav-item">
+          <a
+            href="https://github.com/srtgwerq/ctyz/raw/refs/heads/main/%E9%95%BF%E6%B1%80%E4%B8%80%E4%B8%AD%E5%8A%A8%E6%BC%AB%E7%A4%BE_1.0_20251002_200418_mod_sign.apk"
+            class="styled-link"
+            >下载apk</a
+          >
+        </div>
       </nav>
     </header>
 
@@ -985,17 +994,28 @@
           <h3>社团特色活动亮点</h3>
 
           <h4>手账本接力</h4>
-          <p>•
-            <strong>文化传递</strong>：创作融合国风元素与校园生活的主题手账，搭建自我展示平台
+          <p>
+            •
+            <strong>文化传递</strong
+            >：创作融合国风元素与校园生活的主题手账，搭建自我展示平台
           </p>
-          <p>•
-            <strong>青春存档</strong>：记录校园记忆（毕业季专题/节气文化/校园漫影），传递温暖正能量
+          <p>
+            •
+            <strong>青春存档</strong
+            >：记录校园记忆（毕业季专题/节气文化/校园漫影），传递温暖正能量
           </p>
           <p>• <strong>成果展示</strong>：精选手账作品在B站专栏/官网永久展览</p>
 
           <h4>社员原创作品</h4>
           <p>• 发布自制动画短片、插画、配音作品</p>
-          <p>• B站账号：<a href="https://space.bilibili.com/45868919" target="_blank" class="example-link basic-link">长汀一中动漫社</a></p>
+          <p>
+            • B站账号：<a
+              href="https://space.bilibili.com/45868919"
+              target="_blank"
+              class="example-link basic-link"
+              >长汀一中动漫社</a
+            >
+          </p>
 
           <h3>📣 致家长的一封信</h3>
           <p>我们理解您的关切，因此：</p>
@@ -1011,7 +1031,14 @@
           <p>▸网站制作QQ：2789290042 | 3573377380</p>
           <p>▸社长QQ：2704168175</p>
           <p>▸动漫社同好QQ群：858655372</p>
-          <p>▸ 关注B站：<a href="https://space.bilibili.com/45868919" target="_blank" class="example-link basic-link">长汀一中动漫社</a></p>
+          <p>
+            ▸ 关注B站：<a
+              href="https://space.bilibili.com/45868919"
+              target="_blank"
+              class="example-link basic-link"
+              >长汀一中动漫社</a
+            >
+          </p>
           <p>指导老师：严老师</p>
         </div>
       </section>
@@ -1020,7 +1047,6 @@
       <section id="activity" class="section" style="display: none">
         <h2 class="section-title">最新活动</h2>
         <div class="activities-container">
-          
           <!-- 活动卡片 5 -->
           <a
             href="https://zhinan.netlify.app/"
@@ -1043,7 +1069,7 @@
               </div>
             </div>
           </a>
-          
+
           <!-- 活动卡片 4 -->
           <a
             href="https://chouka.netlify.app/"
@@ -1068,7 +1094,7 @@
               </div>
             </div>
           </a>
-          
+
           <!-- 活动卡片 3 -->
           <div class="activity-card">
             <img
@@ -1112,7 +1138,7 @@
               </div>
             </div>
           </a>
-          
+
           <!-- 活动卡片 1 -->
           <a
             href="https://www.bilibili.com/video/BV1RdFYeCEHM/"
@@ -1876,90 +1902,98 @@
       document.addEventListener("DOMContentLoaded", () => {
         showSection("intro");
       });
-      </script>
-          <script>
-        /*!
-         * Live2D Widget
-         * https://github.com/stevenjoezhang/live2d-widget
-         */
-        
-        // 使用CDN路径
-        const live2d_path = 'https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/dist/';
-        
-        // 封装异步加载资源的方法
-        function loadExternalResource(url, type) {
-          return new Promise((resolve, reject) => {
-            let tag;
-        
-            if (type === 'css') {
-              tag = document.createElement('link');
-              tag.rel = 'stylesheet';
-              tag.href = url;
-            }
-            else if (type === 'js') {
-              tag = document.createElement('script');
-              tag.type = 'module';
-              tag.src = url;
-            }
-            if (tag) {
-              tag.onload = () => resolve(url);
-              tag.onerror = () => reject(url);
-              document.head.appendChild(tag);
-            }
-          });
-        }
-        
-        (async () => {
-          // 解决图片跨域问题
-          const OriginalImage = window.Image;
-          window.Image = function(...args) {
-            const img = new OriginalImage(...args);
-            img.crossOrigin = "anonymous";
-            return img;
-          };
-          window.Image.prototype = OriginalImage.prototype;
-          
-          // 加载CSS和JS资源
-          await Promise.all([
-            loadExternalResource(live2d_path + 'waifu.css', 'css'),
-            loadExternalResource(live2d_path + 'waifu-tips.js', 'js')
-          ]);
-          
-          // 初始化Live2D小部件
-          initWidget({
-            waifuPath: live2d_path + 'waifu-tips.json',
-            // cdnPath: 'https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/',
-            cubism2Path: live2d_path + 'live2d.min.js',
-            cubism5Path: 'https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js',
-            tools: ['hitokoto', 'asteroids', 'switch-model', 'switch-texture', 'photo', 'info', 'quit'],
-            logLevel: 'warn',
-            drag: true,
-          });
-        })();
-        
-        // 控制台输出样式化信息
-        console.log(`\n%cLive2D%cWidget%c\n`, 
-          'padding: 8px; background: #cd3e45; font-weight: bold; font-size: large; color: white;', 
-          'padding: 8px; background: #ff5450; font-size: large; color: #eee;', 
-          ''
-        );
+    </script>
+    <script>
+      /*!
+       * Live2D Widget
+       * https://github.com/stevenjoezhang/live2d-widget
+       */
+
+      // 使用CDN路径
+      const live2d_path =
+        "https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.0-rc.6/dist/";
+
+      // 封装异步加载资源的方法
+      function loadExternalResource(url, type) {
+        return new Promise((resolve, reject) => {
+          let tag;
+
+          if (type === "css") {
+            tag = document.createElement("link");
+            tag.rel = "stylesheet";
+            tag.href = url;
+          } else if (type === "js") {
+            tag = document.createElement("script");
+            tag.type = "module";
+            tag.src = url;
+          }
+          if (tag) {
+            tag.onload = () => resolve(url);
+            tag.onerror = () => reject(url);
+            document.head.appendChild(tag);
+          }
+        });
+      }
+
+      (async () => {
+        // 解决图片跨域问题
+        const OriginalImage = window.Image;
+        window.Image = function (...args) {
+          const img = new OriginalImage(...args);
+          img.crossOrigin = "anonymous";
+          return img;
+        };
+        window.Image.prototype = OriginalImage.prototype;
+
+        // 加载CSS和JS资源
+        await Promise.all([
+          loadExternalResource(live2d_path + "waifu.css", "css"),
+          loadExternalResource(live2d_path + "waifu-tips.js", "js"),
+        ]);
+
+        // 初始化Live2D小部件
+        initWidget({
+          waifuPath: live2d_path + "waifu-tips.json",
+          cdnPath: "https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/",
+          cubism2Path: live2d_path + "live2d.min.js",
+          cubism5Path:
+            "https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js",
+          tools: [
+            "hitokoto",
+            "asteroids",
+            "switch-model",
+            "switch-texture",
+            "photo",
+            "info",
+            "quit",
+          ],
+          logLevel: "warn",
+          drag: true,
+        });
+      })();
+
+      // 控制台输出样式化信息
+      console.log(
+        `\n%cLive2D%cWidget%c\n`,
+        "padding: 8px; background: #cd3e45; font-weight: bold; font-size: large; color: white;",
+        "padding: 8px; background: #ff5450; font-size: large; color: #eee;",
+        ""
+      );
     </script>
     <meting-js
-        name="黑岩射手_ブラック★ロックシューター_BLACK★ROCK SHOOTER"
-        artist="「初音ミク」"
-        url="http://localhost:5244/d/G%3A/%E6%9C%AC%E5%9C%B0%E5%82%A8%E5%AD%98/%E6%9C%AC%E5%9C%B0%E5%82%A8%E5%AD%98/%E3%80%8C4K144_%E6%9C%AC%E5%AE%B6MV%E3%80%8D%E9%BB%91%E5%B2%A9%E5%B0%84%E6%89%8B_%E3%83%96%E3%83%A9%E3%83%83%E3%82%AF%E2%98%85%E3%83%AD%E3%83%83%E3%82%AF%E3%82%B7%E3%83%A5%E3%83%BC%E3%82%BF%E3%83%BC_BLACK%E2%98%85ROCK%20SHOOTER%E3%80%8C%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF%E3%80%8D_%E9%9F%B3%E9%A2%91.mp3?sign=dzV2ORypfDuD0AbThQnJn_BCEeWUK31BYLFXaFXBwkk=:0"
-        cover="http://localhost:5244/d/G%3A/%E6%9C%AC%E5%9C%B0%E5%82%A8%E5%AD%98/b_0d655df598b6a1723cf42f8e0a947e43.jpg?sign=Jh0pA9m1XimPOPIrlgf3enIlbHgCfsf17wzzJ8FPi1U=:0"
-        fixed="true"
-         autoplay="true">
-        <pre hidden>
+      name="黑岩射手_ブラック★ロックシューター_BLACK★ROCK SHOOTER"
+      artist="「初音ミク」"
+      url="http://localhost:5244/d/G%3A/%E6%9C%AC%E5%9C%B0%E5%82%A8%E5%AD%98/%E6%9C%AC%E5%9C%B0%E5%82%A8%E5%AD%98/%E3%80%8C4K144_%E6%9C%AC%E5%AE%B6MV%E3%80%8D%E9%BB%91%E5%B2%A9%E5%B0%84%E6%89%8B_%E3%83%96%E3%83%A9%E3%83%83%E3%82%AF%E2%98%85%E3%83%AD%E3%83%83%E3%82%AF%E3%82%B7%E3%83%A5%E3%83%BC%E3%82%BF%E3%83%BC_BLACK%E2%98%85ROCK%20SHOOTER%E3%80%8C%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF%E3%80%8D_%E9%9F%B3%E9%A2%91.mp3?sign=dzV2ORypfDuD0AbThQnJn_BCEeWUK31BYLFXaFXBwkk=:0"
+      cover="http://localhost:5244/d/G%3A/%E6%9C%AC%E5%9C%B0%E5%82%A8%E5%AD%98/b_0d655df598b6a1723cf42f8e0a947e43.jpg?sign=Jh0pA9m1XimPOPIrlgf3enIlbHgCfsf17wzzJ8FPi1U=:0"
+      fixed="true"
+      autoplay="true"
+    >
+      <pre hidden>
             [00:00.00]This
             [00:04.01]is
             [00:08.02]lyric
-        </pre>
+        </pre
+      >
     </meting-js>
   </body>
 </html>
-
-
-
-
