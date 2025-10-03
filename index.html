@@ -2018,10 +2018,10 @@
     </script>
     <script>
       async function loadMusic() {
-        const repoOwner = "srtgwerq"; // 改成 GitHub 用户名
-        const repoName = "ctyz"; // 改成你的仓库名
+        const repoOwner = "srtgwerq"; // 你的 GitHub 用户名
+        const repoName = "ctyz"; // 你的仓库名
         const path = "music"; // 仓库里的文件夹
-        const branch = "main"; // 分支名，默认 main
+        const branch = "main"; // 分支名（如果仓库默认是 master，这里要改成 "master"）
 
         const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}?ref=${branch}`;
         const response = await fetch(apiUrl);
@@ -2030,10 +2030,10 @@
         const audioList = files
           .filter((f) => f.name.endsWith(".mp3"))
           .map((f) => ({
-            name: f.name.replace(".mp3", ""), // 文件名当歌名
-            artist: "未知", // 可改成固定歌手
-            url: f.download_url, // GitHub 提供的直链
-            cover: "https://via.placeholder.com/150", // 默认封面，可改成一张图
+            name: f.name.replace(".mp3", ""), // 用文件名当歌名
+            artist: "未知",
+            url: `https://ctyz-acgn.netlify.app/${path}/${f.name}`,
+            cover: "https://via.placeholder.com/150", // 你可以换成固定封面图
           }));
 
         new APlayer({
@@ -2048,4 +2048,5 @@
     </script>
   </body>
 </html>
+
 
