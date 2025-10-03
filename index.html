@@ -946,6 +946,20 @@
         margin-top: 5px;
         color: #666;
       }
+
+      #waifu {
+        right: 0 !important;
+        left: auto !important;
+      }
+
+      /* 调整看板娘在移动端的位置 */
+      @media screen and (max-width: 768px) {
+        #waifu {
+          left: 0 !important;
+          right: auto !important;
+          bottom: 70px !important; /* 避免与底部内容重叠 */
+        }
+      }
     </style>
   </head>
   <body>
@@ -1968,7 +1982,7 @@
             "quit",
           ],
           logLevel: "warn",
-          drag: true,
+          drag: false,
         });
       })();
 
