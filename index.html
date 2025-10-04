@@ -2,8 +2,11 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
+
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>长汀一中动漫社-幻想次元部 | ACGN知识RPG</title>
+        <title>Document</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"
@@ -2047,6 +2050,77 @@
       }
 
       loadMusic();
+    </script>
+    <script>
+      (function () {
+        var a_idx = 0;
+        window.onclick = function (event) {
+          var a = new Array(
+            "にゃんぱすー！/喵帕斯！",
+            "うるさい！うるさい！うるさい！/无路赛！无路赛！无路赛！",
+            "私、気になります！/我很好奇！",
+            "身体は剣で出来ている/此身，为剑所成！",
+            "すべてはシュタインズゲートの選択だ/一切都是命运石之门的选择！",
+            "僕と契約して、魔法少女になってよ！/和我签订契约，成为魔法少女吧！",
+            "だが断る！/但是，我拒绝！",
+            "君指先跃动の光は、私の一生不変の信仰に、唯私の超電磁砲永世生き！/你指尖跃动的电光，是我此生不变的信仰，为我超电磁炮永世长存",
+            "Star Burst Stream！/星爆气流斩！",
+            "あんたバカ？/你是白痴吗？",
+            "雑種が！/杂修！"
+          );
+
+          var heart = document.createElement("b"); //创建b元素
+          heart.onselectstart = new Function("event.returnValue=false"); //防止拖动
+
+          document.body.appendChild(heart).innerHTML = a[a_idx]; //将b元素添加到页面上
+          a_idx = (a_idx + 1) % a.length;
+          heart.style.cssText = "position: fixed;left:-100%;"; //给p元素设置样式
+
+          var f = 16, // 字体大小
+            x = event.clientX - f / 2, // 横坐标
+            y = event.clientY - f, // 纵坐标
+            c = randomColor(), // 随机颜色
+            a = 1, // 透明度
+            s = 1.2; // 放大缩小
+
+          var timer = setInterval(function () {
+            //添加定时器
+            if (a <= 0) {
+              document.body.removeChild(heart);
+              clearInterval(timer);
+            } else {
+              heart.style.cssText =
+                "font-size:16px;cursor: default;position: fixed;color:" +
+                c +
+                ";left:" +
+                x +
+                "px;top:" +
+                y +
+                "px;opacity:" +
+                a +
+                ";transform:scale(" +
+                s +
+                ");";
+
+              y--;
+              a -= 0.016;
+              s += 0.002;
+            }
+          }, 15);
+        };
+        // 随机颜色
+        function randomColor() {
+          return (
+            "rgb(" +
+            ~~(Math.random() * 255) +
+            "," +
+            ~~(Math.random() * 255) +
+            "," +
+            ~~(Math.random() * 255) +
+            ")"
+          );
+        }
+      })();
     </script>
   </body>
 </html>
