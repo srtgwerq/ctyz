@@ -469,7 +469,7 @@
         }
       }
 
-      /* 确保看板娘的提示框和按钮也在最上层 */
+
       #waifu-toggle,
       #waifu-tips {
         z-index: 10000 !important;
@@ -497,7 +497,7 @@
     <div class="container">
         <!-- 每周推荐 -->
         <section id="resources" class="section">
-            <h2 class="section-title">动漫社资源库</h2>
+            <h2 class="section-title">每周推荐</h2>
             <p>这里有长汀一中动漫社每周推荐的ACGN作品，点击分类按钮筛选资源，点击卡片查看详情。</p>
 
             <!-- 分类导航 -->
@@ -516,27 +516,27 @@
                 </button>
             </nav>
 
-            <!-- 资源网格 -->
+
             <div class="content-grid" id="resources-container">
-                <!-- 资源卡片将通过JavaScript动态生成 -->
+
             </div>
         </section>
     </div>
 
-    <!-- 模态框 -->
+
     <div class="modal" id="media-modal">
         <div class="modal-content">
             <button class="close-modal">&times;</button>
             <div class="media-container" id="media-container">
-                <!-- 媒体内容将在这里显示 -->
+   
             </div>
             <div class="media-info" id="media-info">
-                <!-- 媒体信息将在这里显示 -->
+
             </div>
         </div>
     </div>
 
-    <!-- 简化后的页脚 -->
+
     <footer class="footer">
         <div class="footer-links">
             <a href="https://space.bilibili.com/45868919" class="footer-link" target="_blank">B站主页</a>
@@ -546,72 +546,33 @@
     </footer>
  <div id="aplayer"></div>
     <script>
-        // 资源数据
+
         const resources = [
             {
                 id: 1,
-                title: "动漫社章程",
-                description: "长汀一中动漫社的章程和规章制度",
+                title: "每周推荐ACGN作品活动",
+                description: "关于长汀一中动漫社启动「每周ACGN推荐」活动的通告",
                 type: "pdf",
                 file: "documents/constitution.pdf",
-                uploadDate: "2023-05-10"
+                uploadDate: "2025-08-1"
             },
             {
                 id: 2,
-                title: "2023夏日祭活动视频",
+                title: "每周推荐ACGN作品——《约会大作战》",
                 description: "记录2023年夏日祭活动的精彩瞬间",
                 type: "videos",
                 file: "videos/summer-festival-2023.mp4",
-                uploadDate: "2023-08-15"
+                uploadDate: "2023-08-19"
             },
             {
                 id: 3,
-                title: "角色设计集",
-                description: "社员原创角色设计作品展示",
+                title: "海报",
+                description: "海报",
                 type: "images",
                 file: "images/character-designs.jpg",
                 uploadDate: "2023-07-22"
             },
-            {
-                id: 4,
-                title: "秋季招新海报",
-                description: "2023年秋季招新活动宣传海报",
-                type: "images",
-                file: "images/autumn-recruitment.jpg",
-                uploadDate: "2023-08-30"
-            },
-            {
-                id: 5,
-                title: "绘画教程",
-                description: "基础动漫绘画技巧教程",
-                type: "pdf",
-                file: "documents/drawing-tutorial.pdf",
-                uploadDate: "2023-07-05"
-            },
-            {
-                id: 6,
-                title: "动漫音乐合集",
-                description: "精选动漫音乐MV合集",
-                type: "videos",
-                file: "videos/anime-music-collection.mp4",
-                uploadDate: "2023-09-10"
-            },
-            {
-                id: 7,
-                title: "活动照片集",
-                description: "社团各类活动照片记录",
-                type: "images",
-                file: "images/activity-photos.jpg",
-                uploadDate: "2023-10-01"
-            },
-            {
-                id: 8,
-                title: "历史回顾",
-                description: "动漫社发展历程和历史回顾",
-                type: "pdf",
-                file: "documents/history-review.pdf",
-                uploadDate: "2023-06-12"
-            }
+
         ];
 
         // DOM元素
