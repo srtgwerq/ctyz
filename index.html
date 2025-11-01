@@ -332,10 +332,12 @@
         transform: scale(1.05);
       }
 
-      .nav-menu {
-        display: flex;
-        gap: 0.7rem;
-      }
+@media (min-width: 769px) {
+  .nav-menu {
+    display: flex;
+    gap: 1rem;
+  }
+}
 
       .nav-item {
         cursor: pointer;
@@ -841,6 +843,8 @@
         .header {
           flex-direction: column;
           padding: 1rem;
+              position: relative;
+    z-index: 9998; /* 让 header 本身高于其他普通内容 */
         }
 
         .header-logo {
@@ -980,6 +984,79 @@
       .live2d-widget-container {
         z-index: 9999 !important;
       }
+      /* ====== 汉堡菜单与移动端导航样式（添加到现有 style 中） ====== */
+.menu-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  font-size: 1.8rem;
+  color: var(--dark-color, #2c2c54);
+  cursor: pointer;
+  margin-left: auto;
+  padding: 6px;
+}
+
+/* 手机端生效 */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  /* header 要允许换行并保证 logo + 按钮一行显示 */
+  .header {
+    position: relative;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* 隐藏原来的横向菜单 */
+  .nav-menu {
+    display: none; /* 初始隐藏 */
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 100%;             /* 紧贴 header 底部展开 */
+    left: 0;
+    width: 100%;
+    background: rgba(255,255,255,0.98);
+    border-radius: 0 0 15px 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+    z-index: 999;
+    overflow: hidden;
+    animation: menuSlideDown .28s ease forwards;
+  }
+
+  /* 展开时显示 */
+  .nav-menu.active {
+    display: flex;
+  }
+
+  @keyframes menuSlideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* 菜单项改为整行可点 */
+  .nav-item {
+    width: 100%;
+    text-align: center;
+    padding: 14px 10px;
+    font-size: 1rem;
+    color: var(--dark-color, #2c2c54);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    background: transparent;
+  }
+  .nav-item:last-child { border-bottom: none; }
+
+  .nav-item:hover {
+    background: var(--main-color, #ff6b6b);
+    color: #fff;
+    transform: none;
+    box-shadow: none;
+  }
+    .visit-counter { display: none !important; }
+      #waifu { transition: opacity .22s ease; }
     </style>
   </head>
   <body>
@@ -993,6 +1070,9 @@
 
     <header class="header">
       <img src="assets/nav_logo.png" class="header-logo" alt="社团Logo" />
+      <button class="menu-toggle" id="menuToggle" aria-label="打开菜单" aria-expanded="false" onclick="toggleMenu()">
+  <i class="fas fa-bars" aria-hidden="true"></i>
+</button>
       <nav class="nav-menu">
         <div class="nav-item" onclick="showSection('intro')">社团介绍</div>
         <div class="nav-item" onclick="showSection('activity')">最新活动</div>
@@ -2315,6 +2395,39 @@
         startSakura();
       }
     }
+    /* 切换移动端菜单（同时隐藏/恢复看板娘）*/
+function toggleMenu() {
+  const nav = document.querySelector('.nav-menu');
+  const btn = document.getElementById('menuToggle');
+  const waifu = document.getElementById('waifu');
+
+  if (!nav) return;
+  nav.classList.toggle('active');
+
+  const open = nav.classList.contains('active');
+  if (btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+
+
+  if (waifu) waifu.style.opacity = open ? '0' : '1';
+}
+
+/* 点击菜单项后自动收起（移动端） */
+document.addEventListener('click', function (e) {
+
+  const nav = document.querySelector('.nav-menu');
+  if (!nav || !nav.classList.contains('active')) return;
+
+  const clicked = e.target.closest('.nav-item, .nav-menu a');
+  const clickedToggle = e.target.closest('#menuToggle');
+
+  if (clicked && !clickedToggle) {
+    nav.classList.remove('active');
+    const btn = document.getElementById('menuToggle');
+    if (btn) btn.setAttribute('aria-expanded', 'false');
+    const waifu = document.getElementById('waifu');
+    if (waifu) waifu.style.opacity = '1';
+  }
+});
   </script>
 </html>
 </html>
