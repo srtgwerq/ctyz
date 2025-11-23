@@ -596,7 +596,23 @@
             },
 
         ];
+function displayImage() {
+    const container = document.getElementById('image-container');
+    const resource = resources[0];
+    
+    container.innerHTML = `
+        <div class="image-item">
+            <h3>${resource.title}</h3>
+            <img src="${resource.image}" alt="${resource.description}" 
+                 onerror="this.style.display='none'">
+            <p>${resource.description}</p>
+        </div>
+    `;
+}
 
+// 页面加载后显示图片
+document.addEventListener('DOMContentLoaded', displayImage);
+</script>
         // DOM元素
         const resourcesContainer = document.getElementById('resources-container');
         const categoryButtons = document.querySelectorAll('.category-btn');
