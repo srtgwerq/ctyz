@@ -543,105 +543,80 @@
             <a href="https://ctyz-acgn.netlify.app/" class="footer-link" target="_blank">社团官网</a>
         </div>
         <div class="footer-copyright">© 2025 长汀一中动漫社·幻想次元部</div>
-    </footer>
- <div id="aplayer"></div>
-    <script>
+ </footer>
+<div id="aplayer"></div>
+<div id="resources-container"></div>
 
-        const resources = [
-{
-                id: 3,
-                title: "25.11.23-本周作品鉴赏",
-                description: "绘画，高一二班",
-                type: "images",
-                image: "mzzpjs/g12b1.jpg",
-                uploadDate: "2025-11-23"
-            },
-{
-                id: 2,
-                title: "每周推荐ACGN作品——《古诺希亚》",
-                type: "videos",
-                file: "https://release-assets.githubusercontent.com/github-production-release-asset/941356854/79415ae0-2fcd-41ba-ba83-06cd82c45906?sp=r&sv=2018-11-09&sr=b&spr=https&se=2025-11-23T03%3A09%3A25Z&rscd=attachment%3B+filename%3DGnosia.mp4&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2025-11-23T02%3A08%3A53Z&ske=2025-11-23T03%3A09%3A25Z&sks=b&skv=2018-11-09&sig=oia71z41V55KDq4xRw7pknh4BkC99yd48Ljda%2BzKckM%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc2Mzg2NzMzMywibmJmIjoxNzYzODYzNzMzLCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.b9WHcUYr0PuJ4heLZghG7AZzsaLlu9229o4DuShjT8M&response-content-disposition=attachment%3B%20filename%3DGnosia.mp4&response-content-type=application%2Foctet-stream",
-                uploadDate: "2025-11-16"
-            },
-            {
-                id: 1,
-                title: "每周推荐ACGN作品活动",
-                description: "关于长汀一中动漫社启动「每周ACGN推荐」活动的通告(pdf只能电脑在线查看，手机端只能下载后用PDF阅读器打开(ó﹏ò｡)",
-                type: "pdf",
-                file: "documents/constitution.pdf",
-                uploadDate: "2025-10-27"
-            },
-            {
-                id: 1,
-                title: "AcuticNotes(Feryquitous)入坑指南",
-                description: "pdf只能电脑在线查看，手机端只能下载后用PDF阅读器打开(ó﹏ò｡)",
-                type: "pdf",
-                file: "documents/AcuticNotes.pdf",
-                uploadDate: "2025-11-02"
-            },
-            {
-                id: 2,
-                title: "每周推荐ACGN作品——《约会大作战》",
-                type: "videos",
-                file: "videos/yhdzz-2025.mp4",
-                uploadDate: "2025-11-02"
-            },
-            {
-                id: 3,
-                title: "海报",
-                description: "海报",
-                type: "images",
-                file: "images/character-designs.jpg",
-                uploadDate: "2025-11-??"
-            },
+<!-- 模态框 -->
+<div id="media-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <div id="media-container"></div>
+        <div id="media-info"></div>
+    </div>
+</div>
 
-        ];
-function displayImage() {
-    const container = document.getElementById('image-container');
-    const resource = resources[0];
-    
-    container.innerHTML = `
-        <div class="image-item">
-            <h3>${resource.title}</h3>
-            <img src="${resource.image}" alt="${resource.description}" 
-                 onerror="this.style.display='none'">
-            <p>${resource.description}</p>
-        </div>
-    `;
-}
+<script>
+    const resources = [
+        {
+            id: 3,
+            title: "25.11.23-本周作品鉴赏",
+            description: "绘画，高一二班",
+            type: "images",
+            image: "mzzpjs/g12b1.jpg",
+            uploadDate: "2025-11-23"
+        },
+        {
+            id: 2,
+            title: "每周推荐ACGN作品——《古诺希亚》",
+            type: "videos",
+            file: "https://release-assets.githubusercontent.com/github-production-release-asset/941356854/79415ae0-2fcd-41ba-ba83-06cd82c45906?sp=r&sv=2018-11-09&sr=b&spr=https&se=2025-11-23T03%3A09%3A25Z&rscd=attachment%3B+filename%3DGnosia.mp4&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2025-11-23T02%3A08%3A53Z&ske=2025-11-23T03%3A09%3A25Z&sks=b&skv=2018-11-09&sig=oia71z41V55KDq4xRw7pknh4BkC99yd48Ljda%2BzKckM%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc2Mzg2NzMzMywibmJmIjoxNzYzODYzNzMzLCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.b9WHcUYr0PuJ4heLZghG7AZzsaLlu9229o4DuShjT8M&response-content-disposition=attachment%3B%20filename%3DGnosia.mp4&response-content-type=application%2Foctet-stream",
+            uploadDate: "2025-11-16"
+        },
+        {
+            id: 1,
+            title: "每周推荐ACGN作品活动",
+            description: "关于长汀一中动漫社启动「每周ACGN推荐」活动的通告(pdf只能电脑在线查看，手机端只能下载后用PDF阅读器打开(ó﹏ò｡)",
+            type: "pdf",
+            file: "documents/constitution.pdf",
+            uploadDate: "2025-10-27"
+        },
+        {
+            id: 4,
+            title: "AcuticNotes(Feryquitous)入坑指南",
+            description: "pdf只能电脑在线查看，手机端只能下载后用PDF阅读器打开(ó﹏ò｡)",
+            type: "pdf",
+            file: "documents/AcuticNotes.pdf",
+            uploadDate: "2025-11-02"
+        },
+        {
+            id: 5,
+            title: "每周推荐ACGN作品——《约会大作战》",
+            type: "videos",
+            file: "videos/yhdzz-2025.mp4",
+            uploadDate: "2025-11-02"
+        },
+        {
+            id: 6,
+            title: "海报",
+            description: "海报",
+            type: "images",
+            image: "images/character-designs.jpg",
+            uploadDate: "2025-11-??"
+        }
+    ];
 
-// 页面加载后显示图片
-document.addEventListener('DOMContentLoaded', displayImage);
-</script>
-        // DOM元素
-        const resourcesContainer = document.getElementById('resources-container');
-        const categoryButtons = document.querySelectorAll('.category-btn');
-        const mediaModal = document.getElementById('media-modal');
-        const mediaContainer = document.getElementById('media-container');
-        const mediaInfo = document.getElementById('media-info');
-        const closeModal = document.querySelector('.close-modal');
+    // DOM元素
+    const resourcesContainer = document.getElementById('resources-container');
+    const mediaModal = document.getElementById('media-modal');
+    const mediaContainer = document.getElementById('media-container');
+    const mediaInfo = document.getElementById('media-info');
+    const closeModal = document.querySelector('.close-modal');
 
-        // 初始化显示所有资源
+    // 页面加载后显示资源
+    document.addEventListener('DOMContentLoaded', function() {
         displayResources(resources);
-
-        // 分类按钮事件
-        categoryButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                // 更新活动按钮
-                categoryButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-                
-                // 过滤资源
-                const category = button.dataset.category;
-                if (category === 'all') {
-                    displayResources(resources);
-                } else {
-                    const filteredResources = resources.filter(resource => resource.type === category);
-                    displayResources(filteredResources);
-                }
-            });
-        });
-
+        
         // 关闭模态框事件
         closeModal.addEventListener('click', () => {
             mediaModal.style.display = 'none';
@@ -653,57 +628,215 @@ document.addEventListener('DOMContentLoaded', displayImage);
                 mediaModal.style.display = 'none';
             }
         });
+    });
 
-        // 显示资源卡片
-        function displayResources(resourcesArray) {
-            resourcesContainer.innerHTML = '';
+    // 显示资源卡片
+    function displayResources(resourcesArray) {
+        resourcesContainer.innerHTML = '';
+        
+        if (resourcesArray.length === 0) {
+            resourcesContainer.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-folder-open"></i>
+                    <h3>暂无资源</h3>
+                    <p>该分类下暂无资源</p>
+                </div>
+            `;
+            return;
+        }
+        
+        resourcesArray.forEach(resource => {
+            const card = document.createElement('div');
+            card.className = 'resource-card';
+            card.onclick = () => openMediaModal(resource);
             
-            if (resourcesArray.length === 0) {
-                resourcesContainer.innerHTML = `
-                    <div class="empty-state">
-                        <i class="fas fa-folder-open"></i>
-                        <h3>暂无资源</h3>
-                        <p>该分类下暂无资源</p>
-                    </div>
-                `;
-                return;
+            // 生成卡片缩略图
+            let thumbnail = '';
+            if (resource.type === 'videos') {
+                thumbnail = `<div class="card-image video-thumbnail">
+                    <i class="fas fa-play-circle"></i>
+                    <div class="card-overlay">视频</div>
+                </div>`;
+            } else if (resource.type === 'pdf') {
+                thumbnail = `<div class="card-image pdf-thumbnail">
+                    <i class="fas fa-file-pdf"></i>
+                    <div class="card-overlay">PDF</div>
+                </div>`;
+            } else {
+                // 图片类型 - 显示实际图片
+                const imageUrl = resource.image;
+                thumbnail = `<div class="card-image">
+                    <img src="${imageUrl}" alt="${resource.title}" 
+                         onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPua1i+ivlTwvdGV4dD48L3N2Zz4='">
+                    <div class="card-overlay">图片</div>
+                </div>`;
             }
             
-            resourcesArray.forEach(resource => {
-                const card = document.createElement('div');
-                card.className = 'resource-card';
-                card.onclick = () => openMediaModal(resource);
-                
-                // 生成卡片缩略图
-                let thumbnail = '';
-                if (resource.type === 'videos') {
-                    thumbnail = `<div class="card-image">
-                        <i class="fas fa-play-circle"></i>
-                    </div>`;
-                } else if (resource.type === 'pdf') {
-                    thumbnail = `<div class="card-image">
-                        <i class="fas fa-file-pdf"></i>
-                    </div>`;
-                } else {
-                    // 图片类型
-                    thumbnail = ``;
-                }
-                
-                card.innerHTML = `
-                    ${thumbnail}
-                    <div class="card-content">
-                        <h3 class="card-title">${resource.title}</h3>
-                        <p class="card-description">${resource.description}</p>
-                        <div class="card-meta">
-                            <span>${formatDate(resource.uploadDate)}</span>
-                            <span class="file-type-badge">${getTypeLabel(resource.type)}</span>
-                        </div>
+            card.innerHTML = `
+                ${thumbnail}
+                <div class="card-content">
+                    <h3 class="card-title">${resource.title}</h3>
+                    <p class="card-description">${resource.description || ''}</p>
+                    <div class="card-meta">
+                        <span>${formatDate(resource.uploadDate)}</span>
+                        <span class="file-type-badge">${getTypeLabel(resource.type)}</span>
                     </div>
-                `;
-                
-                resourcesContainer.appendChild(card);
-            });
+                </div>
+            `;
+            
+            resourcesContainer.appendChild(card);
+        });
+    }
+
+    // 打开模态框
+    function openMediaModal(resource) {
+        mediaContainer.innerHTML = '';
+        mediaInfo.innerHTML = '';
+
+        let mediaContent = '';
+        
+        if (resource.type === 'images') {
+            const imageUrl = resource.image;
+            mediaContent = `<img src="${imageUrl}" alt="${resource.title}" style="max-width: 100%; max-height: 80vh;">`;
+        } else if (resource.type === 'videos') {
+            mediaContent = `
+                <video controls style="max-width: 100%; max-height: 80vh;">
+                    <source src="${resource.file}" type="video/mp4">
+                    您的浏览器不支持视频播放
+                </video>
+            `;
+        } else if (resource.type === 'pdf') {
+            mediaContent = `
+                <iframe src="${resource.file}" width="100%" height="600px" style="border: none;">
+                    您的浏览器不支持PDF预览
+                </iframe>
+            `;
         }
+
+        mediaContainer.innerHTML = mediaContent;
+        mediaInfo.innerHTML = `
+            <h3>${resource.title}</h3>
+            <p>${resource.description || ''}</p>
+            <div class="upload-date">上传日期: ${formatDate(resource.uploadDate)}</div>
+        `;
+
+        mediaModal.style.display = 'flex';
+    }
+
+    // 辅助函数：格式化日期
+    function formatDate(dateString) {
+        if (!dateString) return '未知日期';
+        return dateString.replace(/\?\?/g, '未知');
+    }
+
+    // 辅助函数：获取类型标签
+    function getTypeLabel(type) {
+        const labels = {
+            images: '图片',
+            videos: '视频',
+            pdf: 'PDF文档'
+        };
+        return labels[type] || '未知';
+    }
+</script>
+
+<style>
+.resource-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    background: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.resource-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.card-image {
+    position: relative;
+    height: 150px;
+    background: #f5f5f5;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-overlay {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 90%;
+    max-height: 90%;
+    overflow: auto;
+    position: relative;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.file-type-badge {
+    background: #007bff;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    color: #6c757d;
+}
+
+.empty-state i {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    color: #adb5bd;
+}
+</style>
 
         // 打开媒体查看器
         function openMediaModal(resource) {
