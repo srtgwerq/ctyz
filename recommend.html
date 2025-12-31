@@ -449,36 +449,6 @@
             margin-top: 5px;
             color: #666;
         }
-        #waifu {
-        right: 20px !important; /* 增加右边距，避免紧贴边缘 */
-        left: auto !important;
-        bottom: 20px !important; /* 增加底边距 */
-        z-index: 9999 !important; /* 确保在最上层 */
-        width: 280px !important; /* 固定宽度 */
-        height: 290px !important; /* 固定高度 */
-      }
-
-      /* 调整看板娘在移动端的位置 */
-      @media screen and (max-width: 768px) {
-        #waifu {
-          left: 10px !important; /* 移动端也增加左边距 */
-          right: auto !important;
-          bottom: 80px !important; /* 增加底部间距 */
-          transform: scale(0.5) !important; /* 移动端适当缩小 */
-          transform-origin: left bottom !important; /* 从左下角缩放 */
-        }
-      }
-
-
-      #waifu-toggle,
-      #waifu-tips {
-        z-index: 10000 !important;
-      }
-
-      /* 如果看板娘内部元素也被遮挡，可以添加 */
-      .live2d-widget-container {
-        z-index: 9999 !important;
-      }
     </style>
 </head>
 <body>
