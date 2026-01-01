@@ -508,22 +508,20 @@
     </div>
 
 
-<!-- 模态框 -->
-<div id="media-modal" class="modal">
-    <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        <div id="media-container"></div>
-        <div id="media-info"></div>
-    </div>
-</div>
-
 <script>
     const resources = [
         {
             title: "25.12.14-漫画推荐",
             description: "推荐，高一六班-郑胜文<br>《少年的深渊》——峰浪りょう<br>故事讲述了一个成绩优异的小填少年令儿，本可以同青梅一同前往大城市上大学。却因家中“失踪”的父亲，年迈的奶奶和一个宅在家中十几年的哥哥。单靠母亲单薄的收入无法养活家庭至使少年可能要辍学打工，自儿时起父亲的家暴与母亲超强的控制欲和奶奶不知为何的讨厌使得少年的心以堕入深渊。而在平凡的一天，令儿偶遇自己的偶像一一青江凪。在“简单”交流过后，她却对令儿说：“令儿我们一起去殉情吧”。面对奇怪的要求令儿却同意了……至此一个无论怎么走都只会通往无尽深渊的少年的故事开始了",
             type: "images",
-            image: "mzzpjs/g16bzsw.jpg",
+  images: [
+    "mzzpjs/g16bzsw_1.jpg",
+    "mzzpjs/g16bzsw_2.jpg",
+    "mzzpjs/g16bzsw_3.jpg"
+    "mzzpjs/g16bzsw_4.jpg",
+    "mzzpjs/g16bzsw_5.jpg",
+    "mzzpjs/g16bzsw_6.jpg"
+  ],
             uploadDate: "2025-12-14"
         },
         {
@@ -643,15 +641,20 @@
                     <i class="fas fa-file-text"></i>
                     <div class="card-overlay">留言</div>
                 </div>`;
-            } else {
-                // 图片类型 - 显示实际图片
-                const imageUrl = resource.image;
-                thumbnail = `<div class="card-image">
-                    <img src="${imageUrl}" alt="${resource.title}" 
-                         onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPua1i+ivlTwvdGV4dD48L3N2Zz4='">
-                    <div class="card-overlay">图片</div>
-                </div>`;
-            }
+} else {
+    // 图片类型（支持多张）
+    const imageUrl = resource.images && resource.images.length
+        ? resource.images[0]
+        : '';
+
+    thumbnail = `
+        <div class="card-image">
+            <img src="${imageUrl}" alt="${resource.title}"
+                 onerror="this.style.display='none'">
+            <div class="card-overlay">图片</div>
+        </div>
+    `;
+}
             
             card.innerHTML = `
                 ${thumbnail}
@@ -670,40 +673,66 @@
     }
 
     // 打开模态框
-    function openMediaModal(resource) {
-        mediaContainer.innerHTML = '';
-        mediaInfo.innerHTML = '';
+function openMediaModal(resource) {
+    mediaContainer.innerHTML = '';
+    mediaInfo.innerHTML = '';
 
-        let mediaContent = '';
-        
-        if (resource.type === 'images') {
-            const imageUrl = resource.image;
-            mediaContent = `<img src="${imageUrl}" alt="${resource.title}" style="max-width: 100%; max-height: 80vh;">`;
-        } else if (resource.type === 'videos') {
-            mediaContent = `
-                <video controls style="max-width: 100%; max-height: 80vh;">
-                    <source src="${resource.file}" type="video/mp4">
-                    您的浏览器不支持视频播放
-                </video>
-            `;
-        } else if (resource.type === 'pdf') {
-            mediaContent = `
-                <iframe src="${resource.file}" width="100%" height="600px" style="border: none;">
-                    您的浏览器不支持PDF预览
-                </iframe>
-            `;
-        }
+    let mediaContent = '';
 
-        mediaContainer.innerHTML = mediaContent;
-        mediaInfo.innerHTML = `
-            <h3>${resource.title}</h3>
-            <p>${resource.description || ''}</p>
-            <div class="upload-date">上传日期: ${formatDate(resource.uploadDate)}</div>
-            <p class="card-content">${resource.content || ''}</p>
+    if (resource.type === 'images' && resource.images) {
+        let currentIndex = 0;
+
+        mediaContent = `
+            <div style="display:flex;align-items:center;gap:10px;">
+                <button id="prevImg">⬅</button>
+                <img id="modalImg"
+                     src="${resource.images[0]}"
+                     style="max-width:80%;max-height:80vh;">
+                <button id="nextImg">➡</button>
+            </div>
         `;
 
-        mediaModal.style.display = 'flex';
+        mediaContainer.innerHTML = mediaContent;
+
+        const modalImg = document.getElementById('modalImg');
+
+        document.getElementById('prevImg').onclick = () => {
+            currentIndex =
+                (currentIndex - 1 + resource.images.length) %
+                resource.images.length;
+            modalImg.src = resource.images[currentIndex];
+        };
+
+        document.getElementById('nextImg').onclick = () => {
+            currentIndex =
+                (currentIndex + 1) % resource.images.length;
+            modalImg.src = resource.images[currentIndex];
+        };
+
+    } else if (resource.type === 'videos') {
+        mediaContainer.innerHTML = `
+            <video controls style="max-width:100%;max-height:80vh;">
+                <source src="${resource.file}" type="video/mp4">
+            </video>
+        `;
+    } else if (resource.type === 'pdf') {
+        mediaContainer.innerHTML = `
+            <iframe src="${resource.file}"
+                    width="100%" height="600"
+                    style="border:none;"></iframe>
+        `;
     }
+
+    mediaInfo.innerHTML = `
+        <h3>${resource.title}</h3>
+        <p>${resource.description || ''}</p>
+        <div>上传日期：${formatDate(resource.uploadDate)}</div>
+        <p>${resource.content || ''}</p>
+    `;
+
+    mediaModal.style.display = 'flex';
+}
+
 
     // 辅助函数：格式化日期
     function formatDate(dateString) {
