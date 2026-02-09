@@ -9,13 +9,6 @@
     <title>长汀一中动漫社| ACGN爱好者聚集地 | ACGN线上交流与活动平台</title>
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"
-    />
-    <!-- 引入 APlayer 和 MetingJS JS -->
-    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
-    <link
-      rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <link
@@ -1651,7 +1644,7 @@
       </div>
       <div class="footer-copyright">© 2025 长汀一中动漫社·幻想次元部</div>
     </footer>
-    <div id="aplayer"></div>
+
     <!-- 引入Twikoo JS -->
     <script src="https://cdn.staticfile.org/twikoo/1.6.7/twikoo.all.min.js"></script>
 
@@ -2149,35 +2142,7 @@
         ""
       );
     </script>
-    <script>
-      async function loadMusic() {
-        const repoOwner = "srtgwerq"; // 你的 GitHub 用户名
-        const repoName = "ctyz"; // 你的仓库名
-        const path = "music"; // 仓库里的文件夹
-        const branch = "main"; // 分支名（如果仓库默认是 master，这里要改成 "master"）
 
-        const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}?ref=${branch}`;
-        const response = await fetch(apiUrl);
-        const files = await response.json();
-
-        const audioList = files
-          .filter((f) => f.name.endsWith(".mp3"))
-          .map((f) => ({
-            name: f.name.replace(".mp3", ""), // 用文件名当歌名
-            artist: "未知",
-            url: `https://ctyz-acgn.netlify.app/${path}/${f.name}`,
-            cover: "https://via.placeholder.com/150", // 你可以换成固定封面图
-          }));
-
-        new APlayer({
-          container: document.getElementById("aplayer"),
-          fixed: true,
-          autoplay: true,
-          audio: audioList,
-        });
-      }
-
-      loadMusic();
     </script>
     <script>
       (function () {
