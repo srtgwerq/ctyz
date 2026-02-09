@@ -1167,6 +1167,7 @@
                 src="assets/activities/picture7.jpg"
                 class="activity-image"
                 alt="动漫社团建"
+
               />
               <div class="activity-content">
                 <h3 class="activity-title">UNO，狼人杀，fate桌游</h3>
@@ -2209,10 +2210,37 @@
           );
         }
       })();
+// 汉堡菜单切换函数
+function toggleMenu() {
+  // 获取导航菜单元素
+  const navMenu = document.querySelector('.nav-menu');
+  // 获取汉堡按钮元素
+  const menuBtn = document.getElementById('menuToggle');
+  
+  // 切换菜单的active类（控制显示/隐藏）
+  navMenu.classList.toggle('active');
+  
+  // 同步更新ARIA无障碍属性（可选，但推荐）
+  const isExpanded = navMenu.classList.contains('active');
+  menuBtn.setAttribute('aria-expanded', isExpanded);
+  
+  // 可选：切换按钮图标（汉堡 ↔ 关闭）
+  const icon = menuBtn.querySelector('i');
+  icon.className = isExpanded ? 'fas fa-times' : 'fas fa-bars';
+}
+
+// 可选：点击页面其他区域关闭菜单（提升体验）
+document.addEventListener('click', (e) => {
+  const navMenu = document.querySelector('.nav-menu');
+  const menuBtn = document.getElementById('menuToggle');
+  // 点击的不是菜单、不是按钮 → 关闭菜单
+  if (!navMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+    navMenu.classList.remove('active');
+    menuBtn.setAttribute('aria-expanded', false);
+    menuBtn.querySelector('i').className = 'fas fa-bars';
+  }
+});
     </script>
   </body>
 </html>
 </html>
-
-
-
